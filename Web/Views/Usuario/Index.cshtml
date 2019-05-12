@@ -1,8 +1,69 @@
-﻿
+﻿@using com.co.uan.DMiravalle.Administracion;
 @{
-    ViewBag.Title = "Gestion de usuarios";
+    ViewBag.Title = "Gestión de usuarios";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    WebGrid grdUsuario = new WebGrid(canSort: true, canPage: true, rowsPerPage: 30);
+    grdUsuario.Bind((List<Usuario>)ViewData["Usuario"]);
 }
-
 <script src="~/Scripts/DMiravalle/Administracion/Usuario.js"></script>
+<h2 class="center">Usuario</h2>
+@grdUsuario.GetHtml(
+    tableStyle: "table table-responsive backcolor",
+    headerStyle: "wedgrid-header ",
+    footerStyle: "webgrid-footer",
+    alternatingRowStyle: "webgrid-alternating-row",
+    rowStyle: "webgrid-row-style",
+    htmlAttributes: new { id = "grdUsuario", @class = "" }
+    , columns: grdUsuario.Columns(
+    grdUsuario.Column(header: null, format:@<text><a href="#" class="ace-icon fa fa-pencil" onclick="EditarUsuario(@Html.Raw( String.Concat(new string[] { "'" +item.IdUsuario.ToString() + "|", item.Nombre + "|",item.Apellido + '|', item.Correo  + "|", item.SedeAsignada.IdSede.ToString() + '|', item.NombreUsuario +"'"})));"></a></text>),
+    grdUsuario.Column(header: null, format:@<text><a href="#" class="ace-icon fa fa-trash-o" onclick="EliminarUsuario(@Html.Raw(item.IdUsuario.ToString()));"></a></text>),
+    grdUsuario.Column("Nombre", "Nombre", canSort: false),
+    grdUsuario.Column("Apellido", "Apellido", canSort: false),
+    grdUsuario.Column("Correo", "Correo", canSort: false),
+    grdUsuario.Column("SedeAsignada.NombreSede", "Sede", canSort: false),
+    grdUsuario.Column("NombreUsuario", "Usuario sistema", canSort: false)
+    ))
 
+
+
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="document" aria-hidden="true" id="divModalUsuario">
+    <div class="modal-dialog modal-lg" style="max-width: 550px">
+        <div class="modal-content">
+            <div class="container">
+                <div class="modal-header">
+                    <h3 id="Titulo" name="Titulo" class="modal-title text-blue text-center" style="margin:auto">Usuario</h3>
+                </div>
+                <div id="divFormulario" class="form-actions">
+                    <div class="form-group row">
+                        <label for="Nombre">Nombre:</label>
+                        @Html.TextBox("Nombre", "", new { id = "Nombre", @class = "form-control", required = "true" })
+                    </div>
+                    <div class="form-group row">
+                        <label for="Apellido">Apellido:</label>
+                        @Html.TextBox("Apellido", "", new { id = "Apellido", @class = "form-control", required = "true" })
+                    </div>
+                    <div class="form-group row">
+                        <label for="Correo">Correo:</label>
+                        @Html.TextBox("Correo", "", new { id = "Correo", @class = "form-control", required = "true" })
+                    </div>
+                    <div class="form-group row">
+                        <label for="Sede">Sede:</label>
+                        @Html.DropDownList("Sede", (SelectList)ViewData["Sedes"], new { id = "Sede", @class = "form-control ", required = "" })
+                    </div>
+                    <div class="form-group row">
+                        <label for="Usuario">Usuario:</label>
+                        @Html.TextBox("Usuario", "", new { id = "Usuario", @class = "form-control", required = "true" })
+                    </div>
+                    <div id="divClave" class="form-group row">
+                        <label for="Clave">Contraseña:</label>
+                        @Html.Password("Clave", "", new { id = "Clave", @class = "form-control", required = "true" })
+                    </div>
+                    <div class="form-group row align-center">
+                        <input type="hidden" id="hddID" />
+                        <button id="btnGuardar" class="btn btn-info" onclick="Guardar(); return false;" value="">Guardar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

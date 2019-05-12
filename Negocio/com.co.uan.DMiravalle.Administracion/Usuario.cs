@@ -75,7 +75,7 @@ namespace com.co.uan.DMiravalle.Administracion
                                                                      ,fila["Administrador_Apellido"].ToString()
                                                                      ,fila["Administrador_Correo"].ToString()
                                                                      ,new Sede()
-                                                                     ,0,0, fila["Administrador_NombreUsuario"].ToString()
+                                                                     ,0,0, fila["Administrador_Usuario"].ToString()
                                                                      , fila["Administrador_Clave"].ToString()
                                                                      )
                                                        )
@@ -97,9 +97,10 @@ namespace com.co.uan.DMiravalle.Administracion
                 ,new Parametros("@Apellido",Apellido,SqlDbType.VarChar,ParameterDirection.Input)
                 ,new Parametros("@Correo",Correo,SqlDbType.VarChar,ParameterDirection.Input)
                 ,new Parametros("@Clave",Clave,SqlDbType.VarChar,ParameterDirection.Input)
-                ,new Parametros("@IdSede",IdSede,SqlDbType.Int,ParameterDirection.Input)
+                ,new Parametros("@NombreUsuario",usuario,SqlDbType.VarChar,ParameterDirection.Input)
+                ,new Parametros("@IdSede",(IdSede==0?DBNull.Value:(object)IdSede),SqlDbType.Int,ParameterDirection.Input)
                 ,new Parametros("@UsuarioAutenticado",this.UsuarioAutenticado,SqlDbType.Int,ParameterDirection.Input)
-                 ,new Parametros("@RETURN_VALUE",null,SqlDbType.Int,ParameterDirection.ReturnValue)
+                ,new Parametros("@RETURN_VALUE",null,SqlDbType.Int,ParameterDirection.ReturnValue)
             };
             return Convert.ToInt32(new Transaccion("CrearUsuario", Parametros).EjecutarDevuelveReturnValue())>0;
         }
@@ -109,8 +110,8 @@ namespace com.co.uan.DMiravalle.Administracion
                  new Parametros("@Nombre",Nombre,SqlDbType.VarChar,ParameterDirection.Input)
                 ,new Parametros("@Apellido",Apellido,SqlDbType.VarChar,ParameterDirection.Input)
                 ,new Parametros("@Correo",Correo,SqlDbType.VarChar,ParameterDirection.Input)
-                ,new Parametros("@Clave",Clave,SqlDbType.VarChar,ParameterDirection.Input)
-                ,new Parametros("@IdSede",IdSede,SqlDbType.Int,ParameterDirection.Input)
+                ,new Parametros("@Clave",Clave==""?DBNull.Value:(object)Clave,SqlDbType.VarChar,ParameterDirection.Input)
+                ,new Parametros("@IdSede",(IdSede==0?DBNull.Value:(object)IdSede),SqlDbType.Int,ParameterDirection.Input)
                 ,new Parametros("@IdUsuario",IdUsuario,SqlDbType.Int,ParameterDirection.Input)
                 ,new Parametros("@UsuarioAutenticado",this.UsuarioAutenticado,SqlDbType.Int,ParameterDirection.Input)
                  ,new Parametros("@RETURN_VALUE",null,SqlDbType.Int,ParameterDirection.ReturnValue)

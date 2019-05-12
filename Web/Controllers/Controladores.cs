@@ -1,5 +1,4 @@
-﻿
-using com.co.uan.DMiravalle;
+﻿using com.co.uan.DMiravalle;
 using com.co.uan.DMiravalle.Administracion;
 using System;
 using System.Web.Mvc;
@@ -31,12 +30,16 @@ namespace Web.Controllers
                 Apellido = "Prueba apellido1"
             };
         }
-
-        private  int ObtenerUsuarioAutenticado() {
+        protected int ObtenerUsuarioAutenticado() {
             return 1;
         }
         protected void RegistarError(Exception ex) {
 
+        }
+
+        protected void CerrarSesion() {
+            Session.Clear();
+            RedirectToAction("Index", "Login");
         }
     }
 }

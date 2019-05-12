@@ -1,5 +1,6 @@
 ﻿using System.Web.Mvc;
 using System;
+using System.Linq;
 
 namespace Web.Controllers
 {
@@ -9,25 +10,35 @@ namespace Web.Controllers
         public ActionResult Index()
         {
             ViewData["Autenticado"] = ObtenerAutenticado();
+            SelectList Sedes;
+            var Items = (from sede in ObtenerNegocio().ObtenerFachadaAdministrativa().ConsultarSede(" 1=1 ")
+                         select new SelectListItem()
+                         {
+                             Text = sede.NombreSede,
+                             Value = sede.IdSede.ToString()
+                         });
+            Sedes = new SelectList(Items, "Value", "Text");
+            ViewData["Sedes"] = Sedes;
+            ViewData["Usuario"] = ObtenerNegocio().ObtenerFachadaAdministrativa().ConsultarUsuario(" 1=1 ");
             return View();
         }
 
         [HttpPost]
-        public ActionResult GuardarRegisro()
+        public ActionResult GuardarRegistro()
         {
             string Mensaje = "";
             Boolean Resultado = false;
             try
             {
-                if (Request["id"] == "0")
+                if (Request["hddID"] == "0")
                 {
                     Resultado = ObtenerNegocio().ObtenerFachadaAdministrativa().CrearUsuario
-                        (Request["txtNombres"]
-                        , Request["txtApellidos"]
-                        , Convert.ToInt32(Request["ddlSede"])
-                        , Request["txtCorreo"]
-                        , Request["txtUsuario"]
-                        , Request["txtClave"]);
+                        (Request["Nombre"]
+                        , Request["Apellido"]
+                        , Request["Sede"]==null?0:  Convert.ToInt32(Request["Sede"])
+                        , Request["Correo"]
+                        , Request["Usuario"]
+                        , Request["Clave"]);
                         Mensaje = "No se pudo crear el usuario ";
                     if (Resultado)
                         Mensaje = "Se ha creado el usuario exitosamente";
@@ -35,12 +46,12 @@ namespace Web.Controllers
                 else
                 {
                     Resultado = ObtenerNegocio().ObtenerFachadaAdministrativa().EditarUsuario(
-                        Convert.ToInt32(Request["id"])
-                        , Request["txtNombres"]
-                        , Request["txtApellidos"]
-                        , Convert.ToInt32(Request["ddlSede"])
-                        , Request["txtCorreo"]
-                        , Request["txtClave"]
+                        Convert.ToInt32(Request["hddID"])
+                        , Request["Nombre"]
+                        , Request["Apellido"]
+                        , Request["Sede"] == null ? 0 : Convert.ToInt32(Request["Sede"])
+                        , Request["Correo"]
+                        , ""
                         );
                         Mensaje = "No se pudo editar el usuario ";
                     if (Resultado)
@@ -50,6 +61,29 @@ namespace Web.Controllers
             catch (Exception ex)
             {
                 RegistarError(ex);
+                Mensaje = "Se presento inconveniente al realizar la accion";
+            }
+            return Json(new { success = true, data = Resultado, mensaje = Mensaje });
+        }
+
+        [HttpPost]
+        public ActionResult Eliminar()
+        {
+            try
+            {
+                Resultado = ObtenerNegocio().ObtenerFachadaAdministrativa().RemoverUsuario(Convert.ToInt32(Request["hddID"]));
+                Mensaje = "No se pudo eliminar el usuario ";
+                if (Resultado)
+                {
+                    Mensaje = "Se ha eliminado el usuario exitosamente";
+                    if (Convert.ToInt32(Request["hddID"])== ObtenerUsuarioAutenticado())
+                        CerrarSesion();
+                }
+            }
+            catch (Exception ex)
+            {
+                RegistarError(ex);
+                Resultado = false;
                 Mensaje = "Se presento inconveniente al realizar la accion";
             }
             return Json(new { success = true, data = Resultado, mensaje = Mensaje });

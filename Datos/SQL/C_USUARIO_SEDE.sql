@@ -79,7 +79,6 @@ create procedure EditarUsuario
 ,@Apellido varchar(200)
 ,@Correo varchar(200)
 ,@Clave varchar (1000)
-,@Usuario varchar(200)
 ,@IdSede int
 ,@UsuarioAutenticado int
 as 
@@ -125,7 +124,7 @@ Usuario.IdUsuario
 ,Usuario.Correo
 ,Usuario.Clave 
 ,Usuario.NombreUsuario
-,Usuario.IdSede 
+,isnull(Usuario.IdSede,0)  as IdSede
 ,Usuario.Activo 
 ,isnull(Sede.NombreSede,'') as NombreSede
 ,isnull(Sede.Ciudad,'')  as Ciudad
