@@ -1,0 +1,79 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="~/Scripts/DMiravalle/Administracion/Sede.js"></script>
+
+<div class="jumbotron">
+    <h2><b class="textLabel">Gestion de sedes</b></h2>
+
+    <div class="ibox-content">
+        <div role="form" class="float-right" style="align-items">
+
+            <input type="button" id="btnAdicionar" class="col-xs-1 btn btn-w-m btn-primary" value="Adicionar" />
+
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12">
+
+        @*<%-- Tabla --%>*@
+        <div class="ibox-content">
+            <table class="table table-condensed" id="tbSede" con>
+                <thead>
+                    <tr>
+                        <th>Ciudad</th>
+                        <th data-breakpoints="xs sm">Direccion</th>
+                    </tr>
+                </thead>
+                <tbody id="tbodySede"></tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+
+@*<%--Modal--%>*@
+<div id="modalAdcUsr" class="modal" runat="server">
+    <div class="contentModal">
+
+        <div class="modal-header">
+            <h4 class="control-label align-text-top">Adición de registros</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" style="color: white">&times;</span></button>
+        </div>
+
+        <div class="modal-body">
+
+            <div class="row marginModal">
+
+                <div class="col-xs-12 col-sm-6 col-md-6 sinpadding">
+                    <label for="txtCiudad" class="col-sm-12 control-label textLabel">Ciudad</label>
+                    <input type="text" class="form-control textLabel" id="txtCiudad" name="txtCiudad" />
+                </div>
+
+                <div class="col-xs-12 col-sm-6 col-md-6 sinpadding">
+                    <label for="txtDireccion" class="col-sm-12 control-label textLabel">Direccion</label>
+                    <input type="text" class="form-control textLabel" id="txtDireccion" name="txtDireccion" />
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="modal-footer">
+            <div class="ibox-content">
+                <div role="form" class="form-inline " style="align-items;">
+                    <input type="button" class="btn-delete btn btn-w-m" id="btnCancelar" value="Cancelar" />
+                    <input type="button" class="btn-create btn btn-w-m" id="btnCrear" value="Crear" />
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+

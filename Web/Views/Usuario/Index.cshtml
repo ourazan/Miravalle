@@ -1,0 +1,93 @@
+﻿
+@{
+    ViewBag.Title = "Gestion de usuarios";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="~/Scripts/DMiravalle/Administracion/Usuario.js"></script>
+
+<div class="jumbotron">
+    <h2><b class="textLabel">Gestion de usuarios</b></h2>
+
+    <div class="ibox-content">
+        <div role="form" class="float-right" style="align-items">
+
+            <input type="button" id="btnAdicionar" class="col-xs-1 btn btn-w-m btn-primary" value="Adicionar" />
+
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12">
+
+        @*<%-- Tabla --%>*@
+        <div class="ibox-content">
+            <table class="table table-condensed" id="tbUsr" con>
+                <thead>
+                    <tr>
+                        <th>Nombres</th>
+                        <th data-breakpoints="xs sm">Apellidos</th>
+                        <th data-breakpoints="xs sm">Correo</th>
+                        <th data-breakpoints="xs">Sede Asignada</th>
+                    </tr>
+                </thead>
+                <tbody id="tbodyTablaUsr"></tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+
+@*<%--Modal--%>*@
+<div id="modalAdcUsr" class="modal" runat="server">
+    <div class="contentModal">
+
+        <div class="modal-header">
+            <h4 class="control-label align-text-top">Adición de registros</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" style="color: white">&times;</span></button>
+        </div>
+
+        <div class="modal-body">
+
+            <div class="row marginModal">
+
+                <div class="col-xs-12 col-sm-6 col-md-6 sinpadding">
+                    <label for="txtNombre" class="col-sm-12 control-label textLabel">Nombres</label>
+                    <input type="text" class="form-control textLabel" id="txtNombres" name="txtNombres" />
+                </div>
+
+                <div class="col-xs-12 col-sm-6 col-md-6 sinpadding">
+                    <label for="txtApellidos" class="col-sm-12 control-label textLabel">Apellidos</label>
+                    <input type="text" class="form-control textLabel" id="txtApellidos" name="txtApellidos" />
+                </div>
+
+                <div class="col-xs-12 col-sm-6 col-md-6 sinpadding">
+                    <label for="txtCorreo" class="col-sm-12 control-label textLabel">Correo</label>
+                    <input type="text" class="form-control textLabel" id="txtCorreo" name="txtCorreo" />
+                </div>
+
+                <div class="col-xs-12 col-sm-6 col-md-6 sinpadding">
+                    <label for="ddlSede" class="col-sm-12 control-label textLabel">Sede</label>
+                    <select id="ddlSede" name="ddlSede" class="form-control textLabel">
+                        <option Value="0">SELECCIONE...</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                    </select>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="modal-footer">
+            <div class="ibox-content">
+                <div role="form" class="form-inline " style="align-items;">
+                    <input type="button" class="btn-delete btn btn-w-m" id="btnCancelar" value="Cancelar" />
+                    <input type="button" class="btn-create btn btn-w-m" id="btnCrear" value="Crear" />
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

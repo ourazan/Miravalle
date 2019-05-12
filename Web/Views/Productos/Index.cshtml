@@ -1,0 +1,108 @@
+﻿@using com.co.uan.DMiravalle.Inventario;
+@{
+    ViewBag.Title = "Productos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    WebGrid grdProducto = new WebGrid(canSort: true, canPage: true, rowsPerPage: 30);
+    grdProducto.Bind((List<Producto>)ViewData["Producto"]);
+}
+<script src="~/Scripts/DMiravalle/Inventario/Producto.js"></script>
+<script src="~/Scripts/DMiravalle/Inventario/Lote.js"></script>
+
+<script>
+    function CargarFormularioEdicionLoteModificacion(Detalle) {
+        var Ruta = '@Url.Content("~")';
+        $('#divEdicionLote').load(Ruta + 'Lote/Edicion', function () {
+            AbrirModal("divModalLote");
+            CargarFormularioEdicionLote(Detalle);
+        });
+        return false;
+    }
+
+    function CargarFormularioEdicionLoteNuevo(Detalle)
+    {
+        var Ruta = '@Url.Content("~")';
+         $('#divEdicionLote').load(Ruta + 'Lote/Edicion', function () {
+            AbrirModal("divModalLote");
+            CargarFormularioNuevoLote(Detalle);
+        });
+        return false;
+    }
+
+    function CargarFormularioLoteProducto(IdProducto) {
+        var Ruta = '@Url.Content("~")';
+        $('#divDetalleLote').load(Ruta + 'Lote/ConsultaLotes?IdProducto=' + IdProducto, function () {
+            AbrirModal("divModalDetalleLote");
+        });
+        return false;
+    }
+</script>
+<h2 class="center">Gestión de productos</h2>
+@grdProducto.GetHtml(
+    tableStyle: "table table-responsive backcolor",
+    headerStyle: "wedgrid-header ",
+    footerStyle: "webgrid-footer",
+    alternatingRowStyle: "webgrid-alternating-row",
+    rowStyle: "webgrid-row-style",
+    htmlAttributes: new { id = "grdProducto", @class = "" }
+    , columns: grdProducto.Columns(
+    grdProducto.Column(header: null, format:@<text><a href="#" class="ace-icon fa fa-edit" onclick="CargarFormularioEdicion(@Html.Raw( String.Concat(new string[] { "'" +item.IdProducto.ToString() + "-", item.NombreProducto + '-', item.Tipo.IdTipoProducto +"'"})));"></a></text>),
+    grdProducto.Column(header: null, format:@<text><a href="#" class="ace-icon fa fa-edit" onclick="CargarFormularioEdicionLoteNuevo(@Html.Raw( "'" +item.IdProducto.ToString()+"'"));"></a></text>),
+    grdProducto.Column(header: null, format:@<text><a href="#" class="ace-icon fa fa-eye" onclick="CargarFormularioLoteProducto(@Html.Raw( "'" +item.IdProducto.ToString()+"'"));"></a></text>),
+    grdProducto.Column("NombreProducto", "Producto", canSort: false),
+    grdProducto.Column("Tipo.Descripcion", "Tipo producto", canSort: false)))
+
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="document" aria-hidden="true" id="divModalProducto">
+    <div class="modal-dialog modal-lg" style="max-width: 550px">
+        <div class="modal-content">
+            <div class="container">
+                <div class="modal-header">
+                    <h3 id="Titulo" name="Titulo" class="modal-title text-blue text-center" style="margin:auto">Producto</h3>
+                </div>
+                <div id="divFormulario" class="form-actions">
+                    <div class="form-group row">
+                        <label for="txtNombre">Producto:</label>
+                        @Html.TextBox("NombreProducto", "", new { id = "NombreProducto", @class = "form-control", required = "true" })
+                    </div>
+                    <div class="form-group row">
+                        <label for="txtNombre">TipoProducto:</label>
+                        @Html.DropDownList("TipoProducto", (SelectList)ViewData["TiposProducto"], new { id = "TipoProducto", @class = "form-control ", required = "" })
+                    </div>
+                    <div class="form-group row align-center">
+                        <input type="hidden" id="hddID" />
+                        <button id="btnGuardar" class="btn btn-info" onclick="Guardar(); return false;" value="">Guardar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="document" aria-hidden="true" id="divModalLote">
+    <div class="modal-dialog modal-lg" style="max-width: 550px">
+        <div class="modal-content">
+            <div class="container">
+                <div class="modal-header">
+                    <h3 class="modal-title text-blue text-center" style="margin:auto">Creación de lote</h3>
+                </div>
+                <div id="divEdicionLote" class="form-actions">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="document" aria-hidden="true" id="divModalDetalleLote">
+    <div class="modal-dialog modal-lg" style="max-width: 550px">
+        <div class="modal-content">
+            <div class="container">
+                <div class="modal-header">
+                    <h3 class="modal-title text-blue text-center" style="margin:auto">Lotes</h3>
+                </div>
+                <div id="divDetalleLote" class="form-actions">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

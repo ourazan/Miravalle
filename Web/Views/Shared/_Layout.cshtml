@@ -1,0 +1,178 @@
+﻿<!DOCTYPE html>
+@using com.co.uan.DMiravalle.Administracion;
+@{
+    Layout = null;
+    var Activo = (Usuario)ViewData["Autenticado"];
+}<html>
+<head>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DMiravalle</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-datetimepicker.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap-timepicker.css" rel="stylesheet" />
+    <link href="~/Content/datepicker.css" rel="stylesheet" />
+    <link href="~/Content/daterangepicker.css" rel="stylesheet" />
+    <link href="~/Content/ace.min.css" rel="stylesheet" />
+    <link href="~/Content/ace-fonts.css" rel="stylesheet" />
+    <link href="~/Content/uncompressed/font-awesome.css" rel="stylesheet" />
+    <link href="~/Content/ace-part2.min.css" rel="stylesheet" />
+    <link href="~/Content/ace-rtl.min.css" rel="stylesheet" />
+    <link href="~/Content/ace-skins.min.css" rel="stylesheet" />
+    <script src="~/scripts/jquery-1.10.2.js"></script>
+    <script src="~/scripts/bootstrap.min.js"></script>
+    <script src="~/scripts/modernizr-2.6.2.js"></script>
+    <script src="~/scripts/bootstrap-datepicker.min.js"></script>
+    <script src="~/scripts/bootstrap-datepicker.es.js"></script>
+    <script src="~/scripts/ace.min.js"></script>
+    <script src="~/scripts/ace-extra.min.js"></script>
+    <script src="~/Scripts/DMiravalle/Maestro.js"></script>
+
+
+</head>
+<body  class="no-skin">
+    <div id="navbar" class="navbar navbar-default">
+        <script type="text/javascript">
+            try { ace.settings.check('navbar', 'fixed') } catch (e) { }
+        </script>
+        <div class="navbar-container" id="navbar-container">
+            <!-- #section:basics/sidebar.mobile.toggle -->
+            <button type="button" class="navbar-toggle menu-toggler pull-left d-none" id="menu-toggler">
+                <span class="sr-only">Toggle sidebar</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <div class="navbar-header pull-left">
+                <a href="~/" class="navbar-brand">
+                    <small>
+                        <i class=""></i>
+                      Sistema de gestión de inventario Miravalle
+                    </small>
+                </a>
+
+            </div>
+
+        </div>
+        @if (User != null)
+        {
+            <div class="navbar-buttons navbar-header pull-right" role="navigation">
+                <ul class="nav ace-nav">
+                    <!-- #section:basics/navbar.user_menu -->
+                    <li class="light-blue">
+                        <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                            <span class="user-info">
+                                <small>Bienvenido,</small>
+                                @{
+                                    if (User != null)
+                                    {  @String.Concat(Activo.Nombre + " ", Activo.Apellido);
+                                    }
+                                }
+                            </span>
+                            <i class="ace-icon fa fa-caret-down"></i>
+                        </a>
+                        <ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+                            <li class="divider"></li>
+                            <li>
+                                <a href='@Url.Action("CerrarSesion", "Usuario")'>
+                                    <i class="ace-icon fa fa-power-off"></i>
+                                    Cerrar Sesión
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- /section:basics/navbar.user_menu -->
+                </ul>
+            </div>
+                                    }
+    </div>
+    <div class="main-container" id="main-container">
+        <script type="text/javascript">
+            try { ace.settings.check('main-container', 'fixed') } catch (e) { }
+        </script>
+        <div id="sidebar" class="sidebar responsive">
+            <script type="text/javascript">
+                try { ace.settings.check('sidebar', 'fixed') } catch (e) { }
+            </script>
+
+            <ul class="nav nav-list">
+                        <li class="col-12">
+                            <a href="#" class="dropdown-toggle EditTable" >
+                                <i class="menu-icon fa fa-wrench"></i>
+                                <span class="menu-text">Administración</span>
+                                <b class="arrow fa fa-angle-down"></b>
+
+                            </a>
+                            <b class="arrow"></b>
+                                    <ul class="submenu">
+                                                <li class="">
+                                                    <a href="@(Url.Action("Index","Usuario"))" class="" onclick="location.href='@(Url.Action("Index","Usuario"))'">
+                                                        <i class="menu-icon fa fa-user"></i>
+                                                           Usuarios
+                                                    </a>
+                                                    <b class="arrow fa fa-angle-down"></b>
+                                                </li>
+                                                <li class="">
+                                                    <a href="@(Url.Action("Sede", "Index", "Sede"))" class="" onclick="location.href='@(Url.Action("Sede", "Index", "Sede"))'">
+                                                        <i class="menu-icon fa fa-home"></i>
+                                                        Sedes
+                                                    </a>
+                                                    <b class="arrow fa fa-angle-down"></b>
+                                                </li>
+                                    </ul>
+                        
+                            
+                        </li>
+
+                <li class="col-12">
+                    <a href="#" class="dropdown-toggle EditTable">
+                        <i class="menu-icon fa fa-gears"></i>
+                        <span class="menu-text">Gestión</span>
+                        <b class="arrow fa fa-angle-down"></b>
+
+                    </a>
+                    <b class="arrow"></b>
+                    <ul class="submenu">
+                        <li class="">
+                            <a href="@(Url.Action("Index","TipoProducto"))" class="" onclick="location.href='@(Url.Action("Index","TipoProducto"))'">
+                                <i class="menu-icon fa fa-user"></i>
+                                Tipos de producto
+                            </a>
+                            <b class="arrow fa fa-angle-down"></b>
+                        </li>
+                        <li class="">
+                            <a href="@(Url.Action("Index", "Productos"))" class="" onclick="location.href='@(Url.Action("Index", "Productos"))'">
+                                <i class="menu-icon fa fa-medkit"></i>
+                                Producto
+                            </a>
+                            <b class="arrow fa fa-angle-down"></b>
+                        </li>
+                        <li class="">
+                            <a href="@(Url.Action("Index", "Inventario"))" class="" onclick="location.href='@(Url.Action("Index", "Inventario"))'">
+                                <i class="menu-icon fa fa-dropbox"></i>
+                                Inventario
+                            </a>
+                            <b class="arrow fa fa-angle-down"></b>
+                        </li>
+                    </ul>
+
+
+                </li>
+            </ul>
+            <div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
+                <i class="ace-icon fa fa-angle-double-left" data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>
+            </div>
+            <script type="text/javascript">
+                try { ace.settings.check('sidebar', 'collapsed') } catch (e) { }
+            </script>
+        </div>
+    </div>
+
+    <div class="container body-content col-lg-offset-2">
+        @RenderBody()
+    </div>
+
+</body>
+</html>
