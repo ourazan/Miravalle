@@ -1,79 +1,59 @@
-﻿
+﻿@using com.co.uan.DMiravalle.Administracion;
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Sedes";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    WebGrid grdSede = new WebGrid(canSort: true, canPage: true, rowsPerPage: 30);
+    grdSede.Bind((List<Sede>)ViewData["Sede"]);
+
 }
-
 <script src="~/Scripts/DMiravalle/Administracion/Sede.js"></script>
+<h2 class="center">Sedes</h2>
+@grdSede.GetHtml(
+    tableStyle: "table table-responsive backcolor",
+    headerStyle: "wedgrid-header ",
+    footerStyle: "webgrid-footer",
+    alternatingRowStyle: "webgrid-alternating-row",
+    rowStyle: "webgrid-row-style",
+    htmlAttributes: new { id = "grdSede", @class = "" }
+    , columns: grdSede.Columns(
+    grdSede.Column(header: null, format:@<text><a href="#" class="ace-icon fa fa-pencil" onclick="EditarSede(@Html.Raw( String.Concat(new string[] { "'" +item.IdSede.ToString() + "-", item.Administrador.IdUsuario.ToString() + "-",item.NombreSede + '-', item.Ciudad  + "-", item.Direccion +"'"})));"></a></text>),
+    grdSede.Column(header: null, format:@<text><a href="#" class="ace-icon fa fa-trash-o" onclick="EliminarSede(@Html.Raw(item.IdSede.ToString()));"></a></text>),
+    grdSede.Column("NombreSede", "Nombre Sede", canSort: true),
+    grdSede.Column("Ciudad", "Ciudad", canSort: true),
+    grdSede.Column("Direccion", "Dirección", canSort: false),
+    grdSede.Column("Administrador.Nombre", "Administrador", canSort: false)
+    ))
 
-<div class="jumbotron">
-    <h2><b class="textLabel">Gestion de sedes</b></h2>
-
-    <div class="ibox-content">
-        <div role="form" class="float-right" style="align-items">
-
-            <input type="button" id="btnAdicionar" class="col-xs-1 btn btn-w-m btn-primary" value="Adicionar" />
-
-        </div>
-    </div>
-</div>
-
-<div class="row">
-    <div class="col-xs-12 col-sm-12 col-md-12">
-
-        @*<%-- Tabla --%>*@
-        <div class="ibox-content">
-            <table class="table table-condensed" id="tbSede" con>
-                <thead>
-                    <tr>
-                        <th>Ciudad</th>
-                        <th data-breakpoints="xs sm">Direccion</th>
-                    </tr>
-                </thead>
-                <tbody id="tbodySede"></tbody>
-            </table>
-        </div>
-
-    </div>
-</div>
-
-@*<%--Modal--%>*@
-<div id="modalAdcUsr" class="modal" runat="server">
-    <div class="contentModal">
-
-        <div class="modal-header">
-            <h4 class="control-label align-text-top">Adición de registros</h4>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true" style="color: white">&times;</span></button>
-        </div>
-
-        <div class="modal-body">
-
-            <div class="row marginModal">
-
-                <div class="col-xs-12 col-sm-6 col-md-6 sinpadding">
-                    <label for="txtCiudad" class="col-sm-12 control-label textLabel">Ciudad</label>
-                    <input type="text" class="form-control textLabel" id="txtCiudad" name="txtCiudad" />
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="document" aria-hidden="true" id="divModalSede">
+    <div class="modal-dialog modal-lg" style="max-width: 550px">
+        <div class="modal-content">
+            <div class="container">
+                <div class="modal-header">
+                    <h3 id="Titulo" name="Titulo" class="modal-title text-blue text-center" style="margin:auto">Sede</h3>
                 </div>
-
-                <div class="col-xs-12 col-sm-6 col-md-6 sinpadding">
-                    <label for="txtDireccion" class="col-sm-12 control-label textLabel">Direccion</label>
-                    <input type="text" class="form-control textLabel" id="txtDireccion" name="txtDireccion" />
-                </div>
-
-            </div>
-
-        </div>
-
-        <div class="modal-footer">
-            <div class="ibox-content">
-                <div role="form" class="form-inline " style="align-items;">
-                    <input type="button" class="btn-delete btn btn-w-m" id="btnCancelar" value="Cancelar" />
-                    <input type="button" class="btn-create btn btn-w-m" id="btnCrear" value="Crear" />
+                <div id="divFormulario" class="form-actions">
+                    <div class="form-group row">
+                        <label for="NombreSede">Código de referencia:</label>
+                        @Html.TextBox("NombreSede", "", new { id = "NombreSede", @class = "form-control", required = "true" })
+                    </div>
+                    <div class="form-group row">
+                        <label for="Ciudad">Ciudad:</label>
+                        @Html.TextBox("Ciudad", "", new { id = "Ciudad", @class = "form-control", required = "true" })
+                    </div>
+                     <div class="form-group row">
+                        <label for="Dirección">Dirección:</label>
+                        @Html.TextBox("Direccion", "", new { id = "Direccion", @class = "form-control", required = "true" })
+                    </div>
+                    <div class="form-group row">
+                        <label for="TipoProducto">Administrador:</label>
+                        @Html.DropDownList("Administrador", (SelectList)ViewData["Administradores"], new { id = "Administrador", @class = "form-control ", required = "" })
+                    </div>
+                    <div class="form-group row align-center">
+                        <input type="hidden" id="hddID" />
+                        <button id="btnGuardar" class="btn btn-info" onclick="Guardar(); return false;" value="">Guardar</button>
+                    </div>
                 </div>
             </div>
         </div>
-
     </div>
 </div>
-
-

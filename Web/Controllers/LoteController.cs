@@ -9,7 +9,7 @@ namespace Web.Controllers
         public ActionResult ConsultaLotes()
         {
             ViewData["Autenticado"] = ObtenerAutenticado();
-            ViewData["Lote"] = ObtenerNegocio().ObtenerFachadaInventario().ConsultarLote("IdProducto="+Request["IdProducto"]);
+            ViewData["Lote"] = ObtenerNegocio().ObtenerFachadaInventario().ConsultarLote("IdProducto=" + Request["IdProducto"]);
             return PartialView();
         }
         [HttpGet]
@@ -25,9 +25,9 @@ namespace Web.Controllers
                 if (Request["hddIDLote"] == "0")
                 {
                     Resultado = ObtenerNegocio().ObtenerFachadaInventario().CrearLote(Request["CodigoLote"]
-                        ,Convert.ToDateTime(Request["FechaVencimiento"])
-                        ,Convert.ToInt32 (Request["hddIDProducto"])
-                        ,Convert .ToDateTime (Request["FechaRegistro"])
+                        , Convert.ToDateTime(Request["FechaVencimiento"])
+                        , Convert.ToInt32(Request["hddIDProducto"])
+                        , Convert.ToDateTime(Request["FechaRegistro"])
                         );
                     Mensaje = "No se pudo crear el Lote ";
                     if (Resultado)
@@ -84,5 +84,5 @@ namespace Web.Controllers
             return Json(new { success = true, data = Resultado, mensaje = Mensaje });
 
         }
-       }
+    }
 }

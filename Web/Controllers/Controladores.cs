@@ -32,7 +32,7 @@ namespace Web.Controllers
             };
         }
 
-        protected int ObtenerUsuarioAutenticado() {
+        private  int ObtenerUsuarioAutenticado() {
             return 1;
         }
         protected void RegistarError(Exception ex) {

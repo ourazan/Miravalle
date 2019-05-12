@@ -10,9 +10,9 @@
 
 
 
-function CargarFormularioEdicion(categoria) {
+function CargarFormularioEdicion(Tipo) {
     LimpiarCampos();
-    var arreglo = categoria.toString().split('-');
+    var arreglo = Tipo.toString().split('-');
     $("#hddID").val(arreglo[0]);
     $("#CodigoReferencia").val(arreglo[1]);
     $("#Descripcion").val(arreglo[2]);

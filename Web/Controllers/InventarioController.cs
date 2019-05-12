@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Web.Mvc;
 
 namespace Web.Controllers
@@ -8,9 +9,23 @@ namespace Web.Controllers
         // GET: Inventario
         public ActionResult Index()
         {
-            return View();
+            ViewData["Inventario"] = ObtenerNegocio().ObtenerFachadaInventario().ConsultarInventario(" IdLote=" + Request["IdLote"]);
+            return PartialView();
         }
-
+        [HttpGet]
+        public ActionResult Edicion()
+        {
+            SelectList Sedes;
+            var Items = (from sede in ObtenerNegocio().ObtenerFachadaAdministrativa().ConsultarSede(" 1=1 ")
+                         select new SelectListItem()
+                         {
+                             Text = sede.NombreSede,
+                             Value = sede.IdSede.ToString()
+                         });
+            Sedes = new SelectList(Items, "Value", "Text");
+            ViewData["Sede"] = Sedes;
+            return PartialView();
+        }
         [HttpPost]
         public ActionResult GuardarRegisro()
         {
@@ -19,13 +34,13 @@ namespace Web.Controllers
 
             try
             {
-                if (Request["id"] == "0")
+                if (Request["hddIDInventario"] == "0")
                 {
                     Resultado = ObtenerNegocio().ObtenerFachadaInventario().CrearInventario(
-                        Convert.ToInt32(Request["IdLote"])
-                        , Convert.ToInt32(Request["IdSede"])
-                        , Convert.ToInt32 (Request["txtCantidad"])
-                        ,Convert.ToDateTime( Request["FechaRegistro"]));
+                        Convert.ToInt32(Request["hddIDLote"])
+                        ,Convert.ToInt32(Request["SedeInventario"])
+                        ,Convert.ToInt32 (Request["Cantidad"])
+                        ,Convert.ToDateTime( Request["FechaRegistroInventario"]));
                       Mensaje = "No se pudo crear el inventario ";
                     if (Resultado)
                         Mensaje = "Se ha creado el inventario exitosamente";
@@ -34,11 +49,11 @@ namespace Web.Controllers
                 else
                 {
                     Resultado = ObtenerNegocio().ObtenerFachadaInventario().EditarInventario(
-                        Convert.ToInt32(Request["IdLote"])
-                        , Convert.ToInt32(Request["IdSede"])
-                        , Convert.ToInt32(Request["txtCantidad"])
-                        , Convert.ToInt32(Request["id"])
-                        , Convert.ToDateTime(Request["FechaRegistro"]));
+                        Convert.ToInt32(Request["hddIDLote"])
+                        ,Convert.ToInt32(Request["SedeInventario"])
+                        ,Convert.ToInt32(Request["Cantidad"])
+                        ,Convert.ToInt32(Request["hddIDInventario"])
+                        ,Convert.ToDateTime(Request["FechaRegistroInventario"]));
                  
                     Mensaje = "No se pudo editar el inventario ";
                     if (Resultado )
@@ -57,5 +72,23 @@ namespace Web.Controllers
 
         }
 
+        [HttpPost]
+        public ActionResult Eliminar()
+        {
+            try
+            {
+                    Resultado = ObtenerNegocio().ObtenerFachadaInventario().EliminarInventario(Convert.ToInt32(Request["IdInventario"]));
+                    Mensaje = "No se pudo eliminar el inventario ";
+                    if (Resultado)
+                        Mensaje = "Se ha eliminado el inventario exitosamente";
+            }
+            catch (Exception ex)
+            {
+                RegistarError(ex);
+                Resultado = false;
+                Mensaje = "Se presento inconveniente al realizar la accion";
+            }
+            return Json(new { success = true, data = Resultado, mensaje = Mensaje });
+        }
     }
 }

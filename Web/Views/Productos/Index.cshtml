@@ -7,6 +7,7 @@
 }
 <script src="~/Scripts/DMiravalle/Inventario/Producto.js"></script>
 <script src="~/Scripts/DMiravalle/Inventario/Lote.js"></script>
+<script src="~/Scripts/DMiravalle/Inventario/Inventarios.js"></script>
 
 <script>
     function CargarFormularioEdicionLoteModificacion(Detalle) {
@@ -30,7 +31,7 @@
 
     function CargarFormularioLoteProducto(IdProducto, NombreProducto) {
         var Ruta = '@Url.Content("~")';
-        $('#divDetalleLote').load(Ruta + 'Lote/ConsultaLotes?IdProducto=' + IdProducto, function () {
+           $('#divDetalleLote').load(Ruta + 'Lote/ConsultaLotes?IdProducto=' + IdProducto, function () {
             AbrirModal("divModalDetalleLote");
             $("#TituloDetalleLote").empty();
             $("#TituloDetalleLote").append('Lotes del producto ' + NombreProducto);
@@ -38,6 +39,38 @@
         });
         return false;
     }
+
+
+
+    function CargarFormularioInventarioEdicion(Detalle) {
+        var Ruta = '@Url.Content("~")';
+        $('#divEdicionInventario').load(Ruta + 'Inventario/Edicion', function () {
+            AbrirModal("divModalInventario");
+            CargarDetallesInventario(Detalle);
+        });
+        return false;
+    }
+
+    function CargarFormularioInventarioNuevo(Detalle) {
+        var Ruta = '@Url.Content("~")';
+        $('#divEdicionInventario').load(Ruta + 'Inventario/Edicion', function () {
+            AbrirModal("divModalInventario");
+            CargarDetallesInventarioNuevo(Detalle);
+        });
+        return false;
+    }
+
+    function CargarFormularioInventarioConsulta(IdLote, NombreProducto) {
+        var Ruta = '@Url.Content("~")';
+        $('#divEdicionInventario').load(Ruta + 'Inventario/Index?IdLote='+IdLote, function () {
+            AbrirModal("divModalDetalleInventario");
+            $("#TituloDetalleInventario").empty();
+            $("#TituloDetalleInventario").append('Inventario del producto ' + NombreProducto);
+
+        });
+        return false;
+    }
+
 </script>
 <h2 class="center">Gestión de productos</h2>
 @grdProducto.GetHtml(
@@ -64,11 +97,11 @@
                 </div>
                 <div id="divFormulario" class="form-actions">
                     <div class="form-group row">
-                        <label for="txtNombre">Producto:</label>
+                        <label for="NombreProducto">Producto:</label>
                         @Html.TextBox("NombreProducto", "", new { id = "NombreProducto", @class = "form-control", required = "true" })
                     </div>
                     <div class="form-group row">
-                        <label for="txtNombre">TipoProducto:</label>
+                        <label for="TipoProducto">TipoProducto:</label>
                         @Html.DropDownList("TipoProducto", (SelectList)ViewData["TiposProducto"], new { id = "TipoProducto", @class = "form-control ", required = "" })
                     </div>
                     <div class="form-group row align-center">
@@ -114,7 +147,7 @@
 
 
 
-<div class="modal fade bd-example-modal-lg" tabindex="-1" role="document" aria-hidden="true" id="divModalLote">
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="document" aria-hidden="true" id="divModalInventario">
     <div class="modal-dialog modal-lg" style="max-width: 550px">
         <div class="modal-content">
             <div class="container">
@@ -128,7 +161,7 @@
     </div>
 </div>
 
-<div class="modal fade bd-example-modal-lg" tabindex="-1" role="document" aria-hidden="true" id="divModalDetalleLote">
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="document" aria-hidden="true" id="divModalDetalleInventario">
     <div class="modal-dialog modal-lg" style="max-width: 550px">
         <div class="modal-content">
             <div class="container">

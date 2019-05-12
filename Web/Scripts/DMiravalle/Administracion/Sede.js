@@ -1,33 +1,76 @@
-﻿$(document).ready(function () {
-    //EVENTOS CONTROLES
+﻿
+function CargarFormularioNuevo() {
+    LimpiarCampos();
+    AbrirModal("divModalSede");
+}
 
-    $('#btnAdicionar').on('click', function () {
-        $('#modalAdcUsr').modal('toggle');
-    });
+function LimpiarCampos() {
+    $("#hddID").val(0);
+    $("#NombreSede").val('');
+    $("#Ciudad").val('');
+    $("#Dirección").val('');
+    $("#Administrador").val('');
+    $("#Titulo").empty();
+    $("#Titulo").append('Creación sede');
 
-    $('#btnCancelar').on('click', function () {
-        $('#modalAdcUsr').modal('hide');
-    });
+}
 
-    $('#btnCrear').on('click', function () {
-        crearRegistro();
-    });
+function EditarSede(Sede) {
+    LimpiarCampos();
+    Sede = Sede.toString().split('-');
+    $("#hddID").val(Sede[0]);
+    $("#Administrador").val(Sede[2]);
+    $("#NombreSede").val(Sede[3]);
+    $("#Ciudad").val(Sede[4]);
+    $("#Dirección").val(Sede[5]);
 
-    //FUNCIONES
+    AbrirModal("divModalSede");
+    $("#Titulo").empty();
+    $("#Titulo").append('Edición sede');
+}
 
-    function crearRegistro() {
-
-        LlamadoPostXMLHttp('/Sede/crearRegisro', Response_crearRegistro());
-
+function CargarResultados(Resultado) {
+    MostrarMensaje(Resultado.mensaje);
+    if (Resultado.data) {
+        LimpiarCampos();
+        OcultarModal("divModalSede");
+        window.location.href = '/Sede/Index';
     }
+}
+function ObtenerDatos() {
+    return $("#divFormulario :input").serialize() + '&hddID=' + $("#hddID").val();
 
-    function Response_crearRegistro() {
-
-        //if (res === true) {
-        //} else {
-        //}
-
+}
+function ValidarFormulario() {
+    var Mensajes = '';
+    if ($("#NombreSede").val() == '' || $("#NombreSede").val() == null) {
+        Mensajes += 'Debe registrar un nombre de sede \n'
     }
+    if ($("#Ciudad").val() == '' || $("#Ciudad").val() == null) {
+        Mensajes += 'Debe registrar una ciudad \n'
+    }
+    if ($("#Direccion").val() == '' || $("#Direccion").val() == null) {
+        Mensajes += 'Debe registrar una dirección \n'
+    }
+    return Mensajes;
+}
+function Guardar() {
+    var Mensajes = ValidarFormulario();
 
-});
+    if (Mensajes == '') {
+        LlamadoPost('/Sede/GuardarRegistro', ObtenerDatos());
+    }
+    else { MostrarMensaje(Mensajes); }
+}
+function EliminarSede(Tipo) {
+    LlamadoPost('/Sede/EliminarRegistro', "hddID=" + Tipo);
+}
+
+
+$(function () {
+    var Adicion = $('<a href="#" class="ace-icon fa fa-plus" title="Crear nuevo registro" onclick="CargarFormularioNuevo();"  ></a>');
+    $("#grdSede th:first-child").append(Adicion);
+}
+);
+
 

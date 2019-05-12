@@ -79,7 +79,7 @@ namespace com.co.uan.DMiravalle.Administracion
                 new Parametros("@NombreSede",Nombre,SqlDbType.VarChar,ParameterDirection.Input)
                 ,new Parametros("@Ciudad",Ciudad,SqlDbType.VarChar,ParameterDirection.Input)
                 ,new Parametros("@Direccion",Direccion,SqlDbType.VarChar,ParameterDirection.Input)
-                ,new Parametros("@IdAdministrador",IdAdministrador,SqlDbType.Int,ParameterDirection.Input)
+                ,new Parametros("@IdAdministrador",(IdAdministrador==0?(object)DBNull.Value:(object)IdAdministrador),SqlDbType.Int,ParameterDirection.Input)
                 ,new Parametros("@UsuarioAutenticado",UsuarioAutenticado,SqlDbType.Int,ParameterDirection.Input)
                  ,new Parametros("@RETURN_VALUE",null,SqlDbType.Int,ParameterDirection.ReturnValue)
             };
@@ -92,7 +92,7 @@ namespace com.co.uan.DMiravalle.Administracion
                 new Parametros("@NombreSede",Nombre,SqlDbType.VarChar,ParameterDirection.Input)
                 ,new Parametros("@Ciudad",Ciudad,SqlDbType.VarChar,ParameterDirection.Input)
                 ,new Parametros("@Direccion",Direccion,SqlDbType.VarChar,ParameterDirection.Input)
-                ,new Parametros("@IdAdministrador",IdAdministrador,SqlDbType.Int,ParameterDirection.Input)
+                ,new Parametros("@IdAdministrador",(IdAdministrador==0?(object)DBNull.Value:(object)IdAdministrador),SqlDbType.Int,ParameterDirection.Input)
                 ,new Parametros("@IdSede",IdSede,SqlDbType.Int,ParameterDirection.Input)
                 ,new Parametros("@UsuarioAutenticado",this.UsuarioAutenticado,SqlDbType.Int,ParameterDirection.Input)
                  ,new Parametros("@RETURN_VALUE",null,SqlDbType.Int,ParameterDirection.ReturnValue)
@@ -109,9 +109,6 @@ namespace com.co.uan.DMiravalle.Administracion
                 };
                 return Convert.ToInt32(new Transaccion("EliminarSede", Parametros).EjecutarDevuelveReturnValue()) > 0;
         }
-        public void AsignarEjecutor(int Autenticado)
-        {
-            this.UsuarioAutenticado = Autenticado;
-        }
+       
     }
 }

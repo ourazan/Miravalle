@@ -11,36 +11,49 @@ namespace Web.Controllers
         // GET: Sede
         public ActionResult Index()
         {
+            ViewData["Autenticado"] = ObtenerAutenticado();
+            SelectList Administradores;
+            var Items = (from Administrador in ObtenerNegocio().ObtenerFachadaAdministrativa().ConsultarUsuario(" 1=1")
+                         select new SelectListItem()
+                         {
+                             Text = Administrador.Nombre +" " + Administrador.Apellido,
+                             Value = Administrador.IdUsuario.ToString()
+                         }
+                                    );
+            Administradores = new SelectList(Items, "Value", "Text");
+            ViewData["Administradores"] = Administradores;
             return View();
         }
 
         [HttpPost]
-        public ActionResult crearRegisro()
+        public ActionResult GuardarRegistro()
         {
-            string Mensaje = "";
-            int Resultado = 0;
-
             try
             {
-                if (Request["id"] == "0")
+                if (Request["hddID"] == "0")
                 {
-                    //Resultado = FachadaAdministracion.CrearSede(Request["txtCiudad"], Request["txtDireccion"]);
-                    Mensaje = "No se pudo crear el usuario ";
+                    Resultado = ObtenerNegocio().ObtenerFachadaAdministrativa().CrearSede(Request["NombreSede"]
+                        , Request["Ciudad"],  Request["Direccion"]
+                        , (Request["Administrador"]==null?0:Convert.ToInt32(Request["Administrador"])));
+                    Mensaje = "No se pudo crear la sede ";
 
-                    if (Resultado > 0)
+                    if (Resultado)
                     {
-                        Mensaje = "Se ha creado el usuario exitosamente";
+                        Mensaje = "Se ha creado la sede exitosamente";
                     }
 
                 }
                 else
                 {
-                    //Resultado = FachadaAdministracion.EditarSede(Request["txtCiudad"], Request["txtDireccion"]);
-                    Mensaje = "No se pudo editar el Usuario ";
-                    if (Resultado > 0)
-                        Mensaje = "Se ha editado el usuario exitosamente";
+                    Resultado = ObtenerNegocio().ObtenerFachadaAdministrativa().EditarSede(Request["NombreSede"]
+                        , Request["Ciudad"]
+                        , Request["Direccion"]
+                        , (Request["Administrador"] == null || Request["Administrador"] ==""? 0 : Convert.ToInt32(Request["Administrador"]))
+                        ,Convert.ToInt32(Request["hddID"]) );
+                    Mensaje = "No se pudo editar la sede ";
+                    if (Resultado )
+                        Mensaje = "Se ha editado la sede exitosamente";
                 }
-
 
             }
             catch (Exception ex)
@@ -51,6 +64,36 @@ namespace Web.Controllers
             return Json(new { success = true, data = Resultado, mensaje = Mensaje });
 
         }
+
+        [HttpPost]
+        public ActionResult EliminarRegistro()
+        {
+            try
+            {
+                if (ObtenerNegocio().ObtenerFachadaInventario().ConsultarProducto("IdSede=" + Request["hddID"]).Count == 0)
+                {
+
+                    Resultado = ObtenerNegocio().ObtenerFachadaAdministrativa().EliminarSede(Convert.ToInt32(Request["hddID"]));
+                    Mensaje = "No se pudo eliminar la sede ";
+                    if (Resultado)
+                        Mensaje = "Se ha eliminado la sede exitosamente";
+
+                }
+                else
+                {
+                    Resultado = false;
+                    Mensaje = "No se puede eliminar la sede porque se encuentra relacionado con el inventario";
+                }
+            }
+            catch (Exception ex)
+            {
+                RegistarError(ex);
+                Resultado = false;
+                Mensaje = "Se presento inconveniente al realizar la accion";
+            }
+            return Json(new { success = true, data = Resultado, mensaje = Mensaje });
+        }
+
 
     }
 }
