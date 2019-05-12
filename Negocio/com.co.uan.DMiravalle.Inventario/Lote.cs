@@ -50,7 +50,6 @@ namespace com.co.uan.DMiravalle.Inventario
         }
 
         #endregion
-
         #region Funciones
         public List<Lote> Consultar(string Filtro)
         {
@@ -96,7 +95,7 @@ namespace com.co.uan.DMiravalle.Inventario
                 new Parametros("@CodigoLote",CodigoLote,SqlDbType.VarChar,ParameterDirection.Input)
                 ,new Parametros("@FechaRegistro",FechaRegistro,SqlDbType.DateTime,ParameterDirection.Input)
                 ,new Parametros("@FechaVencimiento",FechaVencimiento,SqlDbType.DateTime,ParameterDirection.Input)
-                ,new Parametros("@IdProducto",Producto.IdProducto,SqlDbType.Int,ParameterDirection.Input)
+                ,new Parametros("@IdProducto",IdProducto,SqlDbType.Int,ParameterDirection.Input)
                  ,new Parametros("@IdLote",IdLote,SqlDbType.Int,ParameterDirection.Input)
                 ,new Parametros("@UsuarioAutenticado",this.UsuarioAutenticado,SqlDbType.Int,ParameterDirection.Input)
                  ,new Parametros("@RETURN_VALUE",null,SqlDbType.Int,ParameterDirection.ReturnValue)

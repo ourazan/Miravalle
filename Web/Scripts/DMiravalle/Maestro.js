@@ -22,6 +22,15 @@ function LlamadoPostXMLHttp(url, data,retornaValor) {
     }
 }
 
+function DefinirFecha(Control) {
+    $('#' + Control).datepicker("destroy")
+    $('#' + Control).datepicker({
+        language: 'es',
+        format: 'dd/mm/yyyy',
+        defaultDate: $('#' + Control).val()
+    });
+    $('#' + Control).datepicker("setDate", $('#' + Control).val());
+}
 
 function MostrarMensaje(texto) {
     alert(texto);

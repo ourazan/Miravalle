@@ -4,5 +4,6 @@ D:\UAN\DMiravalle\Datos\obj\Debug\Datos.dll
 D:\UAN\DMiravalle\Datos\obj\Debug\Datos.pdb
 D:\OMAR\UAN\Miravalle\Datos\bin\Debug\Datos.dll
 D:\OMAR\UAN\Miravalle\Datos\bin\Debug\Datos.pdb
+D:\OMAR\UAN\Miravalle\Datos\obj\Debug\Datos.csprojResolveAssemblyReference.cache
 D:\OMAR\UAN\Miravalle\Datos\obj\Debug\Datos.dll
 D:\OMAR\UAN\Miravalle\Datos\obj\Debug\Datos.pdb
