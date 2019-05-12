@@ -1,33 +1,20 @@
-﻿$(document).ready(function () {
-    //EVENTOS CONTROLES
+﻿function NuevoInventario(Lote) {
 
-    $('#btnAdicionar').on('click', function () {
-        $('#modalAdcUsr').modal('toggle');
-    });
 
-    $('#btnCancelar').on('click', function () {
-        $('#modalAdcUsr').modal('hide');
-    });
+}
 
-    $('#btnCrear').on('click', function () {
-        crearRegistro();
-    });
+function NuevoInventario(Lote) {
 
-    //FUNCIONES
 
-    function crearRegistro() {
+}
+function ObtenerDatosInventario() {
+    return $("#divFormularioInventario :input").serialize();
+}
 
-        LlamadoPostXMLHttp('/Inventario/GuardarRegisro', Response_crearRegistro());
-
+function GuardarLote() {
+    var Mensajes = ValidarFormularioInventario();
+    if (Mensajes == '') {
+        LlamadoPost('/Inventario/GuardarRegistro', ObtenerDatosInventario());
     }
-
-    function Response_crearRegistro() {
-
-        //if (res === true) {
-        //} else {
-        //}
-
-    }
-
-});
-
+    else { MostrarMensaje(Mensajes); }
+}
