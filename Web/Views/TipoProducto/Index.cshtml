@@ -17,7 +17,7 @@
     rowStyle: "webgrid-row-style",
     htmlAttributes: new { id = "grdTipo", @class = "" }
     , columns: grdCategoria.Columns(
-    grdCategoria.Column(header: null, format:@<text><a href="#" class="ace-icon fa fa-edit" onclick="CargarFormularioEdicion(@Html.Raw( String.Concat(new string[] { "'" +item.IdTipoProducto.ToString() + "-", item.CodigoReferencia + '-', item.Descripcion +"'"})));"></a></text>),
+    grdCategoria.Column(header: null, format:@<text><a href="#" class="ace-icon fa fa-pencil" onclick="CargarFormularioEdicion(@Html.Raw( String.Concat(new string[] { "'" +item.IdTipoProducto.ToString() + "-", item.CodigoReferencia + '-', item.Descripcion +"'"})));"></a></text>),
     grdCategoria.Column("CodigoReferencia", "Código Referencia", canSort: true),
     grdCategoria.Column("Descripcion", "Descripción", canSort: false)))
 

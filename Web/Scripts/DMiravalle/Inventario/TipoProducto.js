@@ -2,7 +2,12 @@
     $("#hddID").val(0);
     $("#Descripcion").val('');
     $("#CodigoReferencia").val('');
+    $("#Titulo").empty();
+    $("#Titulo").append('Creación tipo producto');
+
 }
+
+
 
 
 function CargarFormularioEdicion(categoria) {
@@ -12,6 +17,8 @@ function CargarFormularioEdicion(categoria) {
     $("#CodigoReferencia").val(arreglo[1]);
     $("#Descripcion").val(arreglo[2]);
     AbrirModal("divModalTipoProducto");
+    $("#Titulo").empty();
+    $("#Titulo").append('Edición tipo producto');
 }
 
 function CargarFormularioNuevo() {

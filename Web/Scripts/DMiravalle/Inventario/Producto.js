@@ -1,6 +1,9 @@
 ﻿function CargarFormularioNuevo() {
     LimpiarCampos();
     AbrirModal("divModalProducto");
+    $("#TituloProducto").empty();
+    $("#TituloProducto").append('Creación producto');
+
 }
 function CargarFormularioEdicion(categoria) {
     LimpiarCampos();
@@ -9,6 +12,9 @@ function CargarFormularioEdicion(categoria) {
     $("#NombreProducto").val(arreglo[1]);
     $("#TipoProducto").val(arreglo[2]);
     AbrirModal("divModalProducto");
+    $("#TituloProducto").empty();
+    $("#TituloProducto").append('Edición producto');
+
 }
 function LimpiarCampos() {
     $("#hddID").val(0);
@@ -53,3 +59,7 @@ $(function () {
     $("#grdProducto th:first-child").append(Adicion);
 }
 );
+
+function EliminarProducto(idProducto) {
+    LlamadoPost('/Productos/EliminarRegistro', "hddID=" + idProducto);
+}

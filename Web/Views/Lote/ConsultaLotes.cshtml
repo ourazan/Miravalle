@@ -14,6 +14,6 @@
     grdLote.Column("CodigoLote", "Código Lote", canSort: false),
     grdLote.Column("FechaRegistro", "Fecha Registro", canSort: false, format:(item) => string.Format("{0:dd/MM/yyyy}", item.FechaRegistro)),
     grdLote.Column("FechaVencimiento", "Fecha Vencimiento", canSort: false,format:(item) => string.Format("{0:dd/MM/yyyy}", item.FechaVencimiento)),
-    grdLote.Column(header: null, format:@<text><a href="#" class="ace-icon fa fa-edit" onclick="EditarLote(@Html.Raw( String.Concat(new string[] { "'" +item.IdLote.ToString() + "-", item.Producto.IdProducto.ToString() + "-", item.CodigoLote + '-', string.Format("{0:dd/MM/yyyy}", item.FechaRegistro)+ '-',string.Format("{0:dd/MM/yyyy}", item.FechaVencimiento)+"'" })));"></a></text>),
+    grdLote.Column(header: null, format:@<text><a href="#" class="ace-icon fa fa-pencil" onclick="EditarLote(@Html.Raw( String.Concat(new string[] { "'" +item.IdLote.ToString() + "-", item.Producto.IdProducto.ToString() + "-", item.CodigoLote + '-', string.Format("{0:dd/MM/yyyy}", item.FechaRegistro)+ '-',string.Format("{0:dd/MM/yyyy}", item.FechaVencimiento)+"'" })));"></a></text>),
     grdLote.Column(header: null, format:@<text><a href="#" class="ace-icon fa fa-trash-o" onclick="EliminarLote(@Html.Raw(item.IdLote.ToString()));"></a></text>)
     ))

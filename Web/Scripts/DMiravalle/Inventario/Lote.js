@@ -2,11 +2,16 @@
     LimpiarCamposLote();
     $("#hddIDLote").val(0);
     $("#hddIDProducto").val(IdProducto);
+    $("#TituloLote").empty();
+    $("#TituloLote").append('Creación Lote');
+
 }
 
 function EditarLote(Detalles) {
     OcultarModal("divModalDetalleLote");
      CargarFormularioEdicionLoteModificacion(Detalles);
+     $("#TituloLote").empty();
+     $("#TituloLote").append('Edición Lote');
 
 }
 
@@ -52,7 +57,7 @@ function CargarFormularioEdicionLote(Detalles) {
     }
 
     function ObtenerDatosLote() {
-        return $("#divFormularioLote :input").serialize() + '&hddID=' + $("#hddID").val();
+        return $("#divFormularioLote :input").serialize();
     }
 
 

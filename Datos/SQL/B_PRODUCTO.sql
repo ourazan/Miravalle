@@ -57,8 +57,12 @@ go
 
 Create  procedure EliminarProducto
 @IdProducto int 
+,@UsuarioAutenticado int 
  as begin
  update  Producto set Activo=0
+ ,FechaModificacion =getdate()
+ ,UsuarioModifico=@UsuarioAutenticado 
+
 where
 IdProducto =@IdProducto 
 

@@ -28,10 +28,13 @@
         return false;
     }
 
-    function CargarFormularioLoteProducto(IdProducto) {
+    function CargarFormularioLoteProducto(IdProducto, NombreProducto) {
         var Ruta = '@Url.Content("~")';
         $('#divDetalleLote').load(Ruta + 'Lote/ConsultaLotes?IdProducto=' + IdProducto, function () {
             AbrirModal("divModalDetalleLote");
+            $("#TituloDetalleLote").empty();
+            $("#TituloDetalleLote").append('Lotes del producto ' + NombreProducto);
+
         });
         return false;
     }
@@ -45,9 +48,10 @@
     rowStyle: "webgrid-row-style",
     htmlAttributes: new { id = "grdProducto", @class = "" }
     , columns: grdProducto.Columns(
-    grdProducto.Column(header: null, format:@<text><a href="#" class="ace-icon fa fa-edit" onclick="CargarFormularioEdicion(@Html.Raw( String.Concat(new string[] { "'" +item.IdProducto.ToString() + "-", item.NombreProducto + '-', item.Tipo.IdTipoProducto +"'"})));"></a></text>),
-    grdProducto.Column(header: null, format:@<text><a href="#" class="ace-icon fa fa-edit" onclick="CargarFormularioEdicionLoteNuevo(@Html.Raw( "'" +item.IdProducto.ToString()+"'"));"></a></text>),
-    grdProducto.Column(header: null, format:@<text><a href="#" class="ace-icon fa fa-eye" onclick="CargarFormularioLoteProducto(@Html.Raw( "'" +item.IdProducto.ToString()+"'"));"></a></text>),
+    grdProducto.Column(header: null, format:@<text><a href="#" class="ace-icon fa fa-pencil" title="Editar Producto" onclick="CargarFormularioEdicion(@Html.Raw( String.Concat(new string[] { "'" +item.IdProducto.ToString() + "-", item.NombreProducto + '-', item.Tipo.IdTipoProducto +"'"})));"></a></text>),
+    grdProducto.Column(header: null, format:@<text><a href="#" class="ace-icon fa fa-edit" title="Crear Lote" onclick="CargarFormularioEdicionLoteNuevo(@Html.Raw( "'" +item.IdProducto.ToString()+"'"));"></a></text>),
+    grdProducto.Column(header: null, format:@<text><a href="#" class="ace-icon fa fa-eye" title="Ver Lotes" onclick="CargarFormularioLoteProducto(@Html.Raw( "'" +item.IdProducto.ToString()+"'"),@Html.Raw( "'" +item.NombreProducto +"'"));"></a></text>),
+    grdProducto.Column(header: null, format:@<text><a href="#" class="ace-icon fa fa-trash-o" title="Eliminar Producto" onclick="EliminarProducto(@Html.Raw( "'" +item.IdProducto.ToString()+"'"));"></a></text>),
     grdProducto.Column("NombreProducto", "Producto", canSort: false),
     grdProducto.Column("Tipo.Descripcion", "Tipo producto", canSort: false)))
 
@@ -56,7 +60,7 @@
         <div class="modal-content">
             <div class="container">
                 <div class="modal-header">
-                    <h3 id="Titulo" name="Titulo" class="modal-title text-blue text-center" style="margin:auto">Producto</h3>
+                    <h3 id="TituloProducto" name="TituloProducto" class="modal-title text-blue text-center" style="margin:auto">Producto</h3>
                 </div>
                 <div id="divFormulario" class="form-actions">
                     <div class="form-group row">
@@ -83,7 +87,7 @@
         <div class="modal-content">
             <div class="container">
                 <div class="modal-header">
-                    <h3 class="modal-title text-blue text-center" style="margin:auto">Creación de lote</h3>
+                    <h3 id="TituloLote" name="TituloLote" class="modal-title text-blue text-center" style="margin:auto">Creación de lote</h3>
                 </div>
                 <div id="divEdicionLote" class="form-actions">
                 </div>
@@ -97,7 +101,7 @@
         <div class="modal-content">
             <div class="container">
                 <div class="modal-header">
-                    <h3 class="modal-title text-blue text-center" style="margin:auto">Lotes</h3>
+                    <h3  id="TituloDetalleLote" name="TituloDetalleLote" class="modal-title text-blue text-center" style="margin:auto">Lotes</h3>
                 </div>
                 <div id="divDetalleLote" class="form-actions">
 
