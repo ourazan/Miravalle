@@ -37,8 +37,9 @@ namespace com.co.uan.DMiravalle.Administracion
                 IdSede = Resultado[0].IdSede;
             }
         }      
-        public Sede( string direccion, string ciudad, int idSede, Usuario administrador)
+        public Sede(string nombresede, string direccion, string ciudad, int idSede, Usuario administrador)
         {
+            NombreSede = nombresede;
             Administrador = administrador;
             Direccion = direccion;
             Ciudad = ciudad;
@@ -54,7 +55,8 @@ namespace com.co.uan.DMiravalle.Administracion
             };
             DataTable Coleccion = new Transaccion("ConsultarSede", Parametros).EjecutarDevuelveTabla();
             List<Sede> Resultado = (from fila in Coleccion.AsEnumerable()
-                                        select new Sede(fila["Direccion"].ToString()
+                                        select new Sede(fila["NombreSede"].ToString()
+                                                        , fila["Direccion"].ToString()
                                                         , fila["Ciudad"].ToString()
                                                         , Int32.Parse(fila["IdSede"].ToString())
                                                         , new Usuario(fila["Nombre"].ToString()

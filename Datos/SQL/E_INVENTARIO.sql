@@ -41,7 +41,7 @@ select
 ,v_Sede.NombreUsuario  
 from Inventario
 inner join dbo.v_Lote on v_Lote.IdLote=Inventario.IdLote
-inner join dbo.v_sede on v_sede.IdSede=Inventario.IdSede
+inner  join dbo.v_sede on v_sede.IdSede=Inventario.IdSede
 
 GO
 

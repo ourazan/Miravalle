@@ -3,7 +3,8 @@
     ViewBag.Title = "Inventario";
     WebGrid grdInventario = new WebGrid(canSort: true, canPage: true, rowsPerPage: 30);
     grdInventario.Bind((List<Inventario>)ViewData["Inventario"]); }
-    @grdInventario.GetHtml(
+   
+ @grdInventario.GetHtml(
     tableStyle: "table table-responsive backcolor",
     headerStyle: "wedgrid-header ",
     footerStyle: "webgrid-footer",
@@ -11,7 +12,7 @@
     rowStyle: "webgrid-row-style",
     htmlAttributes: new { id = "grdInventario", @class = "" }
     , columns: grdInventario.Columns(
-    grdInventario.Column(header: null, format:@<text><a href="#" class="ace-icon fa fa-pencil" title="Editar Inventario" onclick="EditarInventario(@Html.Raw( String.Concat(new string[] { "'" +item.IdInventario.ToString() + "-", item.Lote.IdLote + '-', item.Lote.CodigoLote + '-', item.Lote.Producto.NombreProducto + '-', item.SedeInventario.IdSede + '-', string.Format("{0:dd/MM/yyyy}", item.FechaRegistro) + '-',item.Cantidad +"'"})));"></a></text>),
+    grdInventario.Column(header: null, format:@<text><a href="#" class="ace-icon fa fa-pencil" title="Editar Inventario" onclick="EditarInventario(@Html.Raw( String.Concat(new string[] { "'" +item.IdInventario.ToString() + "-", item.LoteProducto.IdLote.ToString() + '-', item.LoteProducto.CodigoLote + '-', item.LoteProducto.Producto.NombreProducto + '-', item.SedeInventario.IdSede.ToString() + '-', string.Format("{0:dd/MM/yyyy}", item.FechaRegistro) + '-',item.Cantidad +"'"})));"></a></text>),
     grdInventario.Column(header: null, format:@<text><a href="#" class="ace-icon fa fa-trash-o" title="Eliminar Inventario" onclick="EliminarInventario(@Html.Raw( "'" +item.IdInventario.ToString()+"'"));"></a></text>),
     grdInventario.Column("SedeInventario.NombreSede", "Sede", canSort: false),
     grdInventario.Column("Cantidad", "Cantidad", canSort: false),

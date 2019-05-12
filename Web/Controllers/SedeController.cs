@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace Web.Controllers
@@ -22,6 +20,7 @@ namespace Web.Controllers
                                     );
             Administradores = new SelectList(Items, "Value", "Text");
             ViewData["Administradores"] = Administradores;
+            ViewData["Sede"] = ObtenerNegocio().ObtenerFachadaAdministrativa().ConsultarSede(" 1=1 ");
             return View();
         }
 

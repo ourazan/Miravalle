@@ -62,7 +62,8 @@ namespace com.co.uan.DMiravalle.Inventario
             DataTable Coleccion = new Transaccion("ConsultarInventario", Parametros).EjecutarDevuelveTabla();
             List<Inventario> Resultado = (from fila in Coleccion.AsEnumerable()
                                     select new Inventario(                                                       
-                                                        new Sede(fila["Direccion"].ToString()
+                                                        new Sede(fila["NombreSede"].ToString()
+                                                            , fila["Direccion"].ToString()
                                                             , fila["Ciudad"].ToString()
                                                             , Int32.Parse(fila["IdSede"].ToString())
                                                             , new Usuario(fila["Nombre"].ToString()

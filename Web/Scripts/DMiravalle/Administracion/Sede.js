@@ -17,12 +17,12 @@ function LimpiarCampos() {
 
 function EditarSede(Sede) {
     LimpiarCampos();
-    Sede = Sede.toString().split('-');
+    Sede = Sede.toString().split('|');
     $("#hddID").val(Sede[0]);
-    $("#Administrador").val(Sede[2]);
-    $("#NombreSede").val(Sede[3]);
-    $("#Ciudad").val(Sede[4]);
-    $("#Dirección").val(Sede[5]);
+    $("#Administrador").val(Sede[1]);
+    $("#NombreSede").val(Sede[2]);
+    $("#Ciudad").val(Sede[3]);
+    $("#Dirección").val(Sede[4]);
 
     AbrirModal("divModalSede");
     $("#Titulo").empty();

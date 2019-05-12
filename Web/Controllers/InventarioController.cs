@@ -27,7 +27,7 @@ namespace Web.Controllers
             return PartialView();
         }
         [HttpPost]
-        public ActionResult GuardarRegisro()
+        public ActionResult GuardarRegistro()
         {
             string Mensaje = "";
             bool Resultado = false;

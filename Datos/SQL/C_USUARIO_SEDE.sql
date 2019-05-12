@@ -127,19 +127,19 @@ Usuario.IdUsuario
 ,Usuario.NombreUsuario
 ,Usuario.IdSede 
 ,Usuario.Activo 
-,Sede.NombreSede
-,Sede.Ciudad 
-,Sede.Direccion 
-,Sede.IdAdministrador
-,Administrador.Nombre   as Administrador_Nombre
-,Administrador.Apellido as Administrador_Apellido
-,Administrador.Correo   as Administrador_Correo
-,Administrador.Clave    as Administrador_Clave
-,Administrador.NombreUsuario as Administrador_Usuario
+,isnull(Sede.NombreSede,'') as NombreSede
+,isnull(Sede.Ciudad,'')  as Ciudad
+,isnull(Sede.Direccion,'')  as Direccion
+,isnull(Sede.IdAdministrador,0) as IdAdministrador
+,isnull(Administrador.Nombre ,'')  as Administrador_Nombre
+,isnull(Administrador.Apellido,'') as Administrador_Apellido
+,isnull(Administrador.Correo,'')   as Administrador_Correo
+,isnull(Administrador.Clave ,'')   as Administrador_Clave
+,isnull(Administrador.NombreUsuario ,'')as Administrador_Usuario
 from
 Usuario 
-inner join Sede on Sede.IdSede=Usuario.IdSede
-inner join Usuario Administrador on Administrador.IdUsuario = Sede.IdAdministrador
+left join Sede on Sede.IdSede=Usuario.IdSede
+left join Usuario Administrador on Administrador.IdUsuario = Sede.IdAdministrador
 
 GO
 create procedure ConsultarUsuario
@@ -237,16 +237,16 @@ Sede.IdSede
 , Sede.NombreSede
 ,Sede.Ciudad 
 ,Sede.Direccion 
-,Sede.IdAdministrador
+,isnull(Sede.IdAdministrador,0 ) as IdAdministrador
 ,Sede.Activo
-,Usuario.Nombre 
-,Usuario.Apellido 
-,Usuario.Correo   
-,Usuario.Clave    
-,Usuario.NombreUsuario
+,isnull(Usuario.Nombre,'') as Nombre 
+,isnull(Usuario.Apellido,'')  as Apellido
+,isnull(Usuario.Correo ,'')   as Correo
+,isnull(Usuario.Clave ,'')  as  Clave
+,isnull(Usuario.NombreUsuario,'') as NombreUsuario
 from
 Sede 
-inner join Usuario  on Usuario.IdUsuario = Sede.IdAdministrador
+left join Usuario  on Usuario.IdUsuario = Sede.IdAdministrador
 
 GO
 

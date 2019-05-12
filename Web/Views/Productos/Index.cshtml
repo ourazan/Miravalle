@@ -62,7 +62,7 @@
 
     function CargarFormularioInventarioConsulta(IdLote, NombreProducto) {
         var Ruta = '@Url.Content("~")';
-        $('#divEdicionInventario').load(Ruta + 'Inventario/Index?IdLote='+IdLote, function () {
+        $('#divDetalleInventario').load(Ruta + 'Inventario/Index?IdLote=' + IdLote, function () {
             AbrirModal("divModalDetalleInventario");
             $("#TituloDetalleInventario").empty();
             $("#TituloDetalleInventario").append('Inventario del producto ' + NombreProducto);

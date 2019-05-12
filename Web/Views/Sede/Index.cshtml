@@ -16,10 +16,10 @@
     rowStyle: "webgrid-row-style",
     htmlAttributes: new { id = "grdSede", @class = "" }
     , columns: grdSede.Columns(
-    grdSede.Column(header: null, format:@<text><a href="#" class="ace-icon fa fa-pencil" onclick="EditarSede(@Html.Raw( String.Concat(new string[] { "'" +item.IdSede.ToString() + "-", item.Administrador.IdUsuario.ToString() + "-",item.NombreSede + '-', item.Ciudad  + "-", item.Direccion +"'"})));"></a></text>),
+    grdSede.Column(header: null, format:@<text><a href="#" class="ace-icon fa fa-pencil" onclick="EditarSede(@Html.Raw( String.Concat(new string[] { "'" +item.IdSede.ToString() + "|", item.Administrador.IdUsuario.ToString() + "|",item.NombreSede + '|', item.Ciudad  + "|", item.Direccion +"'"})));"></a></text>),
     grdSede.Column(header: null, format:@<text><a href="#" class="ace-icon fa fa-trash-o" onclick="EliminarSede(@Html.Raw(item.IdSede.ToString()));"></a></text>),
-    grdSede.Column("NombreSede", "Nombre Sede", canSort: true),
-    grdSede.Column("Ciudad", "Ciudad", canSort: true),
+    grdSede.Column("NombreSede", "Nombre Sede", canSort: false),
+    grdSede.Column("Ciudad", "Ciudad", canSort: false),
     grdSede.Column("Direccion", "Dirección", canSort: false),
     grdSede.Column("Administrador.Nombre", "Administrador", canSort: false)
     ))
@@ -33,7 +33,7 @@
                 </div>
                 <div id="divFormulario" class="form-actions">
                     <div class="form-group row">
-                        <label for="NombreSede">Código de referencia:</label>
+                        <label for="NombreSede">Nombre Sede:</label>
                         @Html.TextBox("NombreSede", "", new { id = "NombreSede", @class = "form-control", required = "true" })
                     </div>
                     <div class="form-group row">
