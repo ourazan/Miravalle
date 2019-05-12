@@ -64,6 +64,7 @@ Create  procedure EliminarTipoProducto
  ,UsuarioModifico=@UsuarioAutenticado 
 where
 IdTipoProducto =@IdTipoProducto 
+return @IdTipoProducto
 end
 go
 Create procedure ConsultarTipoProducto

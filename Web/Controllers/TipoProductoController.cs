@@ -81,5 +81,41 @@ namespace Web.Controllers
             return Json(new { success = true, data = Resultado, mensaje = Mensaje });
         }
 
+
+        [HttpPost]
+        public ActionResult EliminarRegistro()
+        {
+            try
+            {
+                if (ObtenerNegocio().ObtenerFachadaInventario().ConsultarProducto("IdTipoProducto=" + Request["hddID"]).Count == 0)
+                {
+
+                    Resultado = ObtenerNegocio().ObtenerFachadaInventario().EliminarTipoProducto(Convert.ToInt32(Request["hddID"]));
+                    Mensaje = "No se pudo eliminar el tipo producto ";
+                    if (Resultado)
+                        Mensaje = "Se ha eliminado el tipo producto exitosamente";
+
+                }
+                else
+                {
+                    Resultado = false;
+                    Mensaje = "No se puede eliminar el tipo producto porque ya se encuentra relacionado con algunos productos";
+                }
+            }
+            catch (Exception ex)
+            {
+                RegistarError(ex);
+                Resultado = false;
+                Mensaje = "Se presento inconveniente al realizar la accion";
+            }
+            return Json(new { success = true, data = Resultado, mensaje = Mensaje });
+        }
+
+
     }
+
+
+
+
+  
 }

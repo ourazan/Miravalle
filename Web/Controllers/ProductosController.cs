@@ -74,7 +74,7 @@ namespace Web.Controllers
                     Resultado = ObtenerNegocio().ObtenerFachadaInventario().EliminarProducto(Convert.ToInt32(Request["hddID"]));
                     Mensaje = "No se pudo eliminar el producto ";
                     if (Resultado)
-                        Mensaje = "Se ha editado el producto exitosamente";
+                        Mensaje = "Se ha eliminado el producto exitosamente";
 
                 } else {
                     Resultado = false;

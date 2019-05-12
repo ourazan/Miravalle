@@ -60,6 +60,11 @@ function Guardar() {
 }
 
 
+function EliminarTipo(Tipo) {
+    LlamadoPost('/TipoProducto/EliminarRegistro', "hddID=" + Tipo);
+}
+
+
 
 $(function () {
     var Adicion = $('<a href="#" class="ace-icon fa fa-plus" title="Crear nuevo registro" onclick="CargarFormularioNuevo();"  ></a>');

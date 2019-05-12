@@ -1,25 +1,26 @@
 ﻿@using com.co.uan.DMiravalle.Inventario;
 @{
-   
+
     ViewBag.Title = "Tipos de productos";
     Layout = "~/Views/Shared/_Layout.cshtml";
-    WebGrid grdCategoria = new WebGrid(canSort: true, canPage: true, rowsPerPage: 30);
-    grdCategoria.Bind((List<TipoProducto>)ViewData["TiposProducto"]);
+    WebGrid grdTipo = new WebGrid(canSort: true, canPage: true, rowsPerPage: 30);
+    grdTipo.Bind((List<TipoProducto>)ViewData["TiposProducto"]);
 }
 <script src="~/Scripts/DMiravalle/Inventario/TipoProducto.js"></script>
 
 <h2 class="center">Tipos de producto</h2>
-    @grdCategoria.GetHtml(
+    @grdTipo.GetHtml(
     tableStyle: "table table-responsive backcolor",
     headerStyle: "wedgrid-header ",
     footerStyle: "webgrid-footer",
     alternatingRowStyle: "webgrid-alternating-row",
     rowStyle: "webgrid-row-style",
     htmlAttributes: new { id = "grdTipo", @class = "" }
-    , columns: grdCategoria.Columns(
-    grdCategoria.Column(header: null, format:@<text><a href="#" class="ace-icon fa fa-pencil" onclick="CargarFormularioEdicion(@Html.Raw( String.Concat(new string[] { "'" +item.IdTipoProducto.ToString() + "-", item.CodigoReferencia + '-', item.Descripcion +"'"})));"></a></text>),
-    grdCategoria.Column("CodigoReferencia", "Código Referencia", canSort: true),
-    grdCategoria.Column("Descripcion", "Descripción", canSort: false)))
+    , columns: grdTipo.Columns(
+    grdTipo.Column(header: null, format:@<text><a href="#" class="ace-icon fa fa-pencil" onclick="CargarFormularioEdicion(@Html.Raw( String.Concat(new string[] { "'" +item.IdTipoProducto.ToString() + "-", item.CodigoReferencia + '-', item.Descripcion +"'"})));"></a></text>),
+    grdTipo.Column(header: null, format:@<text><a href="#" class="ace-icon fa fa-trash-o" onclick="EliminarTipo(@Html.Raw(item.IdTipoProducto.ToString()));"></a></text>),
+    grdTipo.Column("CodigoReferencia", "Código Referencia", canSort: true),
+    grdTipo.Column("Descripcion", "Descripción", canSort: false)))
 
 <div class="modal fade bd-example-modal-lg" tabindex="-1" role="document" aria-hidden="true" id="divModalTipoProducto">
     <div class="modal-dialog modal-lg" style="max-width: 550px">
