@@ -107,14 +107,14 @@
                             </a>
                             <b class="arrow"></b>
                                     <ul class="submenu">
-                                                <li class="">
+                                                <li >
                                                     <a href="@(Url.Action("Index","Usuario"))" class="" onclick="location.href='@(Url.Action("Index","Usuario"))'">
                                                         <i class="menu-icon fa fa-user"></i>
                                                            Usuario
                                                     </a>
                                                     <b class="arrow fa fa-angle-down"></b>
                                                 </li>
-                                                <li class="">
+                                                <li >
                                                     <a href="@(Url.Action("Index", "Sede"))" class="" onclick="location.href='@(Url.Action("Index", "Sede"))'">
                                                         <i class="menu-icon fa fa-home"></i>
                                                         Sede
@@ -135,17 +135,24 @@
                     </a>
                     <b class="arrow"></b>
                     <ul class="submenu">
-                        <li class="">
+                        <li >
                             <a href="@(Url.Action("Index","TipoProducto"))" class="" onclick="location.href='@(Url.Action("Index","TipoProducto"))'">
                                 <i class="menu-icon fa fa-user"></i>
                                 Tipo producto
                             </a>
                             <b class="arrow fa fa-angle-down"></b>
                         </li>
-                        <li class="">
+                        <li>
                             <a href="@(Url.Action("Index", "Productos"))" class="" onclick="location.href='@(Url.Action("Index", "Productos"))'">
                                 <i class="menu-icon fa fa-medkit"></i>
                                 Producto
+                            </a>
+                            <b class="arrow fa fa-angle-down"></b>
+                        </li>
+                        <li>
+                            <a href="@(Url.Action("Index", "Reportes"))" class="" onclick="location.href='@(Url.Action("Index", "Reportes"))'">
+                                <i class="menu-icon fa fa-book"></i>
+                                Informes
                             </a>
                             <b class="arrow fa fa-angle-down"></b>
                         </li>

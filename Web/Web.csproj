@@ -160,6 +160,7 @@
     <Compile Include="Controllers\InventarioController.cs" />
     <Compile Include="Controllers\LoteController.cs" />
     <Compile Include="Controllers\ProductosController.cs" />
+    <Compile Include="Controllers\ReportesController.cs" />
     <Compile Include="Controllers\SedeController.cs" />
     <Compile Include="Controllers\TipoProductoController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
@@ -297,6 +298,7 @@
     <Content Include="Views\TipoProducto\Index.cshtml" />
     <Content Include="Views\Lote\Edicion.cshtml" />
     <Content Include="Views\Inventario\Edicion.cshtml" />
+    <Content Include="Views\Reportes\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
