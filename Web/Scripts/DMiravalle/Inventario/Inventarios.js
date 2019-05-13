@@ -22,7 +22,6 @@ function CargarDetallesInventarioNuevo(IdLote) {
     LimpiarCamposInventario();
     $("#hddIDInventario").val(0);
     $("#hddIDLote").val(IdLote);
-
 }
 
 
@@ -49,6 +48,8 @@ function LimpiarCamposInventario() {
         language: 'es',
         format: 'dd/mm/yyyy',
     });
+    PermitirNumero('Cantidad');
+
 }
 
 

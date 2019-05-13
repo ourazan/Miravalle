@@ -4,10 +4,7 @@
     $("#CodigoReferencia").val('');
     $("#Titulo").empty();
     $("#Titulo").append('Creación tipo producto');
-
 }
-
-
 
 
 function CargarFormularioEdicion(Tipo) {

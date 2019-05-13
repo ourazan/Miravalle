@@ -38,7 +38,8 @@ namespace Web.Controllers
                         , Request["Sede"]==null?0:  Convert.ToInt32(Request["Sede"])
                         , Request["Correo"]
                         , Request["Usuario"]
-                        , Request["Clave"]);
+                        , Request["Clave"]
+                        ,Convert.ToInt32(Request["Perfil"]));
                         Mensaje = "No se pudo crear el usuario ";
                     if (Resultado)
                         Mensaje = "Se ha creado el usuario exitosamente";
@@ -52,8 +53,8 @@ namespace Web.Controllers
                         , Request["Sede"] == null ? 0 : Convert.ToInt32(Request["Sede"])
                         , Request["Correo"]
                         , ""
-                        );
-                        Mensaje = "No se pudo editar el usuario ";
+                        , Convert.ToInt32(Request["Perfil"]));
+                    Mensaje = "No se pudo editar el usuario ";
                     if (Resultado)
                         Mensaje = "Se ha editado el usuario exitosamente";
                 }

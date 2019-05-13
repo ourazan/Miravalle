@@ -67,6 +67,7 @@ namespace com.co.uan.DMiravalle.Administracion
                                                                      ,  0
                                                                      , fila["NombreUsuario"].ToString()
                                                                      , fila["Clave"].ToString()
+                                                                     ,Convert.ToInt32(fila["Perfil"])
                                                                      )
                                                        )
                                                        ).ToList();

@@ -26,6 +26,8 @@ namespace com.co.uan.DMiravalle.Administracion
     
         public string NombreUsuario { get; set; }
 
+        public int Perfil { get; set; }
+
         #endregion
         #region Constructores
         public Usuario() { }
@@ -40,10 +42,10 @@ namespace com.co.uan.DMiravalle.Administracion
                 
                 NombreUsuario = Registro[0].NombreUsuario;
                 Clave = Registro[0].Clave;
-               
+                Perfil = Registro[0].Perfil;
             }
         }
-        public Usuario(string nombre, string apellido, string correo, Sede sedeAsignada, int idUsuario, int idSede, string nombreUsuario, string clave)
+        public Usuario(string nombre, string apellido, string correo, Sede sedeAsignada, int idUsuario, int idSede, string nombreUsuario, string clave,int perfil)
         {
             Nombre = nombre;
             Apellido = apellido;
@@ -52,6 +54,7 @@ namespace com.co.uan.DMiravalle.Administracion
             IdUsuario= idUsuario;
             NombreUsuario = nombreUsuario;
             Clave = clave;
+            Perfil = perfil;
         }
         #endregion
         #region Metodos
@@ -77,12 +80,14 @@ namespace com.co.uan.DMiravalle.Administracion
                                                                      ,new Sede()
                                                                      ,0,0, fila["Administrador_Usuario"].ToString()
                                                                      , fila["Administrador_Clave"].ToString()
+                                                                     ,Convert.ToInt32(fila["Administrador_Perfil"]) 
                                                                      )
                                                        )
                                              ,Int32.Parse(fila["IdUsuario"].ToString())
                                              ,Int32.Parse( fila["IdSede"].ToString())
                                              ,fila["NombreUsuario"].ToString()
                                              ,fila["Clave"].ToString()
+                                             , Convert.ToInt32(fila["Perfil"])
                                              )
                                              ).ToList() );
 
@@ -90,7 +95,7 @@ namespace com.co.uan.DMiravalle.Administracion
             return Resultado;
 
         }
-        public bool Agregar(string Nombre, string Apellido, int IdSede, string Correo, string usuario, string Clave)
+        public bool Agregar(string Nombre, string Apellido, int IdSede, string Correo, string usuario, string Clave,int Perfil)
         {
              List<Parametros> Parametros = new List<Parametros>() {
                 new Parametros("@Nombre",Nombre,SqlDbType.VarChar,ParameterDirection.Input)
@@ -100,11 +105,12 @@ namespace com.co.uan.DMiravalle.Administracion
                 ,new Parametros("@NombreUsuario",usuario,SqlDbType.VarChar,ParameterDirection.Input)
                 ,new Parametros("@IdSede",(IdSede==0?DBNull.Value:(object)IdSede),SqlDbType.Int,ParameterDirection.Input)
                 ,new Parametros("@UsuarioAutenticado",this.UsuarioAutenticado,SqlDbType.Int,ParameterDirection.Input)
+                ,new Parametros("@Perfil",Perfil,SqlDbType.Int,ParameterDirection.Input)
                 ,new Parametros("@RETURN_VALUE",null,SqlDbType.Int,ParameterDirection.ReturnValue)
             };
             return Convert.ToInt32(new Transaccion("CrearUsuario", Parametros).EjecutarDevuelveReturnValue())>0;
         }
-        public bool Editar(int IdUsuario, string Nombre, string Apellido, int IdSede, string Correo, string Clave)
+        public bool Editar(int IdUsuario, string Nombre, string Apellido, int IdSede, string Correo, string Clave, int Perfil)
         {
                 List<Parametros> Parametros = new List<Parametros>() {
                  new Parametros("@Nombre",Nombre,SqlDbType.VarChar,ParameterDirection.Input)
@@ -113,8 +119,9 @@ namespace com.co.uan.DMiravalle.Administracion
                 ,new Parametros("@Clave",Clave==""?DBNull.Value:(object)Clave,SqlDbType.VarChar,ParameterDirection.Input)
                 ,new Parametros("@IdSede",(IdSede==0?DBNull.Value:(object)IdSede),SqlDbType.Int,ParameterDirection.Input)
                 ,new Parametros("@IdUsuario",IdUsuario,SqlDbType.Int,ParameterDirection.Input)
+                ,new Parametros("@Perfil",Perfil,SqlDbType.Int,ParameterDirection.Input)
                 ,new Parametros("@UsuarioAutenticado",this.UsuarioAutenticado,SqlDbType.Int,ParameterDirection.Input)
-                 ,new Parametros("@RETURN_VALUE",null,SqlDbType.Int,ParameterDirection.ReturnValue)
+                ,new Parametros("@RETURN_VALUE",null,SqlDbType.Int,ParameterDirection.ReturnValue)
             };
             return Convert.ToInt32(new Transaccion("EditarUsuario", Parametros).EjecutarDevuelveReturnValue()) > 0;
         }
@@ -123,7 +130,7 @@ namespace com.co.uan.DMiravalle.Administracion
             List<Parametros> Parametros = new List<Parametros>() {
                new Parametros("@IdUsuario",IdUsuario,SqlDbType.Int,ParameterDirection.Input)
                ,new Parametros("@UsuarioAutenticado",this.UsuarioAutenticado,SqlDbType.Int,ParameterDirection.Input)
-                ,new Parametros("@RETURN_VALUE",null,SqlDbType.Int,ParameterDirection.ReturnValue)
+               ,new Parametros("@RETURN_VALUE",null,SqlDbType.Int,ParameterDirection.ReturnValue)
             };
             return Convert.ToInt32(new Transaccion("EliminarUsuario", Parametros).EjecutarDevuelveReturnValue()) > 0;
         }

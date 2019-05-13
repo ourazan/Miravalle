@@ -28,17 +28,17 @@ namespace com.co.uan.DMiravalle.Administracion
         {
            return   Sede.Crear(Nombre,  Ciudad,  Direccion,  IdAdministrador);
         }
-        public bool CrearUsuario(string Nombre, string Apellido, int IdSede, string Correo,string Usuario, string Clave)
+        public bool CrearUsuario(string Nombre, string Apellido, int IdSede, string Correo,string Usuario, string Clave, int Perfil)
         {
-            return Gerente.Agregar(Nombre,  Apellido,  IdSede,  Correo,  Usuario,  Clave);
+            return Gerente.Agregar(Nombre,  Apellido,  IdSede,  Correo,  Usuario,  Clave,  Perfil);
         }
         public bool EditarSede(string Nombre, string Ciudad, string Direccion,int IdAdministrador, int IdSede)
         {
             return Sede.Editar( Nombre,  Ciudad,  Direccion,  IdAdministrador,  IdSede);
         }
-        public bool EditarUsuario(int IdUsuario, string Nombre, string Apellido, int IdSede, string Correo,string Clave)
+        public bool EditarUsuario(int IdUsuario, string Nombre, string Apellido, int IdSede, string Correo,string Clave, int Perfil)
         {
-            return Gerente.Editar( IdUsuario,  Nombre,  Apellido,  IdSede,  Correo, Clave);
+            return Gerente.Editar( IdUsuario,  Nombre,  Apellido,  IdSede,  Correo, Clave,  Perfil);
         }
         public bool EliminarSede(int IdSede)
         {

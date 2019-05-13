@@ -6,6 +6,7 @@ IdUsuario  int primary key identity (1,1)
 ,Clave varchar (1000)
 ,NombreUsuario varchar(200)
 ,IdSede int
+,Perfil int
 ,FechaCreacion smalldatetime
 ,UsuarioCreo int null
 ,FechaModificacion smalldatetime null
@@ -41,6 +42,7 @@ create Procedure CrearUsuario
 ,@Clave varchar (1000)
 ,@NombreUsuario varchar(200)
 ,@IdSede int
+,@Perfil int
 ,@UsuarioAutenticado int
 as begin
  insert into Usuario
@@ -50,6 +52,7 @@ as begin
            ,Clave
            ,NombreUsuario
            ,IdSede
+		   ,Perfil
            ,FechaCreacion
            ,UsuarioCreo
            ,FechaModificacion
@@ -62,6 +65,7 @@ as begin
      ,@Clave
      ,@NombreUsuario
      ,@IdSede
+	 ,@Perfil
 	 ,GETDATE()
 	 ,@UsuarioAutenticado
 	 ,GETDATE()
@@ -80,6 +84,7 @@ create procedure EditarUsuario
 ,@Correo varchar(200)
 ,@Clave varchar (1000)
 ,@IdSede int
+,@Perfil int
 ,@UsuarioAutenticado int
 as 
 begin
@@ -89,6 +94,7 @@ begin
            ,Correo=isnull(@Correo,Correo)
            ,Clave=isnull(@Clave,Clave)
            ,IdSede=@IdSede
+		   ,Perfil=@Perfil
            ,FechaModificacion=GETDATE()
            ,UsuarioModifico=@UsuarioAutenticado
     where IdUsuario=@IdUsuario
@@ -126,6 +132,7 @@ Usuario.IdUsuario
 ,Usuario.NombreUsuario
 ,isnull(Usuario.IdSede,0)  as IdSede
 ,Usuario.Activo 
+,Usuario.Perfil
 ,isnull(Sede.NombreSede,'') as NombreSede
 ,isnull(Sede.Ciudad,'')  as Ciudad
 ,isnull(Sede.Direccion,'')  as Direccion
@@ -135,6 +142,7 @@ Usuario.IdUsuario
 ,isnull(Administrador.Correo,'')   as Administrador_Correo
 ,isnull(Administrador.Clave ,'')   as Administrador_Clave
 ,isnull(Administrador.NombreUsuario ,'')as Administrador_Usuario
+,Administrador.Perfil as Administrador_Perfil
 from
 Usuario 
 left join Sede on Sede.IdSede=Usuario.IdSede
@@ -157,12 +165,14 @@ begin
 ,v_Usuario.NombreSede
 ,v_Usuario.Ciudad 
 ,v_Usuario.Direccion 
+,v_Usuario.Perfil
 ,v_Usuario.IdAdministrador
 ,v_Usuario.Administrador_Nombre
 ,v_Usuario.Administrador_Apellido
 ,v_Usuario.Administrador_Correo
 ,v_Usuario.Administrador_Clave
 ,v_Usuario.Administrador_Usuario
+,v_Usuario.Administrador_Perfil
 from v_Usuario
  where Activo=1 and ' + @filtro
   )
@@ -243,6 +253,7 @@ Sede.IdSede
 ,isnull(Usuario.Correo ,'')   as Correo
 ,isnull(Usuario.Clave ,'')  as  Clave
 ,isnull(Usuario.NombreUsuario,'') as NombreUsuario
+,isnull(Usuario.Perfil,'') as Perfil
 from
 Sede 
 left join Usuario  on Usuario.IdUsuario = Sede.IdAdministrador
@@ -280,6 +291,7 @@ v_Sede.IdSede
 ,v_Sede.Correo   
 ,v_Sede.Clave    
 ,v_Sede.NombreUsuario 
+,v_Sede.Perfil 
 from v_Sede
  where Activo=1 and ' + @filtro
   )

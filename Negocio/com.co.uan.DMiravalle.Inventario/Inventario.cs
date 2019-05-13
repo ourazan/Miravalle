@@ -74,6 +74,7 @@ namespace com.co.uan.DMiravalle.Inventario
                                                                          , 0
                                                                          , fila["NombreUsuario"].ToString()
                                                                          , fila["Clave"].ToString()
+                                                                         , Convert.ToInt32(fila["Perfil"])
                                                                          ))
                                                               , new Lote( fila["CodigoLote"].ToString()
                                                                         , new Producto(

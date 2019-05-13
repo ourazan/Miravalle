@@ -12,9 +12,9 @@ namespace com.co.uan.DMiravalle.Administracion
 
         bool CrearSede(string Nombre, string Ciudad, string Direccion, int IdAdministrador);
 
-        bool CrearUsuario(string Nombre, string Apellido, int IdSede, string Correo, string Usuario, string Clave);
+        bool CrearUsuario(string Nombre, string Apellido, int IdSede, string Correo, string Usuario, string Clave, int Perfil);
 
-        bool EditarUsuario(int IdUsuario, string Nombre, string Apellido, int IdSede, string Correo, string Clave);
+        bool EditarUsuario(int IdUsuario, string Nombre, string Apellido, int IdSede, string Correo, string Clave, int Perfil);
 
         bool EditarSede(string Nombre, string Ciudad, string Direccion, int IdAdministrador, int IdSede);
 

@@ -43,3 +43,17 @@ function AbrirModal(NombreControlDiv) {
 function OcultarModal(NombreControlDiv) {
     $("#" + NombreControlDiv).modal('hide');
 }
+
+function FiltroTexto(Expresion, Control) {
+    $("#" + Control).on("keypress keyup blur", function (event) {
+        $(this).val($(this).val().replace(Expresion, ""));
+        if ((event.which < 48 || event.which > 57)) {
+            event.preventDefault();
+        }
+    });
+}
+
+function PermitirNumero(Control) {
+    FiltroTexto(/[^\d].+/, Control);
+}
+

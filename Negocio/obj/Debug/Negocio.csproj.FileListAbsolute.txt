@@ -5,10 +5,3 @@ D:\UAN\DMiravalle\Negocio\bin\Debug\Datos.pdb
 D:\UAN\DMiravalle\Negocio\obj\Debug\Negocio.csprojResolveAssemblyReference.cache
 D:\UAN\DMiravalle\Negocio\obj\Debug\Negocio.dll
 D:\UAN\DMiravalle\Negocio\obj\Debug\Negocio.pdb
-D:\OMAR\UAN\Miravalle\Negocio\bin\Debug\Negocio.dll
-D:\OMAR\UAN\Miravalle\Negocio\bin\Debug\Negocio.pdb
-D:\OMAR\UAN\Miravalle\Negocio\bin\Debug\Datos.dll
-D:\OMAR\UAN\Miravalle\Negocio\bin\Debug\Datos.pdb
-D:\OMAR\UAN\Miravalle\Negocio\obj\Debug\Negocio.csprojResolveAssemblyReference.cache
-D:\OMAR\UAN\Miravalle\Negocio\obj\Debug\Negocio.dll
-D:\OMAR\UAN\Miravalle\Negocio\obj\Debug\Negocio.pdb

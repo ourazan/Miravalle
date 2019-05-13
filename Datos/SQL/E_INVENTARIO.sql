@@ -39,6 +39,7 @@ select
 ,v_Sede.Correo   
 ,v_Sede.Clave    
 ,v_Sede.NombreUsuario  
+,v_Sede.Perfil 
 from Inventario
 inner join dbo.v_Lote on v_Lote.IdLote=Inventario.IdLote
 inner  join dbo.v_sede on v_sede.IdSede=Inventario.IdSede
@@ -141,6 +142,7 @@ begin
 ,v_Inventario.Correo   
 ,v_Inventario.Clave    
 ,v_Inventario.NombreUsuario
+,v_Inventario.Perfil
 from v_Inventario
 where Activo=1 and ' + @filtro
 )

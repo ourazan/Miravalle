@@ -8,9 +8,9 @@ namespace com.co.uan.DMiravalle.Administracion
 
         List<Usuario> Consultar(string Filtro);
 
-        bool Agregar(string Nombre, string Apellido, int IdSede, string Correo, string Usuario, string Clave);
+        bool Agregar(string Nombre, string Apellido, int IdSede, string Correo, string Usuario, string Clave,int Perfil);
 
-        bool Editar(int IdUsuario, string Nombre, string Apellido, int IdSede, string Correo, string Clave);
+        bool Editar(int IdUsuario, string Nombre, string Apellido, int IdSede, string Correo, string Clave, int Perfil);
 
         bool Eliminar(int IdUsuario);
     
