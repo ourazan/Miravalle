@@ -22,7 +22,7 @@ namespace com.co.uan.DMiravalle.Informes
         private void ObtenerInformacion(ref LocalReport Reporte, string Filtro)
         {
             ReportDataSource Coleccion;
-            Coleccion = new ReportDataSource("origen1", Inventario.ConsultarProductosVencidos(Filtro));
+            Coleccion = new ReportDataSource("origen1", Inventario.ConsultarProductosVencidosTabla(Filtro));
             Reporte.DataSources.Add(Coleccion);
 
         }

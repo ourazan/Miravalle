@@ -547,7 +547,7 @@
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
     <DataSource Name="DMiravalle">
-      <DataSourceReference>origen1</DataSourceReference>
+      <DataSourceReference>DMiravalle</DataSourceReference>
       <rd:DataSourceID>27368cf2-831e-4b78-9d6e-8466a061582c</rd:DataSourceID>
     </DataSource>
   </DataSources>
@@ -559,19 +559,19 @@
       </Query>
       <Fields>
         <Field Name="Sede">
-          <DataField>SedeInventario.NombreSede</DataField>
+          <DataField>NombreSede</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="Producto">
-          <DataField>LoteProducto.Producto.NombreProducto</DataField>
+          <DataField>NombreProducto</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="Tipo">
-          <DataField>LoteProducto.Producto.Tipo.Descripcion</DataField>
+          <DataField>Descripcion</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="FechaVencimiento">
-          <DataField>LoteProducto.FechaVencimiento</DataField>
+          <DataField>FechaVencimiento</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="Cantidad">

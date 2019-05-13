@@ -12,7 +12,7 @@
     <div>
         <asp:ScriptManager ID="scm" runat="server" ></asp:ScriptManager>
     <rsweb:ReportViewer ID="ReporteInformes" runat="server"  ShowExportControls="false" InternalBorderColor="" 
-                ShowPageNavigationControls="True" >
+                ShowPageNavigationControls="True" Width="100%" >
          <LocalReport ReportPath=""> </LocalReport>
     </rsweb:ReportViewer>
     </div>

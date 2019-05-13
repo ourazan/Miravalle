@@ -93,6 +93,9 @@ namespace com.co.uan.DMiravalle.Inventario
         }
 
 
+
+
+
         public List<Inventario> ConsultarInventario(string Filtro)
         {
             List<Parametros> Parametros = new List<Parametros>() {
@@ -142,11 +145,16 @@ namespace com.co.uan.DMiravalle.Inventario
 
         public List<Inventario> ConsultarProductosVencidos(string Filtro)
         {
+            return MapearDatos(ConsultarProductosVencidosTabla(Filtro ));
+        }
+
+        public DataTable  ConsultarProductosVencidosTabla(string Filtro)
+        {
             List<Parametros> Parametros = new List<Parametros>() {
                 new Parametros("@Filtro",Filtro,SqlDbType.VarChar,ParameterDirection.Input)
             };
             DataTable Coleccion = new Transaccion("ObtenerProductosaVencer", Parametros).EjecutarDevuelveTabla();
-            return MapearDatos(Coleccion);
+            return Coleccion;
         }
 
         public bool CrearLote(string CodigoLote, DateTime FechaVencimiento, int IdProducto, DateTime FechaRegistro)

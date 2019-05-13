@@ -1,7 +1,6 @@
 ﻿using com.co.uan.DMiravalle.Informes;
 using Microsoft.Reporting.WebForms;
 using System;
-using System.Collections.Generic;
 
 namespace Web.Reporte
 {
@@ -28,8 +27,10 @@ namespace Web.Reporte
         }
 
         private void GenerarInforme() {
+            LocalReport Reporte = ObtenerFachadaInformes().GenerarInformeVencidos(" 1=1 ");
             ReporteInformes.ProcessingMode = ProcessingMode.Local;
-            ReporteInformes.LocalReport.ReportPath = ObtenerFachadaInformes().GenerarInformeVencidos(" 1=1 ").ReportPath;
+            ReporteInformes.LocalReport.ReportPath  = Reporte.ReportPath;
+            ReporteInformes.LocalReport.DataSources.Add(Reporte.DataSources[0]);
             ReporteInformes.LocalReport.Refresh();
         }
     }

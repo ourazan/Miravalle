@@ -1,6 +1,7 @@
 ﻿using com.co.uan.DMiravalle.Informes;
 using System;
 using System.Collections.Generic;
+using System.Data;
 
 namespace com.co.uan.DMiravalle.Inventario
 {
@@ -13,7 +14,7 @@ namespace com.co.uan.DMiravalle.Inventario
         {
 
             Inventario = new Inventario();
-         }
+        }
 
         public List<Inventario> ConsultarInventario(string Filtro)
         {
@@ -32,7 +33,12 @@ namespace com.co.uan.DMiravalle.Inventario
 
         public List<Inventario> ConsultarProductosVencidos(string Filtro)
         {
-            return ((INotificacionVencidos)Inventario).ConsultarProductosVencidos(Filtro );
+            return ((INotificacionVencidos)Inventario).ConsultarProductosVencidos(Filtro);
+        }
+
+        public DataTable ConsultarProductosVencidosTabla(string Filtro)
+        {
+            return ((INotificacionVencidos)Inventario).ConsultarProductosVencidosTabla(Filtro);
         }
 
         public bool CrearInventario(int IdLote, int IdSede, int Cantidad, DateTime FechaRegistro)
