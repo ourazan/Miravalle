@@ -1,6 +1,7 @@
 ﻿using System.Web.Mvc;
 using System;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace Web.Controllers
 {
@@ -19,6 +20,17 @@ namespace Web.Controllers
                          });
             Sedes = new SelectList(Items, "Value", "Text");
             ViewData["Sedes"] = Sedes;
+
+            List<SelectListItem> PerfilOpciones = new List<SelectListItem>() {
+               new SelectListItem(){
+                             Text = "Gerente",
+                             Value = "1"},
+                new SelectListItem(){
+                             Text = "Administrador Sede",
+                             Value = "2"}
+            };
+            SelectList Perfiles = new SelectList(PerfilOpciones, "Value", "Text");
+            ViewData["Perfiles"] = Perfiles;
             ViewData["Usuario"] = ObtenerNegocio().ObtenerFachadaAdministrativa().ConsultarUsuario(" 1=1 ");
             return View();
         }

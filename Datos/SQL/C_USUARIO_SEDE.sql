@@ -142,7 +142,7 @@ Usuario.IdUsuario
 ,isnull(Administrador.Correo,'')   as Administrador_Correo
 ,isnull(Administrador.Clave ,'')   as Administrador_Clave
 ,isnull(Administrador.NombreUsuario ,'')as Administrador_Usuario
-,Administrador.Perfil as Administrador_Perfil
+,isnull(Administrador.Perfil,0) as Administrador_Perfil
 from
 Usuario 
 left join Sede on Sede.IdSede=Usuario.IdSede
@@ -253,7 +253,7 @@ Sede.IdSede
 ,isnull(Usuario.Correo ,'')   as Correo
 ,isnull(Usuario.Clave ,'')  as  Clave
 ,isnull(Usuario.NombreUsuario,'') as NombreUsuario
-,isnull(Usuario.Perfil,'') as Perfil
+,isnull(Usuario.Perfil,0) as Perfil
 from
 Sede 
 left join Usuario  on Usuario.IdUsuario = Sede.IdAdministrador

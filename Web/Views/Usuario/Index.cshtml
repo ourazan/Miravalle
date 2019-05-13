@@ -15,7 +15,7 @@
     rowStyle: "webgrid-row-style",
     htmlAttributes: new { id = "grdUsuario", @class = "" }
     , columns: grdUsuario.Columns(
-    grdUsuario.Column(header: null, format:@<text><a href="#" class="ace-icon fa fa-pencil" onclick="EditarUsuario(@Html.Raw( String.Concat(new string[] { "'" +item.IdUsuario.ToString() + "|", item.Nombre + "|",item.Apellido + '|', item.Correo  + "|", item.SedeAsignada.IdSede.ToString() + '|', item.NombreUsuario +"'"})));"></a></text>),
+    grdUsuario.Column(header: null, format:@<text><a href="#" class="ace-icon fa fa-pencil" onclick="EditarUsuario(@Html.Raw( String.Concat(new string[] { "'" +item.IdUsuario.ToString() + "|", item.Nombre + "|",item.Apellido + '|', item.Correo  + "|", item.SedeAsignada.IdSede.ToString() + '|', item.NombreUsuario+ '|', item.Perfil +"'"})));"></a></text>),
     grdUsuario.Column(header: null, format:@<text><a href="#" class="ace-icon fa fa-trash-o" onclick="EliminarUsuario(@Html.Raw(item.IdUsuario.ToString()));"></a></text>),
     grdUsuario.Column("Nombre", "Nombre", canSort: false),
     grdUsuario.Column("Apellido", "Apellido", canSort: false),
@@ -49,6 +49,10 @@
                     <div class="form-group row">
                         <label for="Sede">Sede:</label>
                         @Html.DropDownList("Sede", (SelectList)ViewData["Sedes"], new { id = "Sede", @class = "form-control ", required = "" })
+                    </div>
+                    <div class="form-group row">
+                        <label for="Perfil">Perfil:</label>
+                        @Html.DropDownList("Perfil", (SelectList)ViewData["Perfiles"], new { id = "Perfil", @class = "form-control ", required = "" })
                     </div>
                     <div class="form-group row">
                         <label for="Usuario">Usuario:</label>

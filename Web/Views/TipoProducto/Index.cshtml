@@ -19,7 +19,7 @@
     , columns: grdTipo.Columns(
     grdTipo.Column(header: null, format:@<text><a href="#" class="ace-icon fa fa-pencil" onclick="CargarFormularioEdicion(@Html.Raw( String.Concat(new string[] { "'" +item.IdTipoProducto.ToString() + "-", item.CodigoReferencia + '-', item.Descripcion +"'"})));"></a></text>),
     grdTipo.Column(header: null, format:@<text><a href="#" class="ace-icon fa fa-trash-o" onclick="EliminarTipo(@Html.Raw(item.IdTipoProducto.ToString()));"></a></text>),
-    grdTipo.Column("CodigoReferencia", "Código Referencia", canSort: true),
+    grdTipo.Column("CodigoReferencia", "Código Referencia", canSort: false),
     grdTipo.Column("Descripcion", "Descripción", canSort: false)))
 
 <div class="modal fade bd-example-modal-lg" tabindex="-1" role="document" aria-hidden="true" id="divModalTipoProducto">

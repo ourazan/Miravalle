@@ -8,12 +8,25 @@ function LimpiarCampos() {
     $("#Apellido").val('');
     $("#Correo").val('');
     $("#Sede").val('');
+    $("#Perfil").val('');
     $("#Usuario").val('');
     $("#Titulo").empty();
     $("#Titulo").append('Creación usuario');
     $("#divClave").attr('class', 'form-group row');
+    $("#Sede").change(function () {
+        SeleccionarPerfil();
+    });
+    $("#Perfil").change(function () {
+        SeleccionarPerfil();
+    });
 }
 
+
+function SeleccionarPerfil() {
+    if ($("#Sede").val() != '') {
+        $("#Perfil").val('2');
+    }
+}
 
 function EditarUsuario(Usuario) {
     LimpiarCampos();
@@ -24,10 +37,11 @@ function EditarUsuario(Usuario) {
     $("#Correo").val(Usuario[3]);
     $("#Sede").val(Usuario[4]);
     $("#Usuario").val(Usuario[5]);
+    $("#Perfil").val(Usuario[6]);
     $("#Usuario").attr('disabled', '');
     $("#divClave").attr('class', 'hidden');
 
-    
+    SeleccionarPerfil();
     AbrirModal("divModalUsuario");
     $("#Titulo").empty();
     $("#Titulo").append('Edición usuario');
@@ -60,7 +74,9 @@ function ValidarFormulario(EsNuevo) {
     if ($("#Usuario").val() == '' || $("#Usuario").val() == null) {
         Mensajes += 'Debe registrar un nombre de usuario para el registro \n'
     }
-
+    if ($("#Perfil").val() == '' || $("#Perfil").val() == null) {
+        Mensajes += 'Debe seleccionar un perfil \n'
+    }
     if (EsNuevo) {
         if ($("#Clave").val() == '' || $("#Clave").val() == null) {
             Mensajes += 'Debe agregar una clave para el usuario nuevo \n'
@@ -69,6 +85,7 @@ function ValidarFormulario(EsNuevo) {
     return Mensajes;
 }
 function Guardar() {
+    SeleccionarPerfil();
     var Mensajes = ValidarFormulario($("#hddID").val()=='0');
 
     if (Mensajes == '') {
