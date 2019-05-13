@@ -114,12 +114,15 @@ IdInventario=@IdInventario
 return @IdInventario
 end
 go
-create procedure ConsultarInventario
-  @filtro varchar(8000)=' 1=1'
-as 
+create procedure ObtenerProductosaVencer 
+@Filtro varchar(5000)= '1=1'
+as
 begin
- execute (' select 
- v_Inventario.IdInventario 
+
+exec('
+declare @diasaVencer int 
+select @diasaVencer= isnull(300000,300000) from Configuraciones where Configuracion=''Productoavencer''
+select v_Inventario.IdInventario 
 ,v_Inventario.FechaRegistro 
 ,v_Inventario.Cantidad 
 ,v_Inventario.IdLote 
@@ -143,9 +146,13 @@ begin
 ,v_Inventario.Clave    
 ,v_Inventario.NombreUsuario
 ,v_Inventario.Perfil
-from v_Inventario
-where Activo=1 and ' + @filtro
-)
+from v_Inventario where
+DATEDIFF (dd,getdate(), Convert(Date,FechaVencimiento)) <=  @diasaVencer
+and ' +@Filtro)
 
-  end
+end
+
+
+
+
 

@@ -1,11 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using Microsoft.Reporting.WebForms;
+using System.Collections.Generic;
 
 namespace com.co.uan.DMiravalle.Informes
 {
   public   interface IReporte
     {
 
-        List<Reporte> GenerarReporteLotes(string Filtro);
+        LocalReport GenerarInformeVencidos(string Filtro);
 
     }
 }

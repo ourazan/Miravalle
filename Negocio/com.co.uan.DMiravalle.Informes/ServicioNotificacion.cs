@@ -8,7 +8,7 @@ namespace com.co.uan.DMiravalle.Informes
         public void NotificarElementosVencidos()
         {
             INotificacionVencidos Consulta = new Inventario.Inventario();
-            List<Inventario.Inventario> Vencidos = Consulta.ConsultarProductosVencidos();
+            List<Inventario.Inventario> Vencidos = Consulta.ConsultarProductosVencidos(" 1=1 ");
             Notificacion Envio = new Notificacion();
             Email TipoNotificacion= new Email();
             foreach (Inventario.Inventario Vencido in Vencidos)

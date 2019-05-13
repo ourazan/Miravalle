@@ -1,17 +1,31 @@
-﻿using com.co.uan.DMiravalle.Inventario;
-using System;
-using System.Collections.Generic;
-
+﻿using Microsoft.Reporting.WebForms;
+using System.Configuration;
+using System.Web;
 namespace com.co.uan.DMiravalle.Informes
 {
    public  class Reporte: IReporte
     {
+        private INotificacionVencidos Inventario;
 
-        private Inventario.Inventario Inventario;
-
-        public List<Reporte> GenerarReporteLotes(string Filtro)
-        {
-            throw new NotImplementedException();
+        public Reporte() {
+            Inventario = new Inventario.Inventario();
         }
+
+        public LocalReport GenerarInformeVencidos(string Filtro)
+        {
+            LocalReport Vencidos = new LocalReport();
+            Vencidos.ReportPath = HttpContext.Current.Server.MapPath(ConfigurationManager.AppSettings["RutaRDL"] + "Vencidos.rdlc");
+            ObtenerInformacion(ref Vencidos, Filtro);
+            return Vencidos;
+        }
+
+        private void ObtenerInformacion(ref LocalReport Reporte, string Filtro)
+        {
+            ReportDataSource Coleccion;
+            Coleccion = new ReportDataSource("origen1", Inventario.ConsultarProductosVencidos(Filtro));
+            Reporte.DataSources.Add(Coleccion);
+
+        }
+
     }
 }

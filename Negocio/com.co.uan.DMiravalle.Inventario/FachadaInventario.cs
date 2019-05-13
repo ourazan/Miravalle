@@ -30,9 +30,9 @@ namespace com.co.uan.DMiravalle.Inventario
             return Inventario.ConsultarProducto(Filtro);
         }
 
-        public List<Inventario> ConsultarProductosVencidos()
+        public List<Inventario> ConsultarProductosVencidos(string Filtro)
         {
-            throw new NotImplementedException();
+            return ((INotificacionVencidos)Inventario).ConsultarProductosVencidos(Filtro );
         }
 
         public bool CrearInventario(int IdLote, int IdSede, int Cantidad, DateTime FechaRegistro)

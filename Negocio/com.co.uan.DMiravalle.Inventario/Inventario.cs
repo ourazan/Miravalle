@@ -54,47 +54,52 @@ namespace com.co.uan.DMiravalle.Inventario
         #endregion
 
         #region Metodos
+        private List<Inventario> MapearDatos(DataTable Coleccion) {
+            List<Inventario> Resultado = (from fila in Coleccion.AsEnumerable()
+                                          select new Inventario(
+                                                              new Sede(fila["NombreSede"].ToString()
+                                                                  , fila["Direccion"].ToString()
+                                                                  , fila["Ciudad"].ToString()
+                                                                  , Int32.Parse(fila["IdSede"].ToString())
+                                                                  , new Usuario(fila["Nombre"].ToString()
+                                                                               , fila["Apellido"].ToString()
+                                                                               , fila["Correo"].ToString()
+                                                                               , new Sede()
+                                                                               , Int32.Parse(fila["IdAdministrador"].ToString())
+                                                                               , 0
+                                                                               , fila["NombreUsuario"].ToString()
+                                                                               , fila["Clave"].ToString()
+                                                                               , Convert.ToInt32(fila["Perfil"])
+                                                                               ))
+                                                                    , new Lote(fila["CodigoLote"].ToString()
+                                                                              , new Producto(
+                                                                                  fila["NombreProducto"].ToString()
+                                                                                  , Convert.ToInt32(fila["IdProducto"])
+                                                                                  , new TipoProducto(Convert.ToInt32(fila["IdTipoProducto"])
+                                                                                                  , fila["CodigoReferencia"].ToString()
+                                                                                                  , fila["Descripcion"].ToString())
+                                                                                  )
+                                                                              , Convert.ToInt32(fila["IdLote"])
+                                                                              , Convert.ToDateTime(fila["FechaVencimiento"])
+                                                                              , Convert.ToDateTime(fila["Lote_FechaRegistro"]))
+                                                                      , Convert.ToInt32(fila["IdInventario"])
+                                                                      , Convert.ToInt32(fila["Cantidad"])
+                                                                      , Convert.ToDateTime(fila["FechaRegistro"]))
+
+
+                                                    ).ToList();
+
+            return Resultado;
+        }
+
+
         public List<Inventario> ConsultarInventario(string Filtro)
         {
             List<Parametros> Parametros = new List<Parametros>() {
                 new Parametros("@filtro",Filtro,SqlDbType.VarChar,ParameterDirection.Input)
             };
             DataTable Coleccion = new Transaccion("ConsultarInventario", Parametros).EjecutarDevuelveTabla();
-            List<Inventario> Resultado = (from fila in Coleccion.AsEnumerable()
-                                    select new Inventario(                                                       
-                                                        new Sede(fila["NombreSede"].ToString()
-                                                            , fila["Direccion"].ToString()
-                                                            , fila["Ciudad"].ToString()
-                                                            , Int32.Parse(fila["IdSede"].ToString())
-                                                            , new Usuario(fila["Nombre"].ToString()
-                                                                         , fila["Apellido"].ToString()
-                                                                         , fila["Correo"].ToString()
-                                                                         , new Sede()
-                                                                         , Int32.Parse(fila["IdAdministrador"].ToString())
-                                                                         , 0
-                                                                         , fila["NombreUsuario"].ToString()
-                                                                         , fila["Clave"].ToString()
-                                                                         , Convert.ToInt32(fila["Perfil"])
-                                                                         ))
-                                                              , new Lote( fila["CodigoLote"].ToString()
-                                                                        , new Producto(
-                                                                            fila["NombreProducto"].ToString()
-                                                                            , Convert.ToInt32(fila["IdProducto"])
-                                                                            , new TipoProducto( Convert.ToInt32(fila["IdTipoProducto"])
-                                                                                            , fila["CodigoReferencia"].ToString()
-                                                                                            , fila["Descripcion"].ToString())
-                                                                            )
-                                                                        , Convert.ToInt32(fila["IdLote"])
-                                                                        , Convert.ToDateTime(fila["FechaVencimiento"])
-                                                                        , Convert.ToDateTime(fila["Lote_FechaRegistro"]))
-                                                                , Convert.ToInt32(fila["IdInventario"])
-                                                                , Convert.ToInt32(fila["Cantidad"])
-                                                                , Convert.ToDateTime(fila["FechaRegistro"]))
-
-
-                                                    ).ToList();
-
-            return Resultado;
+            return MapearDatos(Coleccion);
         }
 
         public bool CrearInventario(int IdLote, int IdSede, int Cantidad, DateTime FechaRegistro)
@@ -135,9 +140,13 @@ namespace com.co.uan.DMiravalle.Inventario
             return Convert.ToInt32(new Transaccion("EditarInventario", Parametros).EjecutarDevuelveReturnValue()) > 0;
         }
 
-        public List<Inventario> ConsultarProductosVencidos()
+        public List<Inventario> ConsultarProductosVencidos(string Filtro)
         {
-            throw new NotImplementedException();
+            List<Parametros> Parametros = new List<Parametros>() {
+                new Parametros("@Filtro",Filtro,SqlDbType.VarChar,ParameterDirection.Input)
+            };
+            DataTable Coleccion = new Transaccion("ObtenerProductosaVencer", Parametros).EjecutarDevuelveTabla();
+            return MapearDatos(Coleccion);
         }
 
         public bool CrearLote(string CodigoLote, DateTime FechaVencimiento, int IdProducto, DateTime FechaRegistro)
