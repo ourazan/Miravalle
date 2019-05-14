@@ -22,7 +22,7 @@ function EditarSede(Sede) {
     $("#Administrador").val(Sede[1]);
     $("#NombreSede").val(Sede[2]);
     $("#Ciudad").val(Sede[3]);
-    $("#Dirección").val(Sede[4]);
+    $("#Direccion").val(Sede[4]);
 
     AbrirModal("divModalSede");
     $("#Titulo").empty();

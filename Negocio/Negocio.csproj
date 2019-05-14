@@ -61,8 +61,6 @@
     <Compile Include="com.co.uan.DMiravalle.Informes\Notificacion.cs" />
     <Compile Include="com.co.uan.DMiravalle.Informes\Reporte.cs" />
     <Compile Include="com.co.uan.DMiravalle.Informes\ServicioNotificacion.cs" />
-    <Compile Include="com.co.uan.DMiravalle.Inventario\FachadaInventario.cs" />
-    <Compile Include="com.co.uan.DMiravalle.Inventario\IFachadaInventario.cs" />
     <Compile Include="com.co.uan.DMiravalle.Inventario\IInventario.cs" />
     <Compile Include="com.co.uan.DMiravalle.Inventario\ILote.cs" />
     <Compile Include="com.co.uan.DMiravalle.Inventario\Inventario.cs" />
@@ -71,7 +69,7 @@
     <Compile Include="com.co.uan.DMiravalle.Inventario\Lote.cs" />
     <Compile Include="com.co.uan.DMiravalle.Inventario\Producto.cs" />
     <Compile Include="com.co.uan.DMiravalle.Inventario\TipoProducto.cs" />
-    <Compile Include="ConstructorFachada.cs" />
+    <Compile Include="Servicio.cs" />
     <Compile Include="Ejecutor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
