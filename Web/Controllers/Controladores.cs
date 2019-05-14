@@ -9,15 +9,15 @@ namespace Web.Controllers
     {
         protected string  Mensaje="";
         protected bool Resultado = false;
-        ConstructorFachada Negocio=null ;
-        protected ConstructorFachada  ObtenerNegocio() {
+        Servicio Negocio=null ;
+        protected Servicio ObtenerNegocio() {
             if (Session["Negocio"] == null)
             {
-                Negocio = new ConstructorFachada();
+                Negocio = new Servicio();
                 Session["Negocio"]=Negocio;
             }
             else {
-                Negocio = (ConstructorFachada)Session["Negocio"];
+                Negocio = (Servicio)Session["Negocio"];
 
             }
             Negocio.AsignarEjecutor(ObtenerUsuarioAutenticado());

@@ -48,7 +48,7 @@ namespace Web.Controllers
                 }
                 else
                 {
-                    Resultado = ObtenerNegocio().ObtenerFachadaInventario().EditarInventario(
+                    Resultado = ObtenerNegocio().ObtenerFachadaInventario().ModificarInventario(
                         Convert.ToInt32(Request["hddIDLote"])
                         ,Convert.ToInt32(Request["SedeInventario"])
                         ,Convert.ToInt32(Request["Cantidad"])
