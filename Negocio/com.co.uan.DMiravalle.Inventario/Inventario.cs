@@ -5,11 +5,11 @@ using System.Collections.Generic;
 using Datos;
 using System.Linq;
 using System.Data;
-using Negocio;
+
 
 namespace com.co.uan.DMiravalle.Inventario
 {
- public class Inventario: Ejecutor,IInventario, INotificacionVencidos
+ public class Inventario: IInventario, INotificacionVencidos
     {
         #region Propiedades
         public  Sede SedeInventario { get; set; }
@@ -21,6 +21,8 @@ namespace com.co.uan.DMiravalle.Inventario
         public int Cantidad { get; set; }
 
         public DateTime FechaRegistro { get; set; }
+
+        public int UsuarioAutenticado { get; set; }
         #endregion
 
         #region Constructores

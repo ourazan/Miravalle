@@ -55,11 +55,11 @@ namespace com.co.uan.DMiravalle.Administracion
         }
         public void AsignarEjecutor(int Autenticado) {
             if (this.Gerente!=null)
-                ((Usuario)Gerente).AsignarEjecutor(Autenticado);
+                ((Usuario)Gerente).UsuarioAutenticado = Autenticado;
             if (this.Sede != null)
-                 ((Sede)Sede).AsignarEjecutor(Autenticado);
+                 ((Sede)Sede).UsuarioAutenticado = Autenticado;
 
-       }
+        }
         #endregion
     }
 }

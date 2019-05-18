@@ -32,10 +32,10 @@ namespace com.co.uan.DMiravalle
 
         public void AsignarEjecutor(int Autenticado) {
             ObjetoAdministracion.AsignarEjecutor(Autenticado);
-            ((Inventario.Inventario)ObjetoFachadaInventario).AsignarEjecutor(Autenticado);
-            ((Inventario.Inventario)ObjetoFachadaInventario).LoteProducto.AsignarEjecutor(Autenticado);
-            ((Inventario.Inventario)ObjetoFachadaInventario).LoteProducto.Producto.AsignarEjecutor(Autenticado);
-            ((Inventario.Inventario)ObjetoFachadaInventario).LoteProducto.Producto.Tipo.AsignarEjecutor(Autenticado);
+            ((Inventario.Inventario)ObjetoFachadaInventario).LoteProducto.UsuarioAutenticado=Autenticado;
+            ((Inventario.Inventario)ObjetoFachadaInventario).UsuarioAutenticado = Autenticado;
+            ((Inventario.Inventario)ObjetoFachadaInventario).LoteProducto.Producto.UsuarioAutenticado = Autenticado;
+            ((Inventario.Inventario)ObjetoFachadaInventario).LoteProducto.Producto.Tipo.UsuarioAutenticado = Autenticado;
         }
         #endregion
 

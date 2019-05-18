@@ -3,17 +3,19 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using Datos;
-using Negocio;
+
 
 namespace com.co.uan.DMiravalle.Inventario
 {
-    public class TipoProducto : Ejecutor, ITipoProducto
+    public class TipoProducto :  ITipoProducto
     {
         #region Propiedades
       
         public int IdTipoProducto { get; set; }
         public string CodigoReferencia { get; set; }
         public string Descripcion { get; set; }
+        public int UsuarioAutenticado { get; set; }
+
         #endregion
         #region Constructores    
         public TipoProducto() { }

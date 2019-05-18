@@ -3,11 +3,11 @@ using System.Data;
 using Datos;
 using System;
 using System.Linq;
-using Negocio;
+
 
 namespace com.co.uan.DMiravalle.Administracion
 {
-    public class Sede : Ejecutor,ISede
+    public class Sede :ISede
     {
        
 
@@ -20,6 +20,8 @@ namespace com.co.uan.DMiravalle.Administracion
         public string Ciudad { get; set; }
 
         public int IdSede { get; set; }
+
+        public int UsuarioAutenticado { get; set; }
 
         public Sede() {
 

@@ -70,7 +70,6 @@
     <Compile Include="com.co.uan.DMiravalle.Inventario\Producto.cs" />
     <Compile Include="com.co.uan.DMiravalle.Inventario\TipoProducto.cs" />
     <Compile Include="Servicio.cs" />
-    <Compile Include="Ejecutor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

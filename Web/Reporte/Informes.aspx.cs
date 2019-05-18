@@ -7,8 +7,6 @@ namespace Web.Reporte
     public partial class Informes : System.Web.UI.Page
     {
         IReporte Informe;
-
-
         private IReporte ObtenerFachadaInformes() {
 
             if (Informe == null)

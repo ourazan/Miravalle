@@ -1,6 +1,5 @@
 ﻿
 using Datos;
-using Negocio;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -8,7 +7,7 @@ using System.Linq;
 
 namespace com.co.uan.DMiravalle.Administracion
 {
-   public  class Usuario : Ejecutor, IGerente
+   public  class Usuario :  IGerente
     {
         #region Propiedades
     
@@ -28,6 +27,7 @@ namespace com.co.uan.DMiravalle.Administracion
 
         public int Perfil { get; set; }
 
+        public int UsuarioAutenticado { get; set; }
         #endregion
         #region Constructores
         public Usuario() { }

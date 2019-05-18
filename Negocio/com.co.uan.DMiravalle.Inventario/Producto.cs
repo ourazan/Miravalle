@@ -3,11 +3,11 @@ using System.Data;
 using Datos;
 using System;
 using System.Linq;
-using Negocio;
+
 
 namespace com.co.uan.DMiravalle.Inventario
 {
-  public   class Producto: Ejecutor, IProducto
+  public   class Producto: IProducto
     {
         #region Propiedades
         public string NombreProducto { get; set; }
@@ -15,6 +15,9 @@ namespace com.co.uan.DMiravalle.Inventario
         public int IdProducto { get; set; }
 
         public TipoProducto Tipo { get; set; }
+
+        public int UsuarioAutenticado { get; set; }
+
         #endregion
 
         #region Constructores

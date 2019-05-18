@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Data;
 using Datos;
 using System.Linq;
-using Negocio;
+
 
 namespace com.co.uan.DMiravalle.Inventario
 {
-   public  class Lote:Ejecutor, ILote
+   public  class Lote: ILote
     {
         #region Propiedades
        
@@ -20,6 +20,8 @@ namespace com.co.uan.DMiravalle.Inventario
         public DateTime FechaVencimiento { get; set; }
 
         public DateTime FechaRegistro { get; set; }
+
+        public int UsuarioAutenticado { get; set; }
 
         #endregion
         #region constructores
