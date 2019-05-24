@@ -15,8 +15,10 @@ namespace com.co.uan.DMiravalle.Informes
         public Email() {
             Mensaje = new MailMessage();
         }
-        public void EnviarNotificacion()
+        public void  EnviarNotificacion()
         {
+            try
+            {
             SmtpClient ServicioEmail = new SmtpClient();
             ServicioEmail.Port = 25;
             ServicioEmail.DeliveryMethod = SmtpDeliveryMethod.Network;
@@ -26,12 +28,13 @@ namespace com.co.uan.DMiravalle.Informes
             Mensaje.Subject = ConfigurationManager.AppSettings["AsuntoVencidos"];
             ServicioEmail.Credentials = new  System.Net.NetworkCredential(ConfigurationManager.AppSettings["userSmtp"], ConfigurationManager.AppSettings["claveSmtp"]);
             ServicioEmail.Send(Mensaje);
+            }
+            catch (Exception ex)
+            {
+                
+            }
         }
-
-        internal void GenerarCuerpoHTMLCorreo(Inventario.Inventario vencido, object p)
-        {
-            throw new NotImplementedException();
-        }
+      
 
         public void  GenerarCuerpoHTMLCorreo(Inventario.Inventario ElementoVencido,string NombrePlantillaCorreo)
         {

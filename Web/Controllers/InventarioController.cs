@@ -36,40 +36,28 @@ namespace Web.Controllers
             {
                 if (Request["hddIDInventario"] == "0")
                 {
-                    Resultado = ObtenerNegocio().ObtenerFachadaInventario().CrearInventario(
+                   return Json (ObtenerNegocio().ObtenerFachadaInventario().CrearInventario(
                         Convert.ToInt32(Request["hddIDLote"])
                         ,Convert.ToInt32(Request["SedeInventario"])
                         ,Convert.ToInt32 (Request["Cantidad"])
-                        ,Convert.ToDateTime( Request["FechaRegistroInventario"]));
-                      Mensaje = "No se pudo crear el inventario ";
-                    if (Resultado)
-                        Mensaje = "Se ha creado el inventario exitosamente";
-
+                        ,Convert.ToDateTime( Request["FechaRegistroInventario"])));
                 }
                 else
                 {
-                    Resultado = ObtenerNegocio().ObtenerFachadaInventario().ModificarInventario(
+                    return Json(ObtenerNegocio().ObtenerFachadaInventario().ModificarInventario(
                         Convert.ToInt32(Request["hddIDLote"])
                         ,Convert.ToInt32(Request["SedeInventario"])
                         ,Convert.ToInt32(Request["Cantidad"])
                         ,Convert.ToInt32(Request["hddIDInventario"])
-                        ,Convert.ToDateTime(Request["FechaRegistroInventario"]));
-                 
-                    Mensaje = "No se pudo editar el inventario ";
-                    if (Resultado )
-                        Mensaje = "Se ha editado el inventario exitosamente";
+                        ,Convert.ToDateTime(Request["FechaRegistroInventario"])));
                 }
-
-
             }
             catch (Exception ex)
             {
                 RegistarError(ex);
                 Mensaje = "Se presento inconveniente al realizar la accion";
             }
-
             return Json(new { success = true, data = Resultado, mensaje = Mensaje });
-
         }
 
         [HttpPost]

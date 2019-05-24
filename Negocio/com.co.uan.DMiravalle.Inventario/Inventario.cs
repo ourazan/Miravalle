@@ -12,6 +12,9 @@ namespace com.co.uan.DMiravalle.Inventario
  public class Inventario: IInventario, INotificacionVencidos
     {
         #region Propiedades
+        private bool Resultado;
+        private string Mensaje;
+
         public  Sede SedeInventario { get; set; }
 
         public Lote LoteProducto { get; set; }
@@ -56,6 +59,13 @@ namespace com.co.uan.DMiravalle.Inventario
         #endregion
 
         #region Metodos
+
+        private bool ExisteInventario(int Idlote ,int IdSede ,int IdInventario) {
+
+            return ConsultarInventario(" IdLote="+ Idlote.ToString() + " and IdSede="+ IdSede.ToString()+" and  IdInventario not in(" + IdInventario .ToString ()+")").Count>0;
+        }
+
+
         private List<Inventario> MapearDatos(DataTable Coleccion) {
             List<Inventario> Resultado = (from fila in Coleccion.AsEnumerable()
                                           select new Inventario(
@@ -107,18 +117,29 @@ namespace com.co.uan.DMiravalle.Inventario
             return MapearDatos(Coleccion);
         }
 
-        public bool CrearInventario(int IdLote, int IdSede, int Cantidad, DateTime FechaRegistro)
+        public object CrearInventario(int IdLote, int IdSede, int Cantidad, DateTime FechaRegistro)
         {
-           
-                List<Parametros> Parametros = new List<Parametros>() {
+            
+            if (!ExisteInventario(IdLote, IdSede, 0))
+            {
+                   List<Parametros> Parametros = new List<Parametros>() {
                 new Parametros("@FechaRegistro",FechaRegistro,SqlDbType.DateTime,ParameterDirection.Input)
                 ,new Parametros("@Cantidad",Cantidad,SqlDbType.Int,ParameterDirection.Input)
                 ,new Parametros("@IdLote",IdLote,SqlDbType.Int,ParameterDirection.Input)
                 ,new Parametros("@IdSede",IdSede,SqlDbType.Int,ParameterDirection.Input)
                 ,new Parametros("@UsuarioAutenticado",this.UsuarioAutenticado,SqlDbType.Int,ParameterDirection.Input)
-                 ,new Parametros("@RETURN_VALUE",null,SqlDbType.Int,ParameterDirection.ReturnValue)
-            };
-            return Convert.ToInt32(new Transaccion("CrearInventario", Parametros).EjecutarDevuelveReturnValue()) > 0;
+                 ,new Parametros("@RETURN_VALUE",null,SqlDbType.Int,ParameterDirection.ReturnValue) };
+                    Resultado =  Convert.ToInt32(new Transaccion("CrearInventario", Parametros).EjecutarDevuelveReturnValue()) > 0;
+                    Mensaje = "No se pudo crear el inventario ";
+                if (Resultado)
+                    Mensaje = "Se ha creado el inventario exitosamente";
+            }
+            else {
+                 Resultado = false;
+                Mensaje = "El inventario ya se encuentra registrado para la sede seleccionada";
+
+            }
+            return new { success = true, data = Resultado, mensaje = Mensaje };
         }
 
         public bool EliminarInventario(int IdInventario)
@@ -131,7 +152,7 @@ namespace com.co.uan.DMiravalle.Inventario
             return Convert.ToInt32(new Transaccion("ELiminarInventario", Parametros).EjecutarDevuelveReturnValue()) > 0;
         }
 
-        public bool ModificarInventario(int IdLote, int IdSede, int Cantidad, int IdInventario, DateTime FechaRegistro)
+        public object  ModificarInventario(int IdLote, int IdSede, int Cantidad, int IdInventario, DateTime FechaRegistro)
         {
             List<Parametros> Parametros = new List<Parametros>() {
                 new Parametros("@FechaRegistro",FechaRegistro,SqlDbType.DateTime,ParameterDirection.Input)
@@ -142,7 +163,13 @@ namespace com.co.uan.DMiravalle.Inventario
                 ,new Parametros("@UsuarioAutenticado",UsuarioAutenticado,SqlDbType.Int,ParameterDirection.Input)
                  ,new Parametros("@RETURN_VALUE",null,SqlDbType.Int,ParameterDirection.ReturnValue)
             };
-            return Convert.ToInt32(new Transaccion("EditarInventario", Parametros).EjecutarDevuelveReturnValue()) > 0;
+            Resultado = Convert.ToInt32(new Transaccion("EditarInventario", Parametros).EjecutarDevuelveReturnValue()) > 0;
+
+            Mensaje = "No se pudo editar el inventario ";
+            if (Resultado)
+                Mensaje = "Se ha editado el inventario exitosamente";
+
+            return   new { success = true, data = Resultado, mensaje = Mensaje };
         }
 
         public List<Inventario> ConsultarProductosVencidos(string Filtro)
