@@ -11,7 +11,7 @@ namespace Web.Controllers
         {
             ViewData["Autenticado"] = ObtenerAutenticado();
             SelectList Administradores;
-            var Items = (from Administrador in ObtenerNegocio().ObtenerFachadaAdministrativa().ConsultarUsuario(" 1=1")
+            var Items = (from Administrador in ObtenerNegocio().ObtenerFachadaAdministrativa().ConsultarUsuario(0,string.Empty, string.Empty,0, string.Empty,0)
                          select new SelectListItem()
                          {
                              Text = Administrador.Nombre +" " + Administrador.Apellido,
@@ -20,7 +20,7 @@ namespace Web.Controllers
                                     );
             Administradores = new SelectList(Items, "Value", "Text");
             ViewData["Administradores"] = Administradores;
-            ViewData["Sede"] = ObtenerNegocio().ObtenerFachadaAdministrativa().ConsultarSede(" 1=1 ");
+            ViewData["Sede"] = ObtenerNegocio().ObtenerFachadaAdministrativa().ConsultarSede(string.Empty, string.Empty, string.Empty, 0,0);
             return View();
         }
 
@@ -69,7 +69,7 @@ namespace Web.Controllers
         {
             try
             {
-                if (ObtenerNegocio().ObtenerFachadaInventario().ConsultarProducto("IdSede=" + Request["hddID"]).Count == 0)
+                if (ObtenerNegocio().ObtenerFachadaInventario().ConsultarProducto(string .Empty,0,Convert.ToInt32 ( Request["hddID"])).Count == 0)
                 {
 
                     Resultado = ObtenerNegocio().ObtenerFachadaAdministrativa().EliminarSede(Convert.ToInt32(Request["hddID"]));

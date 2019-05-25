@@ -33,7 +33,7 @@ namespace com.co.uan.DMiravalle.Administracion
 
         public string Nombre { get { return nombre; } }
 
-        public string Apellido { get { return Apellido; } }
+        public string Apellido { get { return apellido; } }
 
         public string Correo { get { return correo; } }
 

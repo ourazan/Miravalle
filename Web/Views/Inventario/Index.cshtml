@@ -2,7 +2,7 @@
 @{
     ViewBag.Title = "Inventario";
     WebGrid grdInventario = new WebGrid(canSort: true, canPage: true, rowsPerPage: 30);
-    grdInventario.Bind((List<Inventario>)ViewData["Inventario"]); }
+    grdInventario.Bind((List<InventarioDTO>)ViewData["Inventario"]); }
    
  @grdInventario.GetHtml(
     tableStyle: "table table-responsive backcolor",

@@ -12,7 +12,7 @@ namespace Web.Controllers
         {
             ViewData["Autenticado"] = ObtenerAutenticado();
             SelectList Sedes;
-            var Items = (from sede in ObtenerNegocio().ObtenerFachadaAdministrativa().ConsultarSede(" 1=1 ")
+            var Items = (from sede in ObtenerNegocio().ObtenerFachadaAdministrativa().ConsultarSede(string.Empty,string.Empty,string.Empty,0,0)
                          select new SelectListItem()
                          {
                              Text = sede.NombreSede,
@@ -31,7 +31,7 @@ namespace Web.Controllers
             };
             SelectList Perfiles = new SelectList(PerfilOpciones, "Value", "Text");
             ViewData["Perfiles"] = Perfiles;
-            ViewData["Usuario"] = ObtenerNegocio().ObtenerFachadaAdministrativa().ConsultarUsuario(" 1=1 ");
+            ViewData["Usuario"] = ObtenerNegocio().ObtenerFachadaAdministrativa().ConsultarUsuario(0,string.Empty,string.Empty,0,string.Empty,0);
             return View();
         }
 

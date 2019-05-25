@@ -3,7 +3,7 @@
     ViewBag.Title = "Sedes";
     Layout = "~/Views/Shared/_Layout.cshtml";
     WebGrid grdSede = new WebGrid(canSort: true, canPage: true, rowsPerPage: 30);
-    grdSede.Bind((List<Sede>)ViewData["Sede"]);
+    grdSede.Bind((List<SedeDTO>)ViewData["Sede"]);
 
 }
 <script src="~/Scripts/DMiravalle/Administracion/Sede.js"></script>

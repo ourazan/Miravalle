@@ -9,7 +9,7 @@ namespace Web.Controllers
         public ActionResult ConsultaLotes()
         {
             ViewData["Autenticado"] = ObtenerAutenticado();
-            ViewData["Lote"] = ObtenerNegocio().ObtenerFachadaInventario().ConsultarLote("IdProducto=" + Request["IdProducto"]);
+            ViewData["Lote"] = ObtenerNegocio().ObtenerFachadaInventario().ConsultarLote(string.Empty,null,Convert.ToInt32( Request["IdProducto"]),0,null);
             return PartialView();
         }
         [HttpGet]
@@ -60,7 +60,7 @@ namespace Web.Controllers
         {
             try
             {
-                if (ObtenerNegocio().ObtenerFachadaInventario().ConsultarInventario("IdLote=" + Request["IdLote"]).Count == 0)
+                if (ObtenerNegocio().ObtenerFachadaInventario().ConsultarInventario(Convert.ToInt32 ( Request["IdLote"]),0,-1,0,null,0).Count == 0)
                 {
 
                     Resultado = ObtenerNegocio().ObtenerFachadaInventario().EliminarLote(Convert.ToInt32(Request["IdLote"]));

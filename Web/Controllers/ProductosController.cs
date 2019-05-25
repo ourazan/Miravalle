@@ -13,8 +13,8 @@ namespace Web.Controllers
             {
                 ViewData["Autenticado"] = ObtenerAutenticado();
                 SelectList Tipos;
-                    ViewData["Producto"] = ObtenerNegocio().ObtenerFachadaInventario().ConsultarProducto("1=1");
-                     var Items= (from Tipo in ObtenerNegocio().ObtenerFachadaInventario().ConsultarTipoProducto("1=1")
+                    ViewData["Producto"] = ObtenerNegocio().ObtenerFachadaInventario().ConsultarProducto(string.Empty,0,0);
+                     var Items= (from Tipo in ObtenerNegocio().ObtenerFachadaInventario().ConsultarTipoProducto(string.Empty,string.Empty,0)
                                                select new SelectListItem() {
                                                    Text=Tipo.Descripcion,
                                                    Value=Tipo.IdTipoProducto.ToString()
@@ -69,7 +69,7 @@ namespace Web.Controllers
         {
             try
             {
-                if (ObtenerNegocio().ObtenerFachadaInventario().ConsultarInventario("IdProducto=" + Request["hddID"]).Count == 0) {
+                if (ObtenerNegocio().ObtenerFachadaInventario().ConsultarInventario(0,0,0,0,null ,Convert.ToInt32(Request["hddID"])).Count == 0) {
 
                     Resultado = ObtenerNegocio().ObtenerFachadaInventario().EliminarProducto(Convert.ToInt32(Request["hddID"]));
                     Mensaje = "No se pudo eliminar el producto ";

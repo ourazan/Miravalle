@@ -122,6 +122,7 @@ create procedure [dbo].[ConsultarInventario]
 ,@Cantidad int = null
 ,@IdLote int= null
 ,@IdSede int = null
+,@IdProducto int = null
 as 
 begin
  select 
@@ -156,6 +157,46 @@ where Activo=1
  and (Cantidad=@Cantidad or(@Cantidad  is null))
  and (IdLote=@IdLote or( @IdLote is null))
  and (IdSede=@IdSede or(@IdSede is null))
+ and (IdProducto=@IdProducto or(@IdProducto is null))
+ end
+ go
+
+create procedure [dbo].[ExisteInventario]
+  @IdInventario int = null
+  ,@IdLote int= null
+  ,@IdSede int = null
+as 
+begin
+ select 
+ v_Inventario.IdInventario 
+,v_Inventario.FechaRegistro 
+,v_Inventario.Cantidad 
+,v_Inventario.IdLote 
+,v_Inventario.IdSede 
+,v_Inventario.Activo
+,v_Inventario.CodigoLote 
+,v_Inventario.Lote_FechaRegistro 
+,v_Inventario.FechaVencimiento 
+,v_Inventario.IdProducto 
+,v_Inventario.NombreProducto
+,v_Inventario.IdTipoProducto
+,v_Inventario.CodigoReferencia 
+,v_Inventario.Descripcion
+,v_Inventario.NombreSede
+,v_Inventario.Ciudad 
+,v_Inventario.Direccion 
+,v_Inventario.IdAdministrador
+,v_Inventario.Nombre 
+,v_Inventario.Apellido 
+,v_Inventario.Correo   
+,v_Inventario.Clave    
+,v_Inventario.NombreUsuario
+,v_Inventario.Perfil
+from v_Inventario
+where Activo=1
+ and IdLote=@IdLote
+ and IdSede=@IdSede
+ and  IdInventario not in(@idInventario)
  end
 
 

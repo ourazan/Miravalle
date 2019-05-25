@@ -10,7 +10,7 @@ namespace Web.Controllers
         {
             try
             {
-            ViewData["TiposProducto"] = ObtenerNegocio().ObtenerFachadaInventario().ConsultarTipoProducto("activo=1");
+            ViewData["TiposProducto"] = ObtenerNegocio().ObtenerFachadaInventario().ConsultarTipoProducto(string.Empty,string.Empty,0);
             ViewData["Autenticado"] = ObtenerAutenticado();
             return View();
 
@@ -87,7 +87,7 @@ namespace Web.Controllers
         {
             try
             {
-                if (ObtenerNegocio().ObtenerFachadaInventario().ConsultarProducto("IdTipoProducto=" + Request["hddID"]).Count == 0)
+                if (ObtenerNegocio().ObtenerFachadaInventario().ConsultarProducto(string.Empty,Convert.ToInt32 (Request["hddID"]),0).Count == 0)
                 {
 
                     Resultado = ObtenerNegocio().ObtenerFachadaInventario().EliminarTipoProducto(Convert.ToInt32(Request["hddID"]));

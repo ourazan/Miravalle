@@ -30,10 +30,10 @@ namespace com.co.uan.DMiravalle.Administracion
                                                         , fila["Direccion"].ToString()
                                                         , fila["Ciudad"].ToString()
                                                         , Int32.Parse(fila["IdSede"].ToString())
-                                                        , new Usuario(fila["Nombre"].ToString()
+                                                        , new UsuarioDTO(fila["Nombre"].ToString()
                                                                      , fila["Apellido"].ToString()
                                                                      , fila["Correo"].ToString()
-                                                                     , new Sede()
+                                                                     , new SedeDTO()
                                                                      , Int32.Parse(fila["IdAdministrador"].ToString())
                                                                      ,  0
                                                                      , fila["NombreUsuario"].ToString()

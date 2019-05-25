@@ -4,7 +4,7 @@
     ViewBag.Title = "Tipos de productos";
     Layout = "~/Views/Shared/_Layout.cshtml";
     WebGrid grdTipo = new WebGrid(canSort: true, canPage: true, rowsPerPage: 30);
-    grdTipo.Bind((List<TipoProducto>)ViewData["TiposProducto"]);
+    grdTipo.Bind((List<TipoProductoDTO>)ViewData["TiposProducto"]);
 }
 <script src="~/Scripts/DMiravalle/Inventario/TipoProducto.js"></script>
 

@@ -6,7 +6,7 @@ namespace com.co.uan.DMiravalle.Inventario
    public  interface IInventario
     {
 
-        List<InventarioDTO> ConsultarInventario(int IdLote, int IdSede, int Cantidad, int IdInventario, DateTime? FechaRegistro);
+        List<InventarioDTO> ConsultarInventario(int IdLote, int IdSede, int Cantidad, int IdInventario, DateTime? FechaRegistro, int IdProducto);
         
         object  CrearInventario(int IdLote, int IdSede, int Cantidad, DateTime FechaRegistro);
 

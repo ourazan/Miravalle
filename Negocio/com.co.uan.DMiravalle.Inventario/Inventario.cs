@@ -21,13 +21,21 @@ namespace com.co.uan.DMiravalle.Inventario
         private int usuarioautenticado;
         public int UsuarioAutenticado
         {
-            set { usuarioautenticado = value; }
+            set
+            {
+                usuarioautenticado = value;
+                Producto.UsuarioAutenticado = value;
+                LoteProducto.UsuarioAutenticado = value;
+                Tipo.UsuarioAutenticado = value;
+            }
         }
         #endregion
 
         #region Constructores
         public Inventario() {
             LoteProducto = new Lote();
+            Tipo = new TipoProducto();
+            Producto = new Producto();
         }
 
  
@@ -89,14 +97,15 @@ namespace com.co.uan.DMiravalle.Inventario
 
 
 
-        public List<InventarioDTO> ConsultarInventario(int IdLote, int IdSede, int Cantidad, int IdInventario, DateTime? FechaRegistro)
+        public List<InventarioDTO> ConsultarInventario(int IdLote, int IdSede, int Cantidad, int IdInventario, DateTime? FechaRegistro,int IdProducto)
         {
             List<Parametros> Parametros = new List<Parametros>() {
                 new Parametros("@FechaRegistro",FechaRegistro==null?DBNull.Value :(object )FechaRegistro,SqlDbType.DateTime,ParameterDirection.Input)
                 ,new Parametros("@Cantidad",Cantidad==-1?DBNull.Value :(object )Cantidad,SqlDbType.Int,ParameterDirection.Input)
                 ,new Parametros("@IdLote",IdLote==0?DBNull.Value :(object )IdLote,SqlDbType.Int,ParameterDirection.Input)
                 ,new Parametros("@IdSede",IdSede==0?DBNull.Value :(object )IdSede,SqlDbType.Int,ParameterDirection.Input)
-                ,new Parametros("@IdInventario",IdInventario,SqlDbType.Int,ParameterDirection.Input)
+                ,new Parametros("@IdInventario",IdInventario==0?DBNull.Value :(object )IdInventario,SqlDbType.Int,ParameterDirection.Input)
+                ,new Parametros("@IdProducto",IdProducto==0?DBNull.Value :(object )IdProducto,SqlDbType.Int,ParameterDirection.Input)
             };
             DataTable Coleccion = new Transaccion("ConsultarInventario", Parametros).EjecutarDevuelveTabla();
             return MapearDatos(Coleccion);

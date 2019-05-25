@@ -3,7 +3,7 @@
     ViewBag.Title = "Gestión de usuarios";
     Layout = "~/Views/Shared/_Layout.cshtml";
     WebGrid grdUsuario = new WebGrid(canSort: true, canPage: true, rowsPerPage: 30);
-    grdUsuario.Bind((List<Usuario>)ViewData["Usuario"]);
+    grdUsuario.Bind((List<UsuarioDTO>)ViewData["Usuario"]);
 }
 <script src="~/Scripts/DMiravalle/Administracion/Usuario.js"></script>
 <h2 class="center">Usuario</h2>

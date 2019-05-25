@@ -23,12 +23,8 @@ namespace Web.Controllers
             Negocio.AsignarEjecutor(ObtenerUsuarioAutenticado());
             return  Negocio;
         }
-        protected Usuario ObtenerAutenticado() {
-            return new Usuario()
-            {
-                Nombre = "prueba1",
-                Apellido = "Prueba apellido1"
-            };
+        protected UsuarioDTO ObtenerAutenticado() {
+            return new UsuarioDTO("prueba1", "Prueba apellido1",string.Empty,null,0,0,string .Empty,string.Empty,0);
         }
         protected int ObtenerUsuarioAutenticado() {
             return 1;

@@ -3,7 +3,7 @@
     ViewBag.Title = "Productos";
     Layout = "~/Views/Shared/_Layout.cshtml";
     WebGrid grdProducto = new WebGrid(canSort: true, canPage: true, rowsPerPage: 30);
-    grdProducto.Bind((List<Producto>)ViewData["Producto"]);
+    grdProducto.Bind((List<ProductoDTO>)ViewData["Producto"]);
 }
 <script src="~/Scripts/DMiravalle/Inventario/Producto.js"></script>
 <script src="~/Scripts/DMiravalle/Inventario/Lote.js"></script>

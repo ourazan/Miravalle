@@ -9,14 +9,14 @@ namespace Web.Controllers
         // GET: Inventario
         public ActionResult Index()
         {
-            ViewData["Inventario"] = ObtenerNegocio().ObtenerFachadaInventario().ConsultarInventario(" IdLote=" + Request["IdLote"]);
+            ViewData["Inventario"] = ObtenerNegocio().ObtenerFachadaInventario().ConsultarInventario (Convert.ToInt32( Request["IdLote"]),0,-1,0,null,0);
             return PartialView();
         }
         [HttpGet]
         public ActionResult Edicion()
         {
             SelectList Sedes;
-            var Items = (from sede in ObtenerNegocio().ObtenerFachadaAdministrativa().ConsultarSede(" 1=1 ")
+            var Items = (from sede in ObtenerNegocio().ObtenerFachadaAdministrativa().ConsultarSede(string.Empty, string.Empty, string.Empty, 0, 0)
                          select new SelectListItem()
                          {
                              Text = sede.NombreSede,

@@ -1,7 +1,7 @@
 ﻿@using com.co.uan.DMiravalle.Inventario;
 @{
     WebGrid grdLote = new WebGrid(canSort: true, canPage: true, rowsPerPage: 30);
-    grdLote.Bind((List<Lote>)ViewData["Lote"]);
+    grdLote.Bind((List<LoteDTO>)ViewData["Lote"]);
 }
 @grdLote.GetHtml(
     tableStyle: "table table-responsive backcolor",
