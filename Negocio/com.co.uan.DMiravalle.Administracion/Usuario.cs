@@ -10,55 +10,15 @@ namespace com.co.uan.DMiravalle.Administracion
    public  class Usuario :  IGerente
     {
         #region Propiedades
-    
-        private string Clave;
-
-        public string Nombre { get; set; }
-
-        public string Apellido { get; set; }
-
-        public string Correo { get; set; }
-
-        public Sede SedeAsignada { get; set; }
-
-        public int IdUsuario { get; set; }
-    
-        public string NombreUsuario { get; set; }
-
-        public int Perfil { get; set; }
-
-        public int UsuarioAutenticado { get; set; }
-        #endregion
-        #region Constructores
-        public Usuario() { }
-        public Usuario(int IdUsuario) {
-            List<Usuario> Registro = Consultar( IdUsuario,string .Empty ,string.Empty ,0,string .Empty ,0);
-            this.IdUsuario = IdUsuario;
-            if (Registro.Count > 0) {
-                Nombre = Registro[0].Nombre;
-                Apellido = Registro[0].Apellido;
-                Correo = Registro[0].Correo;
-                SedeAsignada = Registro[0].SedeAsignada;
-                
-                NombreUsuario = Registro[0].NombreUsuario;
-                Clave = Registro[0].Clave;
-                Perfil = Registro[0].Perfil;
-            }
-        }
-        public Usuario(string nombre, string apellido, string correo, Sede sedeAsignada, int idUsuario, int idSede, string nombreUsuario, string clave,int perfil)
+        private int usuarioautenticado;
+        public int UsuarioAutenticado
         {
-            Nombre = nombre;
-            Apellido = apellido;
-            Correo = correo;
-            SedeAsignada = sedeAsignada;
-            IdUsuario= idUsuario;
-            NombreUsuario = nombreUsuario;
-            Clave = clave;
-            Perfil = perfil;
+            set { usuarioautenticado = value; }
         }
         #endregion
+
         #region Metodos
-        public List<Usuario> Consultar(int IdUsuario, string Nombre, string Apellido, int IdSede, string Correo, int Perfil)
+        public List<UsuarioDTO> Consultar(int IdUsuario, string Nombre, string Apellido, int IdSede, string Correo, int Perfil)
         {
             List<Parametros> Parametros = new List<Parametros>() {
                  new Parametros("@Nombre",string.IsNullOrEmpty(Nombre)?DBNull .Value :(object)Nombre,SqlDbType.VarChar,ParameterDirection.Input)
@@ -70,19 +30,19 @@ namespace com.co.uan.DMiravalle.Administracion
             };
             DataTable Coleccion = new Transaccion("ConsultarUsuario",Parametros).EjecutarDevuelveTabla();
 
-            List<Usuario> Resultado = ((from fila in Coleccion.AsEnumerable()
-                                        select new Usuario(
+            List<UsuarioDTO> Resultado = ((from fila in Coleccion.AsEnumerable()
+                                        select new UsuarioDTO(
                                              fila["Nombre"].ToString()
                                              ,fila["Apellido"].ToString()
                                              , fila["Correo"].ToString()
-                                             , new Sede(fila["NombreSede"].ToString()
+                                             , new SedeDTO(fila["NombreSede"].ToString()
                                                         ,fila["Direccion"].ToString()
                                                         ,fila["Ciudad"].ToString()
                                                         ,Int32.Parse(fila["IdSede"].ToString())
-                                                        ,new Usuario(fila["Administrador_Nombre"].ToString()
+                                                        ,new UsuarioDTO(fila["Administrador_Nombre"].ToString()
                                                                      ,fila["Administrador_Apellido"].ToString()
                                                                      ,fila["Administrador_Correo"].ToString()
-                                                                     ,new Sede()
+                                                                     ,new SedeDTO()
                                                                      ,0,0, fila["Administrador_Usuario"].ToString()
                                                                      , fila["Administrador_Clave"].ToString()
                                                                      ,Convert.ToInt32(fila["Administrador_Perfil"]) 
@@ -109,7 +69,7 @@ namespace com.co.uan.DMiravalle.Administracion
                 ,new Parametros("@Clave",Clave,SqlDbType.VarChar,ParameterDirection.Input)
                 ,new Parametros("@NombreUsuario",usuario,SqlDbType.VarChar,ParameterDirection.Input)
                 ,new Parametros("@IdSede",(IdSede==0?DBNull.Value:(object)IdSede),SqlDbType.Int,ParameterDirection.Input)
-                ,new Parametros("@UsuarioAutenticado",this.UsuarioAutenticado,SqlDbType.Int,ParameterDirection.Input)
+                ,new Parametros("@UsuarioAutenticado",usuarioautenticado,SqlDbType.Int,ParameterDirection.Input)
                 ,new Parametros("@Perfil",Perfil,SqlDbType.Int,ParameterDirection.Input)
                 ,new Parametros("@RETURN_VALUE",null,SqlDbType.Int,ParameterDirection.ReturnValue)
             };
@@ -125,7 +85,7 @@ namespace com.co.uan.DMiravalle.Administracion
                 ,new Parametros("@IdSede",(IdSede==0?DBNull.Value:(object)IdSede),SqlDbType.Int,ParameterDirection.Input)
                 ,new Parametros("@IdUsuario",IdUsuario,SqlDbType.Int,ParameterDirection.Input)
                 ,new Parametros("@Perfil",Perfil,SqlDbType.Int,ParameterDirection.Input)
-                ,new Parametros("@UsuarioAutenticado",this.UsuarioAutenticado,SqlDbType.Int,ParameterDirection.Input)
+                ,new Parametros("@UsuarioAutenticado",usuarioautenticado,SqlDbType.Int,ParameterDirection.Input)
                 ,new Parametros("@RETURN_VALUE",null,SqlDbType.Int,ParameterDirection.ReturnValue)
             };
             return Convert.ToInt32(new Transaccion("EditarUsuario", Parametros).EjecutarDevuelveReturnValue()) > 0;
@@ -134,7 +94,7 @@ namespace com.co.uan.DMiravalle.Administracion
         {
             List<Parametros> Parametros = new List<Parametros>() {
                new Parametros("@IdUsuario",IdUsuario,SqlDbType.Int,ParameterDirection.Input)
-               ,new Parametros("@UsuarioAutenticado",this.UsuarioAutenticado,SqlDbType.Int,ParameterDirection.Input)
+               ,new Parametros("@UsuarioAutenticado",usuarioautenticado,SqlDbType.Int,ParameterDirection.Input)
                ,new Parametros("@RETURN_VALUE",null,SqlDbType.Int,ParameterDirection.ReturnValue)
             };
             return Convert.ToInt32(new Transaccion("EliminarUsuario", Parametros).EjecutarDevuelveReturnValue()) > 0;

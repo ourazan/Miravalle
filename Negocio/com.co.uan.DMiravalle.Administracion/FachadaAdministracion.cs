@@ -20,7 +20,7 @@ namespace com.co.uan.DMiravalle.Administracion
         #endregion
 
         #region Metodos
-        public List<Usuario> ConsultarUsuario(int IdUsuario, string Nombre, string Apellido, int IdSede, string Correo, int Perfil)
+        public List<UsuarioDTO> ConsultarUsuario(int IdUsuario, string Nombre, string Apellido, int IdSede, string Correo, int Perfil)
         {
             return Gerente.Consultar( IdUsuario,  Nombre,  Apellido,  IdSede,  Correo,  Perfil);
         }
@@ -49,7 +49,7 @@ namespace com.co.uan.DMiravalle.Administracion
             return Gerente.Eliminar(IdUsuario);
         }
 
-        public List<Sede> ConsultarSede(string Nombre, string Ciudad, string Direccion, int IdAdministrador, int IdSed)
+        public List<SedeDTO> ConsultarSede(string Nombre, string Ciudad, string Direccion, int IdAdministrador, int IdSed)
         {
             return Sede.Consultar( Nombre,  Ciudad,  Direccion,  IdAdministrador,  IdSed);
         }

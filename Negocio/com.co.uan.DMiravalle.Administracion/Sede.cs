@@ -9,48 +9,13 @@ namespace com.co.uan.DMiravalle.Administracion
 {
     public class Sede :ISede
     {
-       
-
-        public  Usuario Administrador { get; set; }
-
-        public string NombreSede { get; set; }
-
-        public string Direccion { get; set; }
-
-        public string Ciudad { get; set; }
-
-        public int IdSede { get; set; }
-
-        public int UsuarioAutenticado { get; set; }
-
-        public Sede() {
-
-        }
-       
-        public Sede(int idSede) {
-            this.IdSede = IdSede;
-           
-            List<Sede>Resultado= Consultar(string.Empty, string.Empty, string.Empty ,0,IdSede);
-            if (Resultado.Count>0)
-            {
-                Administrador = Resultado[0].Administrador;
-                Direccion = Resultado[0].Direccion;
-                Ciudad = Resultado[0].Ciudad;
-                IdSede = Resultado[0].IdSede;
-            }
-        }      
-        public Sede(string nombresede, string direccion, string ciudad, int idSede, Usuario administrador)
-        {
-            NombreSede = nombresede;
-            Administrador = administrador;
-            Direccion = direccion;
-            Ciudad = ciudad;
-            IdSede = idSede;
-         
+        private int usuarioautenticado;
+        public int UsuarioAutenticado {
+            set{ usuarioautenticado = value; }
         }
 
-      
-        public List<Sede> Consultar(string Nombre, string Ciudad, string Direccion, int IdAdministrador, int IdSede)
+     
+        public List<SedeDTO> Consultar(string Nombre, string Ciudad, string Direccion, int IdAdministrador, int IdSede)
         {
             List<Parametros> Parametros = new List<Parametros>() {
                 new Parametros("@NombreSede",String.IsNullOrEmpty (Nombre)? DBNull.Value:(object)Nombre,SqlDbType.VarChar,ParameterDirection.Input)
@@ -60,8 +25,8 @@ namespace com.co.uan.DMiravalle.Administracion
                 ,new Parametros("@IdSede",(IdSede==0?(object)DBNull.Value:(object)IdSede),SqlDbType.Int,ParameterDirection.Input)
             };
             DataTable Coleccion = new Transaccion("ConsultarSede", Parametros).EjecutarDevuelveTabla();
-            List<Sede> Resultado = (from fila in Coleccion.AsEnumerable()
-                                        select new Sede(fila["NombreSede"].ToString()
+            List<SedeDTO> Resultado = (from fila in Coleccion.AsEnumerable()
+                                        select new SedeDTO(fila["NombreSede"].ToString()
                                                         , fila["Direccion"].ToString()
                                                         , fila["Ciudad"].ToString()
                                                         , Int32.Parse(fila["IdSede"].ToString())
@@ -89,7 +54,7 @@ namespace com.co.uan.DMiravalle.Administracion
                 ,new Parametros("@Ciudad",Ciudad,SqlDbType.VarChar,ParameterDirection.Input)
                 ,new Parametros("@Direccion",Direccion,SqlDbType.VarChar,ParameterDirection.Input)
                 ,new Parametros("@IdAdministrador",(IdAdministrador==0?(object)DBNull.Value:(object)IdAdministrador),SqlDbType.Int,ParameterDirection.Input)
-                ,new Parametros("@UsuarioAutenticado",UsuarioAutenticado,SqlDbType.Int,ParameterDirection.Input)
+                ,new Parametros("@UsuarioAutenticado",usuarioautenticado,SqlDbType.Int,ParameterDirection.Input)
                  ,new Parametros("@RETURN_VALUE",null,SqlDbType.Int,ParameterDirection.ReturnValue)
             };
             return Convert.ToInt32(new Transaccion("CrearSede", Parametros).EjecutarDevuelveReturnValue()) > 0;
@@ -103,7 +68,7 @@ namespace com.co.uan.DMiravalle.Administracion
                 ,new Parametros("@Direccion",Direccion,SqlDbType.VarChar,ParameterDirection.Input)
                 ,new Parametros("@IdAdministrador",(IdAdministrador==0?(object)DBNull.Value:(object)IdAdministrador),SqlDbType.Int,ParameterDirection.Input)
                 ,new Parametros("@IdSede",IdSede,SqlDbType.Int,ParameterDirection.Input)
-                ,new Parametros("@UsuarioAutenticado",this.UsuarioAutenticado,SqlDbType.Int,ParameterDirection.Input)
+                ,new Parametros("@UsuarioAutenticado",usuarioautenticado,SqlDbType.Int,ParameterDirection.Input)
                  ,new Parametros("@RETURN_VALUE",null,SqlDbType.Int,ParameterDirection.ReturnValue)
             };
             return Convert.ToInt32(new Transaccion("EditarSede", Parametros).EjecutarDevuelveReturnValue()) > 0;
@@ -113,7 +78,7 @@ namespace com.co.uan.DMiravalle.Administracion
         {
                List<Parametros> Parametros = new List<Parametros>() {
                 new Parametros("@IdSede",IdSede,SqlDbType.Int,ParameterDirection.Input)
-                ,new Parametros("@UsuarioAutenticado",this.UsuarioAutenticado,SqlDbType.Int,ParameterDirection.Input)
+                ,new Parametros("@UsuarioAutenticado",usuarioautenticado,SqlDbType.Int,ParameterDirection.Input)
                  ,new Parametros("@RETURN_VALUE",null,SqlDbType.Int,ParameterDirection.ReturnValue)
                 };
                 return Convert.ToInt32(new Transaccion("EliminarSede", Parametros).EjecutarDevuelveReturnValue()) > 0;

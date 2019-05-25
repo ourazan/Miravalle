@@ -52,7 +52,9 @@
     <Compile Include="com.co.uan.DMiravalle.Administracion\IGerente.cs" />
     <Compile Include="com.co.uan.DMiravalle.Administracion\ISede.cs" />
     <Compile Include="com.co.uan.DMiravalle.Administracion\Sede.cs" />
+    <Compile Include="com.co.uan.DMiravalle.Administracion\SedeDTO.cs" />
     <Compile Include="com.co.uan.DMiravalle.Administracion\Usuario.cs" />
+    <Compile Include="com.co.uan.DMiravalle.Administracion\UsuarioDTO.cs" />
     <Compile Include="com.co.uan.DMiravalle.Informes\Email.cs" />
     <Compile Include="com.co.uan.DMiravalle.Informes\IAlerta.cs" />
     <Compile Include="com.co.uan.DMiravalle.Informes\INotificacionVencidos.cs" />
@@ -68,6 +70,7 @@
     <Compile Include="com.co.uan.DMiravalle.Inventario\ITipoProducto.cs" />
     <Compile Include="com.co.uan.DMiravalle.Inventario\Lote.cs" />
     <Compile Include="com.co.uan.DMiravalle.Inventario\Producto.cs" />
+    <Compile Include="com.co.uan.DMiravalle.Inventario\TipoProductoDTO.cs" />
     <Compile Include="com.co.uan.DMiravalle.Inventario\TipoProducto.cs" />
     <Compile Include="Servicio.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

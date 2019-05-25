@@ -16,7 +16,11 @@ namespace com.co.uan.DMiravalle.Inventario
 
         public TipoProducto Tipo { get; set; }
 
-        public int UsuarioAutenticado { get; set; }
+        private int usuarioautenticado;
+        public int UsuarioAutenticado
+        {
+            set { usuarioautenticado = value; }
+        }
 
         #endregion
 

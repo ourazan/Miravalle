@@ -5,7 +5,7 @@ namespace com.co.uan.DMiravalle.Administracion
   public   interface ISede
     {
 
-        List<Sede> Consultar(string Nombre, string Ciudad, string Direccion, int IdAdministrador, int IdSed);
+        List<SedeDTO> Consultar(string Nombre, string Ciudad, string Direccion, int IdAdministrador, int IdSed);
 
         bool Crear(string Nombre, string Ciudad, string Direccion, int IdAdministrador);
 

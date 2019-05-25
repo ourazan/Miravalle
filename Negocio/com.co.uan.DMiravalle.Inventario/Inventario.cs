@@ -25,7 +25,11 @@ namespace com.co.uan.DMiravalle.Inventario
 
         public DateTime FechaRegistro { get; set; }
 
-        public int UsuarioAutenticado { get; set; }
+        private int usuarioautenticado;
+        public int UsuarioAutenticado
+        {
+            set { usuarioautenticado = value; }
+        }
         #endregion
 
         #region Constructores

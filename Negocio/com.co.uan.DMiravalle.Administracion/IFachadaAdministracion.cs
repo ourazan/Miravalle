@@ -1,5 +1,4 @@
 ﻿
-using com.co.uan.DMiravalle.Administracion;
 using System.Collections.Generic;
 
 namespace com.co.uan.DMiravalle.Administracion
@@ -7,8 +6,8 @@ namespace com.co.uan.DMiravalle.Administracion
   public   interface IFachadaAdministracion
     {
 
-        List<Usuario> ConsultarUsuario(int IdUsuario, string Nombre, string Apellido, int IdSede, string Correo, int Perfil);
-        List<Sede>ConsultarSede(string Nombre, string Ciudad, string Direccion, int IdAdministrador, int IdSed);
+        List<UsuarioDTO> ConsultarUsuario(int IdUsuario, string Nombre, string Apellido, int IdSede, string Correo, int Perfil);
+        List<SedeDTO>ConsultarSede(string Nombre, string Ciudad, string Direccion, int IdAdministrador, int IdSed);
 
         bool CrearSede(string Nombre, string Ciudad, string Direccion, int IdAdministrador);
 
