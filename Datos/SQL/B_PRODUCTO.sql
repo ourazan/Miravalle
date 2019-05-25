@@ -87,15 +87,20 @@ Go
 
 
 Create procedure ConsultarProducto
-@filtro varchar(8000)= ''
+ @NombreProducto varchar(300) = null
+,@IdTipoProducto int=null
+,@IdProducto int= null
 as begin
-exec (' Select
+ Select
         IdProducto
 	   ,NombreProducto
 	   ,IdTipoProducto
 	   ,Activo
 	   ,CodigoReferencia
 	   ,Descripcion
-	   from v_producto where Activo=1  and '+ @filtro)
+	   from v_producto where Activo=1  
+	   and (NombreProducto=@NombreProducto or (@NombreProducto is null))
+	   and (IdTipoProducto=@IdTipoProducto or (@IdTipoProducto is null))
+	   and (IdProducto=@IdProducto or(@IdProducto is null))
 end
 

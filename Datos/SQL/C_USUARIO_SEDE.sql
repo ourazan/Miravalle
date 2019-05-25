@@ -150,10 +150,15 @@ left join Usuario Administrador on Administrador.IdUsuario = Sede.IdAdministrado
 
 GO
 create procedure ConsultarUsuario
-  @filtro varchar(8000)=' 1=1'
+ @IdUsuario int = null
+,@Nombre varchar(200)=null
+,@Apellido varchar(200)=null
+,@Correo varchar(200)=null
+,@IdSede int=null
+,@Perfil int=null
 as 
 begin
-  execute ('Select 
+ Select 
  v_Usuario. IdUsuario  
 ,v_Usuario.Nombre
 ,v_Usuario.Apellido 
@@ -174,11 +179,13 @@ begin
 ,v_Usuario.Administrador_Usuario
 ,v_Usuario.Administrador_Perfil
 from v_Usuario
- where Activo=1 and ' + @filtro
-  )
-
-
-
+ where Activo=1 
+ and (Nombre=@Nombre or(@Nombre is null))
+ and (Apellido=@Apellido or(@Apellido is null))
+ and (Correo=@Correo or(@Correo is null))
+ and (IdSede=@IdSede or(@IdSede is null))  
+ and (Perfil=@Perfil or(@Perfil is null))
+ and (IdUsuario=@IdUsuario or (@IdUsuario is null))
 end
 
 go
@@ -276,10 +283,15 @@ end
 go
 
 create procedure ConsultarSede
-  @filtro varchar(8000)=' 1=1'
+ @IdSede int= null
+,@NombreSede varchar(100)= null
+,@Ciudad varchar(100)= null
+,@Direccion varchar (100)= null
+,@IdAdministrador int= null
+
 as 
 begin
-  execute (' select 
+ select 
 v_Sede.IdSede
 , v_Sede.NombreSede
 ,v_Sede.Ciudad 
@@ -293,9 +305,12 @@ v_Sede.IdSede
 ,v_Sede.NombreUsuario 
 ,v_Sede.Perfil 
 from v_Sede
- where Activo=1 and ' + @filtro
-  )
-
+ where Activo=1 
+ and (IdSede=@IdSede or(@IdSede is null))
+ and (NombreSede=@NombreSede or(@NombreSede is null))
+ and (Ciudad=@Ciudad or(@Ciudad is null))
+ and (Direccion=@Direccion or(@Direccion is null))
+ and (IdAdministrador=@IdAdministrador or(@IdAdministrador is null))
 
 
 end

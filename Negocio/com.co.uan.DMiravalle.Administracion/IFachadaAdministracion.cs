@@ -7,8 +7,8 @@ namespace com.co.uan.DMiravalle.Administracion
   public   interface IFachadaAdministracion
     {
 
-        List<Usuario> ConsultarUsuario(string Filtro);
-        List<Sede>ConsultarSede(string Filtro);
+        List<Usuario> ConsultarUsuario(int IdUsuario, string Nombre, string Apellido, int IdSede, string Correo, int Perfil);
+        List<Sede>ConsultarSede(string Nombre, string Ciudad, string Direccion, int IdAdministrador, int IdSed);
 
         bool CrearSede(string Nombre, string Ciudad, string Direccion, int IdAdministrador);
 

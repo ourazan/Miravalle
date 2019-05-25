@@ -90,9 +90,13 @@ end
 GO
 
 Create procedure ConsultarLote
-@filtro varchar(8000)= ''
+@IdLote int= null
+,@CodigoLote varchar(100)= null
+,@FechaRegistro smalldatetime= null
+,@FechaVencimiento smalldatetime= null
+,@IdProducto int= null
 as begin
-exec (' Select
+ Select
 		v_lote.IdLote 
 		,v_lote.CodigoLote 
 		,v_lote.FechaRegistro 
@@ -103,7 +107,12 @@ exec (' Select
 		,v_lote.IdTipoProducto
 		,v_lote.CodigoReferencia 
 		,v_lote.Descripcion
-	   from v_lote where Activo=1  and '+ @filtro)
+	   from v_lote where Activo=1  
+	   and(IdLote =@IdLote or(@IdLote is null))
+	   and (CodigoLote=@CodigoLote or (@CodigoLote  is null))
+	   and (FechaRegistro=@FechaRegistro or (@FechaRegistro is null))
+	   and (FechaVencimiento=@FechaVencimiento or (@FechaVencimiento is null))
+	   and (IdProducto=@IdProducto or (@IdProducto is null))
 end
 go
 create procedure EliminarLote

@@ -31,7 +31,7 @@ namespace com.co.uan.DMiravalle.Inventario
         }
         public Lote(int idLote) {
             IdLote = idLote;
-            List<Lote> Registro = Consultar("IdLote="+ idLote.ToString());
+            List<Lote> Registro = Consultar( string .Empty ,null ,0,idLote,null );
             if (Registro.Count>0)
             {
 
@@ -53,10 +53,14 @@ namespace com.co.uan.DMiravalle.Inventario
 
         #endregion
         #region Funciones
-        public List<Lote> Consultar(string Filtro)
+        public List<Lote> Consultar(string CodigoLote, DateTime? FechaVencimiento, int IdProducto, int IdLote, DateTime? FechaRegistro)
         {
             List<Parametros> Parametros = new List<Parametros>() {
-                new Parametros("@filtro",Filtro,SqlDbType.VarChar,ParameterDirection.Input)
+                 new Parametros("@CodigoLote",string.IsNullOrEmpty ( CodigoLote)?DBNull .Value :(object)CodigoLote,SqlDbType.VarChar,ParameterDirection.Input)
+                ,new Parametros("@FechaRegistro",FechaRegistro==null?DBNull.Value: (object)FechaRegistro,SqlDbType.DateTime,ParameterDirection.Input)
+                ,new Parametros("@FechaVencimiento",FechaVencimiento==null?DBNull.Value: (object)FechaVencimiento,SqlDbType.DateTime,ParameterDirection.Input)
+                ,new Parametros("@IdProducto",IdProducto==0?DBNull.Value:(object)IdProducto,SqlDbType.Int,ParameterDirection.Input)
+                 ,new Parametros("@IdLote",IdLote==0?DBNull.Value:(object)IdLote,SqlDbType.Int,ParameterDirection.Input)
             };
             DataTable Coleccion = new Transaccion("ConsultarLote", Parametros).EjecutarDevuelveTabla();
             List<Lote> Resultado = (from fila in Coleccion.AsEnumerable()

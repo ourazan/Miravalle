@@ -30,7 +30,7 @@ namespace com.co.uan.DMiravalle.Administracion
         public Sede(int idSede) {
             this.IdSede = IdSede;
            
-            List<Sede>Resultado= Consultar("IdSede="+IdSede);
+            List<Sede>Resultado= Consultar(string.Empty, string.Empty, string.Empty ,0,IdSede);
             if (Resultado.Count>0)
             {
                 Administrador = Resultado[0].Administrador;
@@ -50,10 +50,14 @@ namespace com.co.uan.DMiravalle.Administracion
         }
 
       
-        public List<Sede> Consultar(string Filtro)
+        public List<Sede> Consultar(string Nombre, string Ciudad, string Direccion, int IdAdministrador, int IdSede)
         {
             List<Parametros> Parametros = new List<Parametros>() {
-                new Parametros("@filtro",Filtro,SqlDbType.VarChar,ParameterDirection.Input)
+                new Parametros("@NombreSede",String.IsNullOrEmpty (Nombre)? DBNull.Value:(object)Nombre,SqlDbType.VarChar,ParameterDirection.Input)
+                ,new Parametros("@Ciudad",String.IsNullOrEmpty (Ciudad )? DBNull.Value : (object)Ciudad, SqlDbType.VarChar,ParameterDirection.Input)
+                ,new Parametros("@Direccion",String.IsNullOrEmpty (Direccion )? DBNull.Value : (object)Direccion, SqlDbType.VarChar,ParameterDirection.Input)
+                ,new Parametros("@IdAdministrador",(IdAdministrador==0?(object)DBNull.Value:(object)IdAdministrador),SqlDbType.Int,ParameterDirection.Input)
+                ,new Parametros("@IdSede",(IdSede==0?(object)DBNull.Value:(object)IdSede),SqlDbType.Int,ParameterDirection.Input)
             };
             DataTable Coleccion = new Transaccion("ConsultarSede", Parametros).EjecutarDevuelveTabla();
             List<Sede> Resultado = (from fila in Coleccion.AsEnumerable()

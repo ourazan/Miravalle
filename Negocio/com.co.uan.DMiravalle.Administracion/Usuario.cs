@@ -32,7 +32,7 @@ namespace com.co.uan.DMiravalle.Administracion
         #region Constructores
         public Usuario() { }
         public Usuario(int IdUsuario) {
-            List<Usuario> Registro = Consultar(" idUsuario=" + IdUsuario.ToString());
+            List<Usuario> Registro = Consultar( IdUsuario,string .Empty ,string.Empty ,0,string .Empty ,0);
             this.IdUsuario = IdUsuario;
             if (Registro.Count > 0) {
                 Nombre = Registro[0].Nombre;
@@ -58,10 +58,15 @@ namespace com.co.uan.DMiravalle.Administracion
         }
         #endregion
         #region Metodos
-        public List<Usuario> Consultar(string Filtro)
+        public List<Usuario> Consultar(int IdUsuario, string Nombre, string Apellido, int IdSede, string Correo, int Perfil)
         {
             List<Parametros> Parametros = new List<Parametros>() {
-                new Parametros("@filtro",Filtro,SqlDbType.VarChar,ParameterDirection.Input)
+                 new Parametros("@Nombre",string.IsNullOrEmpty(Nombre)?DBNull .Value :(object)Nombre,SqlDbType.VarChar,ParameterDirection.Input)
+                ,new Parametros("@Apellido",string.IsNullOrEmpty(Apellido) ? DBNull.Value : (object)Apellido,SqlDbType.VarChar,ParameterDirection.Input)
+                ,new Parametros("@Correo",string.IsNullOrEmpty(Correo) ? DBNull.Value : (object)Correo,SqlDbType.VarChar,ParameterDirection.Input)
+                ,new Parametros("@IdSede",(IdSede==0?DBNull.Value:(object)IdSede),SqlDbType.Int,ParameterDirection.Input)
+                ,new Parametros("@IdUsuario",(IdUsuario==0?DBNull.Value:(object)IdUsuario),SqlDbType.Int,ParameterDirection.Input)
+                ,new Parametros("@Perfil",(Perfil == 0 ? DBNull.Value : (object)Perfil),SqlDbType.Int,ParameterDirection.Input)
             };
             DataTable Coleccion = new Transaccion("ConsultarUsuario",Parametros).EjecutarDevuelveTabla();
 

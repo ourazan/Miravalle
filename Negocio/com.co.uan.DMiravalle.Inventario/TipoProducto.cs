@@ -22,7 +22,7 @@ namespace com.co.uan.DMiravalle.Inventario
         public TipoProducto( int idTipoProducto) {
         
             IdTipoProducto = idTipoProducto;
-            List<TipoProducto> Registro = Consultar(" IdTipoProducto="+IdTipoProducto.ToString());
+            List<TipoProducto> Registro = Consultar(string.Empty, string.Empty, IdTipoProducto);
             if (Registro.Count>0)
             {
                 IdTipoProducto = Registro[0].IdTipoProducto;
@@ -39,12 +39,12 @@ namespace com.co.uan.DMiravalle.Inventario
 
         #endregion
         #region Metodos
-        #endregion
-
-        public List<TipoProducto> Consultar(string Filtro)
+        public List<TipoProducto> Consultar(string Descripcion, string CodigoReferencia, int IdTipoProducto)
         {
             List<Parametros> Parametros = new List<Parametros>() {
-                new Parametros("@filtro",Filtro,SqlDbType.VarChar,ParameterDirection.Input)
+                new Parametros("@Descripcion",string.IsNullOrEmpty( Descripcion)?DBNull.Value :(object )Descripcion,SqlDbType.VarChar,ParameterDirection.Input)
+                ,new Parametros("@CodigoReferencia",string.IsNullOrEmpty( CodigoReferencia) ? DBNull.Value : (object)CodigoReferencia, SqlDbType.VarChar,ParameterDirection.Input)
+                ,new Parametros("@IdTipoProducto",IdTipoProducto==0?DBNull.Value:(object )IdTipoProducto, SqlDbType.Int,ParameterDirection.Input)
             };
             DataTable Coleccion = new Transaccion("ConsultarTipoProducto", Parametros).EjecutarDevuelveTabla();
             List<TipoProducto> Resultado = (from fila in Coleccion.AsEnumerable()
@@ -92,14 +92,12 @@ namespace com.co.uan.DMiravalle.Inventario
         }
 
         public bool ExisteCodigoReferencia(string CodigoReferencia, int IdTipoProducto) {
-
-
-            string FiltroAdicional = "";
-            if (IdTipoProducto>0)
-                FiltroAdicional = " and  IdTipoProducto not in("+IdTipoProducto .ToString()+")";
-
-            List<TipoProducto> Resultado = Consultar(" CodigoReferencia ='"+ CodigoReferencia +"'"+ FiltroAdicional );
+            List<TipoProducto> Resultado = Consultar(string .Empty ,CodigoReferencia ,IdTipoProducto);
             return Resultado.Count > 0;
         }
+
+
+        #endregion
+
     }
 }

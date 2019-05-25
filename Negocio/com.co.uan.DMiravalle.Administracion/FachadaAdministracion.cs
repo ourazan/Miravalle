@@ -20,9 +20,9 @@ namespace com.co.uan.DMiravalle.Administracion
         #endregion
 
         #region Metodos
-        public List<Usuario> ConsultarUsuario(string Filtro)
+        public List<Usuario> ConsultarUsuario(int IdUsuario, string Nombre, string Apellido, int IdSede, string Correo, int Perfil)
         {
-            return Gerente.Consultar(Filtro);
+            return Gerente.Consultar( IdUsuario,  Nombre,  Apellido,  IdSede,  Correo,  Perfil);
         }
         public bool CrearSede(string Nombre, string Ciudad, string Direccion,int IdAdministrador)
         {
@@ -49,9 +49,9 @@ namespace com.co.uan.DMiravalle.Administracion
             return Gerente.Eliminar(IdUsuario);
         }
 
-        public List<Sede> ConsultarSede(string Filtro)
+        public List<Sede> ConsultarSede(string Nombre, string Ciudad, string Direccion, int IdAdministrador, int IdSed)
         {
-            return Sede.Consultar(Filtro);
+            return Sede.Consultar( Nombre,  Ciudad,  Direccion,  IdAdministrador,  IdSed);
         }
         public void AsignarEjecutor(int Autenticado) {
             if (this.Gerente!=null)

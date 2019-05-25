@@ -29,7 +29,7 @@ namespace com.co.uan.DMiravalle.Inventario
         public Producto(  int idProducto) {
            
             IdProducto = idProducto;
-            List<Producto> Registro = Consultar(" IdProducto="+ IdProducto);
+            List<Producto> Registro = Consultar(string .Empty ,0, IdProducto);
             if (Registro.Count>0)
             {
                 NombreProducto = Registro[0].NombreProducto;
@@ -49,10 +49,12 @@ namespace com.co.uan.DMiravalle.Inventario
         #region Metodos
 
 
-        public List<Producto> Consultar(string Filtro)
+        public List<Producto> Consultar(string Nombre, int IdTipoProducto, int IdProducto)
         {
             List<Parametros> Parametros = new List<Parametros>() {
-                new Parametros("@filtro",Filtro,SqlDbType.VarChar,ParameterDirection.Input)
+                new Parametros("@NombreProducto",string.IsNullOrEmpty (Nombre)?DBNull.Value :(object)Nombre,SqlDbType.VarChar,ParameterDirection.Input)
+                ,new Parametros("@IdTipoProducto",IdTipoProducto==0 ? DBNull.Value : (object)IdTipoProducto, SqlDbType.Int,ParameterDirection.Input)
+                ,new Parametros("@IdProducto",IdProducto==0 ? DBNull.Value : (object)IdProducto,SqlDbType.Int,ParameterDirection.Input)
             };
             DataTable Coleccion = new Transaccion("ConsultarProducto", Parametros).EjecutarDevuelveTabla();
             List<Producto> Resultado =(from fila in Coleccion.AsEnumerable()

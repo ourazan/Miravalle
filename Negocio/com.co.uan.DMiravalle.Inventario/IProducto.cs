@@ -5,7 +5,7 @@ namespace com.co.uan.DMiravalle.Inventario
   public  interface IProducto
     {
 
-        List<Producto> Consultar(string Filtro);
+        List<Producto> Consultar(string Nombre, int IdTipoProducto, int IdProducto);
 
         bool Crear(string Nombre, int IdTipoProducto);
 

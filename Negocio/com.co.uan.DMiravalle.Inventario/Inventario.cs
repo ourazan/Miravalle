@@ -38,7 +38,7 @@ namespace com.co.uan.DMiravalle.Inventario
         {
            
             IdInventario = idInventario;
-            List<Inventario> Registro = ConsultarInventario(" IdInventario="+ idInventario);
+            List<Inventario> Registro = ConsultarInventario(0,0,-1, idInventario, null);
             if (Registro.Count >0) {
                 SedeInventario =Registro[0]. SedeInventario;
                 LoteProducto = Registro[0].LoteProducto;
@@ -60,9 +60,14 @@ namespace com.co.uan.DMiravalle.Inventario
 
         #region Metodos
 
-        private bool ExisteInventario(int Idlote ,int IdSede ,int IdInventario) {
-
-            return ConsultarInventario(" IdLote="+ Idlote.ToString() + " and IdSede="+ IdSede.ToString()+" and  IdInventario not in(" + IdInventario .ToString ()+")").Count>0;
+        private bool ExisteInventario(int IdLote ,int IdSede ,int IdInventario) {
+                List<Parametros> Parametros = new List<Parametros>() {
+                 new Parametros("@IdLote",IdLote,SqlDbType.Int,ParameterDirection.Input)
+                ,new Parametros("@IdSede",IdSede,SqlDbType.Int,ParameterDirection.Input)
+                ,new Parametros("@IdInventario",IdInventario,SqlDbType.Int,ParameterDirection.Input)
+            };
+            DataTable Coleccion = new Transaccion("ExisteInventario", Parametros).EjecutarDevuelveTabla();
+            return Coleccion.Rows.Count > 0;
         }
 
 
@@ -108,10 +113,14 @@ namespace com.co.uan.DMiravalle.Inventario
 
 
 
-        public List<Inventario> ConsultarInventario(string Filtro)
+        public List<Inventario> ConsultarInventario(int IdLote, int IdSede, int Cantidad, int IdInventario, DateTime? FechaRegistro)
         {
             List<Parametros> Parametros = new List<Parametros>() {
-                new Parametros("@filtro",Filtro,SqlDbType.VarChar,ParameterDirection.Input)
+                new Parametros("@FechaRegistro",FechaRegistro==null?DBNull.Value :(object )FechaRegistro,SqlDbType.DateTime,ParameterDirection.Input)
+                ,new Parametros("@Cantidad",Cantidad==-1?DBNull.Value :(object )Cantidad,SqlDbType.Int,ParameterDirection.Input)
+                ,new Parametros("@IdLote",IdLote==0?DBNull.Value :(object )IdLote,SqlDbType.Int,ParameterDirection.Input)
+                ,new Parametros("@IdSede",IdSede==0?DBNull.Value :(object )IdSede,SqlDbType.Int,ParameterDirection.Input)
+                ,new Parametros("@IdInventario",IdInventario,SqlDbType.Int,ParameterDirection.Input)
             };
             DataTable Coleccion = new Transaccion("ConsultarInventario", Parametros).EjecutarDevuelveTabla();
             return MapearDatos(Coleccion);
@@ -221,19 +230,19 @@ namespace com.co.uan.DMiravalle.Inventario
           return  LoteProducto.Producto.Tipo.ExisteCodigoReferencia(CodigoReferencia, IdTipoProducto);
         }
 
-        public List<Lote> ConsultarLote(string Filtro)
+        public List<Lote> ConsultarLote(string CodigoLote, DateTime? FechaVencimiento, int IdProducto, int IdLote, DateTime? FechaRegistro)
         {
-            return LoteProducto.Consultar(Filtro);
+            return LoteProducto.Consultar( CodigoLote,  FechaVencimiento,  IdProducto,  IdLote,  FechaRegistro);
         }
 
-        public List<Producto> ConsultarProducto(string Filtro)
+        public List<Producto> ConsultarProducto(string Nombre, int IdTipoProducto, int IdProducto)
         {
-            return LoteProducto.Producto.Consultar(Filtro);
+            return LoteProducto.Producto.Consultar( Nombre,  IdTipoProducto,  IdProducto);
         }
 
-        public List<TipoProducto> ConsultarTipoProducto(string Filtro)
+        public List<TipoProducto> ConsultarTipoProducto(string Descripcion, string CodigoReferencia, int IdTipoProducto)
         {
-            return LoteProducto.Producto.Tipo.Consultar(Filtro);
+            return LoteProducto.Producto.Tipo.Consultar( Descripcion,  CodigoReferencia,  IdTipoProducto);
         }
 
         public bool CrearTipoProducto(string Descripcion, string CodigoReferencia)
