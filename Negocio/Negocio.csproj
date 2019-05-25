@@ -66,12 +66,15 @@
     <Compile Include="com.co.uan.DMiravalle.Inventario\IInventario.cs" />
     <Compile Include="com.co.uan.DMiravalle.Inventario\ILote.cs" />
     <Compile Include="com.co.uan.DMiravalle.Inventario\Inventario.cs" />
+    <Compile Include="com.co.uan.DMiravalle.Inventario\InventarioDTO.cs" />
     <Compile Include="com.co.uan.DMiravalle.Inventario\IProducto.cs" />
     <Compile Include="com.co.uan.DMiravalle.Inventario\ITipoProducto.cs" />
     <Compile Include="com.co.uan.DMiravalle.Inventario\Lote.cs" />
+    <Compile Include="com.co.uan.DMiravalle.Inventario\LoteDTO.cs" />
     <Compile Include="com.co.uan.DMiravalle.Inventario\Producto.cs" />
-    <Compile Include="com.co.uan.DMiravalle.Inventario\TipoProductoDTO.cs" />
+    <Compile Include="com.co.uan.DMiravalle.Inventario\ProductoDTO.cs" />
     <Compile Include="com.co.uan.DMiravalle.Inventario\TipoProducto.cs" />
+    <Compile Include="com.co.uan.DMiravalle.Inventario\TipoProductoDTO.cs" />
     <Compile Include="Servicio.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -6,7 +6,7 @@ namespace com.co.uan.DMiravalle.Inventario
    public  interface IInventario
     {
 
-        List<Inventario> ConsultarInventario(int IdLote, int IdSede, int Cantidad, int IdInventario, DateTime? FechaRegistro);
+        List<InventarioDTO> ConsultarInventario(int IdLote, int IdSede, int Cantidad, int IdInventario, DateTime? FechaRegistro);
         
         object  CrearInventario(int IdLote, int IdSede, int Cantidad, DateTime FechaRegistro);
 
@@ -15,11 +15,11 @@ namespace com.co.uan.DMiravalle.Inventario
         bool EliminarInventario(int IdInventario);
 
 
-        List<Lote> ConsultarLote(string CodigoLote, DateTime? FechaVencimiento, int IdProducto, int IdLote, DateTime? FechaRegistro);
+        List<LoteDTO> ConsultarLote(string CodigoLote, DateTime? FechaVencimiento, int IdProducto, int IdLote, DateTime? FechaRegistro);
 
-        List<Producto> ConsultarProducto(string Nombre, int IdTipoProducto, int IdProducto);
+        List<ProductoDTO> ConsultarProducto(string Nombre, int IdTipoProducto, int IdProducto);
 
-        List<TipoProducto> ConsultarTipoProducto(string Descripcion, string CodigoReferencia, int IdTipoProducto);
+        List<TipoProductoDTO> ConsultarTipoProducto(string Descripcion, string CodigoReferencia, int IdTipoProducto);
 
         bool CrearLote(string CodigoLote, DateTime FechaVencimiento, int IdProducto, DateTime FechaRegistro);
 

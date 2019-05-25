@@ -36,7 +36,7 @@ namespace com.co.uan.DMiravalle.Informes
         }
       
 
-        public void  GenerarCuerpoHTMLCorreo(Inventario.Inventario ElementoVencido,string NombrePlantillaCorreo)
+        public void  GenerarCuerpoHTMLCorreo(InventarioDTO ElementoVencido,string NombrePlantillaCorreo)
         {
             Mensaje.To.Add(new MailAddress(ElementoVencido.SedeInventario.Administrador.Correo));
             CuerpoCorreo = new StreamReader(ConfigurationManager.AppSettings["RutaHTMLCorreo"].ToString()).ReadToEnd();

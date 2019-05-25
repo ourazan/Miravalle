@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using com.co.uan.DMiravalle.Inventario;
+using System.Collections.Generic;
 using System.Configuration;
 
 namespace com.co.uan.DMiravalle.Informes
@@ -14,9 +15,9 @@ namespace com.co.uan.DMiravalle.Informes
         }
         public void NotificarElementosVencidos()
         {
-            List<Inventario.Inventario> Vencidos = Consulta.ConsultarProductosVencidos(" 1=1 ");
+            List<InventarioDTO> Vencidos = Consulta.ConsultarProductosVencidos(" 1=1 ");
             Email TipoNotificacion= new Email();
-            foreach (Inventario.Inventario Vencido in Vencidos)
+            foreach (InventarioDTO Vencido in Vencidos)
             {
                 TipoNotificacion.GenerarCuerpoHTMLCorreo(Vencido,ConfigurationManager.AppSettings["PlantillaVencidos"]);
                 Envio.AsignarEstrategia(TipoNotificacion);

@@ -72,7 +72,7 @@ namespace com.co.uan.DMiravalle.Inventario
         }
 
         public bool ExisteCodigoReferencia(string CodigoReferencia, int IdTipoProducto) {
-            List<TipoProductoDTO> Resultado = Consultar(string .Empty ,CodigoReferencia ,IdTipoProducto);
+            List<TipoProductoDTO> Resultado = Consultar(string.Empty ,CodigoReferencia ,IdTipoProducto);
             return Resultado.Count > 0;
         }
 

@@ -14,16 +14,9 @@ namespace com.co.uan.DMiravalle.Inventario
         #region Propiedades
         private bool Resultado;
         private string Mensaje;
-
-        public  Sede SedeInventario { get; set; }
-
-        public Lote LoteProducto { get; set; }
-
-        public int IdInventario { get; set; }
-
-        public int Cantidad { get; set; }
-
-        public DateTime FechaRegistro { get; set; }
+        private Lote LoteProducto;
+        private Producto Producto;
+        private TipoProducto Tipo;
 
         private int usuarioautenticado;
         public int UsuarioAutenticado
@@ -34,32 +27,11 @@ namespace com.co.uan.DMiravalle.Inventario
 
         #region Constructores
         public Inventario() {
-            SedeInventario = new Sede();
             LoteProducto = new Lote();
         }
 
-        public Inventario( int idInventario)
-        {
-           
-            IdInventario = idInventario;
-            List<Inventario> Registro = ConsultarInventario(0,0,-1, idInventario, null);
-            if (Registro.Count >0) {
-                SedeInventario =Registro[0]. SedeInventario;
-                LoteProducto = Registro[0].LoteProducto;
-                Cantidad = Registro[0].Cantidad;
-                FechaRegistro = Registro[0].FechaRegistro;
-            }
-        }
-
-        public Inventario( Sede sedeInventario, Lote loteProducto, int idInventario, int cantidad, DateTime fechaRegistro)
-        {
-           
-            IdInventario = idInventario;
-            SedeInventario = sedeInventario;
-            LoteProducto = loteProducto;
-            Cantidad = cantidad;
-            FechaRegistro = fechaRegistro;
-        }
+ 
+       
         #endregion
 
         #region Metodos
@@ -75,28 +47,28 @@ namespace com.co.uan.DMiravalle.Inventario
         }
 
 
-        private List<Inventario> MapearDatos(DataTable Coleccion) {
-            List<Inventario> Resultado = (from fila in Coleccion.AsEnumerable()
-                                          select new Inventario(
-                                                              new Sede(fila["NombreSede"].ToString()
+        private List<InventarioDTO> MapearDatos(DataTable Coleccion) {
+            List<InventarioDTO> Resultado = (from fila in Coleccion.AsEnumerable()
+                                          select new InventarioDTO(
+                                                              new SedeDTO(fila["NombreSede"].ToString()
                                                                   , fila["Direccion"].ToString()
                                                                   , fila["Ciudad"].ToString()
                                                                   , Int32.Parse(fila["IdSede"].ToString())
-                                                                  , new Usuario(fila["Nombre"].ToString()
+                                                                  , new UsuarioDTO(fila["Nombre"].ToString()
                                                                                , fila["Apellido"].ToString()
                                                                                , fila["Correo"].ToString()
-                                                                               , new Sede()
+                                                                               , new SedeDTO()
                                                                                , Int32.Parse(fila["IdAdministrador"].ToString())
                                                                                , 0
                                                                                , fila["NombreUsuario"].ToString()
                                                                                , fila["Clave"].ToString()
                                                                                , Convert.ToInt32(fila["Perfil"])
                                                                                ))
-                                                                    , new Lote(fila["CodigoLote"].ToString()
-                                                                              , new Producto(
+                                                                    , new LoteDTO(fila["CodigoLote"].ToString()
+                                                                              , new ProductoDTO(
                                                                                   fila["NombreProducto"].ToString()
                                                                                   , Convert.ToInt32(fila["IdProducto"])
-                                                                                  , new TipoProducto(Convert.ToInt32(fila["IdTipoProducto"])
+                                                                                  , new TipoProductoDTO(Convert.ToInt32(fila["IdTipoProducto"])
                                                                                                   , fila["CodigoReferencia"].ToString()
                                                                                                   , fila["Descripcion"].ToString())
                                                                                   )
@@ -117,7 +89,7 @@ namespace com.co.uan.DMiravalle.Inventario
 
 
 
-        public List<Inventario> ConsultarInventario(int IdLote, int IdSede, int Cantidad, int IdInventario, DateTime? FechaRegistro)
+        public List<InventarioDTO> ConsultarInventario(int IdLote, int IdSede, int Cantidad, int IdInventario, DateTime? FechaRegistro)
         {
             List<Parametros> Parametros = new List<Parametros>() {
                 new Parametros("@FechaRegistro",FechaRegistro==null?DBNull.Value :(object )FechaRegistro,SqlDbType.DateTime,ParameterDirection.Input)
@@ -140,7 +112,7 @@ namespace com.co.uan.DMiravalle.Inventario
                 ,new Parametros("@Cantidad",Cantidad,SqlDbType.Int,ParameterDirection.Input)
                 ,new Parametros("@IdLote",IdLote,SqlDbType.Int,ParameterDirection.Input)
                 ,new Parametros("@IdSede",IdSede,SqlDbType.Int,ParameterDirection.Input)
-                ,new Parametros("@UsuarioAutenticado",this.UsuarioAutenticado,SqlDbType.Int,ParameterDirection.Input)
+                ,new Parametros("@UsuarioAutenticado",this.usuarioautenticado,SqlDbType.Int,ParameterDirection.Input)
                  ,new Parametros("@RETURN_VALUE",null,SqlDbType.Int,ParameterDirection.ReturnValue) };
                     Resultado =  Convert.ToInt32(new Transaccion("CrearInventario", Parametros).EjecutarDevuelveReturnValue()) > 0;
                     Mensaje = "No se pudo crear el inventario ";
@@ -159,7 +131,7 @@ namespace com.co.uan.DMiravalle.Inventario
         {
             List<Parametros> Parametros = new List<Parametros>() {
                  new Parametros("@IdInventario",IdInventario,SqlDbType.Int,ParameterDirection.Input)
-                ,new Parametros("@UsuarioAutenticado",this.UsuarioAutenticado,SqlDbType.Int,ParameterDirection.Input)
+                ,new Parametros("@UsuarioAutenticado",this.usuarioautenticado,SqlDbType.Int,ParameterDirection.Input)
                  ,new Parametros("@RETURN_VALUE",null,SqlDbType.Int,ParameterDirection.ReturnValue)
             };
             return Convert.ToInt32(new Transaccion("ELiminarInventario", Parametros).EjecutarDevuelveReturnValue()) > 0;
@@ -173,7 +145,7 @@ namespace com.co.uan.DMiravalle.Inventario
                 ,new Parametros("@IdLote",IdLote,SqlDbType.Int,ParameterDirection.Input)
                 ,new Parametros("@IdSede",IdSede,SqlDbType.Int,ParameterDirection.Input)
                 ,new Parametros("@IdInventario",IdInventario,SqlDbType.Int,ParameterDirection.Input)
-                ,new Parametros("@UsuarioAutenticado",UsuarioAutenticado,SqlDbType.Int,ParameterDirection.Input)
+                ,new Parametros("@UsuarioAutenticado",usuarioautenticado,SqlDbType.Int,ParameterDirection.Input)
                  ,new Parametros("@RETURN_VALUE",null,SqlDbType.Int,ParameterDirection.ReturnValue)
             };
             Resultado = Convert.ToInt32(new Transaccion("EditarInventario", Parametros).EjecutarDevuelveReturnValue()) > 0;
@@ -185,7 +157,7 @@ namespace com.co.uan.DMiravalle.Inventario
             return   new { success = true, data = Resultado, mensaje = Mensaje };
         }
 
-        public List<Inventario> ConsultarProductosVencidos(string Filtro)
+        public List<InventarioDTO> ConsultarProductosVencidos(string Filtro)
         {
             return MapearDatos(ConsultarProductosVencidosTabla(Filtro ));
         }
@@ -206,7 +178,7 @@ namespace com.co.uan.DMiravalle.Inventario
 
         public bool CrearProducto(string Nombre, int IdTipoProducto)
         {
-            return LoteProducto.Producto.Crear(Nombre, IdTipoProducto);
+            return Producto.Crear(Nombre, IdTipoProducto);
         }
 
         public bool EditarLote(string CodigoLote, DateTime FechaVencimiento, int IdProducto, int IdLote, DateTime FechaRegistro)
@@ -216,7 +188,7 @@ namespace com.co.uan.DMiravalle.Inventario
 
         public bool EditarProducto(string Nombre, int IdTipoProducto, int IdProducto)
         {
-            return LoteProducto.Producto.Editar(Nombre, IdTipoProducto, IdProducto);
+            return Producto.Editar(Nombre, IdTipoProducto, IdProducto);
         }
 
         public bool EliminarLote(int IdLote)
@@ -226,42 +198,42 @@ namespace com.co.uan.DMiravalle.Inventario
 
         public bool EliminarProducto(int IdProducto)
         {
-            return LoteProducto.Producto.Eliminar(IdProducto);
+            return Producto.Eliminar(IdProducto);
         }
 
         public bool ExisteCodigoReferencia(string CodigoReferencia, int IdTipoProducto)
         {
-          return  LoteProducto.Producto.Tipo.ExisteCodigoReferencia(CodigoReferencia, IdTipoProducto);
+          return  Tipo.ExisteCodigoReferencia(CodigoReferencia, IdTipoProducto);
         }
 
-        public List<Lote> ConsultarLote(string CodigoLote, DateTime? FechaVencimiento, int IdProducto, int IdLote, DateTime? FechaRegistro)
+        public List<LoteDTO> ConsultarLote(string CodigoLote, DateTime? FechaVencimiento, int IdProducto, int IdLote, DateTime? FechaRegistro)
         {
             return LoteProducto.Consultar( CodigoLote,  FechaVencimiento,  IdProducto,  IdLote,  FechaRegistro);
         }
 
-        public List<Producto> ConsultarProducto(string Nombre, int IdTipoProducto, int IdProducto)
+        public List<ProductoDTO> ConsultarProducto(string Nombre, int IdTipoProducto, int IdProducto)
         {
-            return LoteProducto.Producto.Consultar( Nombre,  IdTipoProducto,  IdProducto);
+            return Producto.Consultar( Nombre,  IdTipoProducto,  IdProducto);
         }
 
-        public List<TipoProducto> ConsultarTipoProducto(string Descripcion, string CodigoReferencia, int IdTipoProducto)
+        public List<TipoProductoDTO> ConsultarTipoProducto(string Descripcion, string CodigoReferencia, int IdTipoProducto)
         {
-            return LoteProducto.Producto.Tipo.Consultar( Descripcion,  CodigoReferencia,  IdTipoProducto);
+            return Tipo.Consultar( Descripcion,  CodigoReferencia,  IdTipoProducto);
         }
 
         public bool CrearTipoProducto(string Descripcion, string CodigoReferencia)
         {
-            return LoteProducto.Producto.Tipo.Crear(Descripcion,  CodigoReferencia);
+            return Tipo.Crear(Descripcion,  CodigoReferencia);
         }
 
         public bool EditarTipoProducto(string Descripcion, string CodigoReferencia, int IdTipoProducto)
         {
-            return LoteProducto.Producto.Tipo.Editar(Descripcion,  CodigoReferencia,  IdTipoProducto);
+            return Tipo.Editar(Descripcion,  CodigoReferencia,  IdTipoProducto);
         }
 
         public bool EliminarTipoProducto(int IdTipoProducto)
         {
-            return LoteProducto.Producto.Tipo.Eliminar(IdTipoProducto);
+            return Tipo.Eliminar(IdTipoProducto);
         }
         #endregion
     }
