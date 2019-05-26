@@ -29,7 +29,6 @@ namespace Web.Controllers
         [HttpPost]
         public ActionResult GuardarRegistro()
         {
-            string Mensaje = "";
             bool Resultado = false;
 
             try
@@ -55,9 +54,9 @@ namespace Web.Controllers
             catch (Exception ex)
             {
                 RegistarError(ex);
-                Mensaje = "Se presento inconveniente al realizar la accion";
+                Resultado = false;
             }
-            return Json(new { success = true, data = Resultado, mensaje = Mensaje });
+            return Json(new { success = true, data = Resultado });
         }
 
         [HttpPost]
@@ -66,17 +65,33 @@ namespace Web.Controllers
             try
             {
                     Resultado = ObtenerNegocio().ObtenerFachadaInventario().EliminarInventario(Convert.ToInt32(Request["IdInventario"]));
-                    Mensaje = "No se pudo eliminar el inventario ";
-                    if (Resultado)
-                        Mensaje = "Se ha eliminado el inventario exitosamente";
             }
             catch (Exception ex)
             {
                 RegistarError(ex);
                 Resultado = false;
-                Mensaje = "Se presento inconveniente al realizar la accion";
             }
-            return Json(new { success = true, data = Resultado, mensaje = Mensaje });
+            return Json(new { success = true, data = Resultado });
+        }
+
+        [HttpPost]
+        public ActionResult ExisteLoteXSede()
+        {
+            try
+            {
+                Resultado = ObtenerNegocio().ObtenerFachadaInventario().ConsultarInventario(
+                      Convert.ToInt32(Request["hddIDLote"])
+                    , Convert.ToInt32(Request["SedeInventario"])
+                    , -1
+                    ,0
+                    ,null
+                    ,0).Count>0;
+            }
+            catch (Exception ex)
+            {
+                RegistarError(ex);
+            }
+            return Json(new { success = true, data = Resultado});
         }
     }
 }

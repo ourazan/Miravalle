@@ -68,6 +68,12 @@ function ValidarFormularioInventario() {
     if ($("#SedeInventario").val() == '' || $("#SedeInventario").val() == null) {
         Mensajes += 'Debe seleccionar una sede del inventario \n'
     }
+    if (Mensajes == '') {
+        if (ValidarAccion('/Inventario/ExisteLoteXSede', 'hddIDLote=' + $("#hddIDLote").val() + '&SedeInventario=' + $("#SedeInventario"))) {
+            Mensajes += 'El lote ya se encuentra asignado a la sede seleccionada \n'
+        }
+
+    }
     return Mensajes;
 }
 

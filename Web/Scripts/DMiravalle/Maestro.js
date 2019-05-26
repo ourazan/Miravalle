@@ -2,7 +2,7 @@
     $.post(url
         , data
         , function (data, status) {
-            CargarResultados(data);
+            CargarResultados(data, url);
         });
 
 }
@@ -16,7 +16,7 @@ function LlamadoPostXMLHttp(url, data,retornaValor) {
             if (retornaValor) {
                 return JSON.parse(xhr.response);
             } else {
-                CargarResultados(JSON.parse(xhr.response));
+                CargarResultados(JSON.parse(xhr.response),url);
             }
         }
     }
@@ -57,3 +57,17 @@ function PermitirNumero(Control) {
     FiltroTexto(/[^\d].+/, Control);
 }
 
+function ValidarAccion(URL, parametros) {
+    resultados = false;
+    $.ajax({
+        url: URL
+        , method:'POST'
+        ,data:parametros
+        ,context: document.body
+        , async:false
+    }).done(function (resultado) {
+        resultados= resultado.data;
+    });
+
+    return resultados;
+}

@@ -29,10 +29,6 @@ namespace Web.Controllers
                         , Convert.ToInt32(Request["hddIDProducto"])
                         , Convert.ToDateTime(Request["FechaRegistro"])
                         );
-                    Mensaje = "No se pudo crear el Lote ";
-                    if (Resultado)
-                        Mensaje = "Se ha creado el lote exitosamente";
-
                 }
                 else
                 {
@@ -42,47 +38,44 @@ namespace Web.Controllers
                         , Convert.ToInt32(Request["hddIDLote"])
                         , Convert.ToDateTime(Request["FechaRegistro"])
                         );
-                    Mensaje = "No se pudo editar el lote ";
-                    if (Resultado)
-                        Mensaje = "Se ha editado el lote exitosamente";
+                 
                 }
             }
             catch (Exception ex)
             {
                 RegistarError(ex);
                 Resultado = false;
-                Mensaje = "Se presento inconveniente al realizar la acción";
             }
-            return Json(new { success = true, data = Resultado, mensaje = Mensaje });
+            return Json(new { success = true, data = Resultado });
         }
         [HttpPost]
         public ActionResult Eliminar()
         {
             try
             {
-                if (ObtenerNegocio().ObtenerFachadaInventario().ConsultarInventario(Convert.ToInt32 ( Request["IdLote"]),0,-1,0,null,0).Count == 0)
-                {
-
                     Resultado = ObtenerNegocio().ObtenerFachadaInventario().EliminarLote(Convert.ToInt32(Request["IdLote"]));
-                    Mensaje = "No se pudo eliminar el lote ";
-                    if (Resultado)
-                        Mensaje = "Se ha eliminado el lote exitosamente";
-
-                }
-                else
-                {
-                    Resultado = false;
-                    Mensaje = "No se puede eliminar el lote porque ya se encuentra registrado en los inventarios";
-                }
             }
             catch (Exception ex)
             {
                 RegistarError(ex);
                 Resultado = false;
-                Mensaje = "Se presento inconveniente al realizar la accion";
             }
-            return Json(new { success = true, data = Resultado, mensaje = Mensaje });
+            return Json(new { success = true, data = Resultado });
 
         }
-    }
+        [HttpPost]
+        public ActionResult ExisteLoteXInventario()
+        {
+            try
+            {
+                Resultado= ObtenerNegocio().ObtenerFachadaInventario().ConsultarInventario(Convert.ToInt32(Request["IdLote"]), 0, -1, 0, null, 0).Count>0;
+            }
+            catch (Exception ex )
+            {
+                RegistarError(ex);
+                Resultado = false;
+            }
+            return Json(new { success = true, data = Resultado });
+        }
+      }
 }

@@ -23,12 +23,32 @@ function CargarFormularioNuevo() {
   AbrirModal("divModalTipoProducto");
 }
 
-function CargarResultados(Resultado) {
-    MostrarMensaje(Resultado.mensaje);
+function CargarResultados(Resultado,url) {
+
+
     if (Resultado.data) {
+        if (url == '/TipoProducto/GuardarRegistro' &&  $("#hddID").val()=='0') {
+            MostrarMensaje('Se creo el tipo de producto exitosamente');
+        }
+        if (url == '/TipoProducto/GuardarRegistro' && $("#hddID").val() != '0') {
+            MostrarMensaje('Se editó el tipo de producto exitosamente');
+        }
+        if (url == '/TipoProducto/EliminarRegistro') {
+            MostrarMensaje('Se elimino el tipo de producto exitosamente');
+        }
         LimpiarCampos();
         OcultarModal("divModalTipoProducto");
         window.location.href = '/TipoProducto/Index';
+    } else {
+        if (url == '/TipoProducto/GuardarRegistro' && $("#hddID").val() == '0') {
+            MostrarMensaje('No se creo el tipo de producto exitosamente');
+        }
+        if (url == '/TipoProducto/GuardarRegistro' && $("#hddID").val() != '0') {
+            MostrarMensaje('No se editó el tipo de producto exitosamente');
+        }
+        if (url == '/TipoProducto/EliminarRegistro') {
+            MostrarMensaje('No se elimino el tipo de producto exitosamente');
+        }
     }
 }
 function ObtenerDatos() {
@@ -43,8 +63,16 @@ function ValidarFormulario() {
     if ($("#CodigoReferencia").val() == '' || $("#CodigoReferencia").val() == null) {
         Mensajes += 'Debe registrar un código de referencia \n'
     }
+    if (Mensajes == '') {
+        if (ValidarAccion('/TipoProducto/ExisteCodigoReferencia', 'CodigoReferencia=' + $("#CodigoReferencia").val() + '&hddID=' + $("#hddID").val())) {
+            Mensajes += 'Ya se encuentra el codigo de referencia ' + $("#CodigoReferencia").val() + ' en el sistema \n'
+        }
+    }
+
     return Mensajes;
 }
+
+
 
 
 function Guardar() {
@@ -58,7 +86,11 @@ function Guardar() {
 
 
 function EliminarTipo(Tipo) {
-    LlamadoPost('/TipoProducto/EliminarRegistro', "hddID=" + Tipo);
+
+    if (!ValidarAccion('/TipoProducto/ExisteProductosXTipo', "hddID=" + Tipo))
+    {
+        LlamadoPost('/TipoProducto/EliminarRegistro', "hddID=" + Tipo); }
+    else { MostrarMensaje('No se puede eliminar el tipo producto porque ya se encuentra relacionado con algunos productos'); }
 }
 
 

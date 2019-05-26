@@ -8,9 +8,9 @@ namespace com.co.uan.DMiravalle.Inventario
 
         List<InventarioDTO> ConsultarInventario(int IdLote, int IdSede, int Cantidad, int IdInventario, DateTime? FechaRegistro, int IdProducto);
         
-        object  CrearInventario(int IdLote, int IdSede, int Cantidad, DateTime FechaRegistro);
+        bool  CrearInventario(int IdLote, int IdSede, int Cantidad, DateTime FechaRegistro);
 
-        object ModificarInventario(int IdLote, int IdSede, int Cantidad, int IdInventario, DateTime FechaRegistro);
+        bool ModificarInventario(int IdLote, int IdSede, int Cantidad, int IdInventario, DateTime FechaRegistro);
 
         bool EliminarInventario(int IdInventario);
 

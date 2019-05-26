@@ -21,12 +21,40 @@ function LimpiarCampos() {
     $("#NombreProducto").val('');
     $("#TipoProducto").val('');
 }
-function CargarResultados(Resultado) {
-    MostrarMensaje(Resultado.mensaje);
+function CargarResultados(Resultado,url) {
+    MostrarMensaje('');
     if (Resultado.data) {
+        if (url == '/Productos/GuardarRegistro' && $("#hddID").val() == '0') { MostrarMensaje('Se ha creado el producto exitosamente'); }
+        if (url == '/Productos/GuardarRegistro' && $("#hddID").val() != '0') { MostrarMensaje('Se ha editado el producto exitosamente'); }
+        if (url == '/Productos/EliminarRegistro') { MostrarMensaje('Se ha eliminado el producto exitosamente'); }
+
+        if (url == '/Lote/GuardarRegistro' && $("#hddIDLote").val() == '0') { MostrarMensaje('Se ha creado el lote exitosamente'); }
+        if (url == '/Lote/GuardarRegistro' && $("#hddIDLote").val() != '0') { MostrarMensaje('Se ha editado el lote exitosamente'); }
+        if (url == '/Lote/Eliminar') { MostrarMensaje('Se ha eliminado el lote exitosamente'); }
+
+        if (url == '/Inventario/GuardarRegistro' && $("#hddIDInventario").val() == '0') { MostrarMensaje('Se ha creado el inventario exitosamente'); }
+        if (url == '/Inventario/GuardarRegistro' && $("#hddIDInventario").val() != '0') { MostrarMensaje('Se ha editado el inventario exitosamente'); }
+        if (url == '/Inventario/Eliminar') { MostrarMensaje('Se ha eliminado el inventario exitosamente'); }
+
+
         LimpiarCampos();
         OcultarModal("divModalProducto");
         window.location.href = '/Productos/Index';
+    }
+    else {
+        if (url == '/Productos/GuardarRegistro' && $("#hddID").val()=='0') { MostrarMensaje('No se pudo crear el producto'); }
+        if (url == '/Productos/GuardarRegistro' && $("#hddID").val() != '0') { MostrarMensaje('No se pudo editar el producto'); }
+        if (url == '/Productos/EliminarRegistro') { MostrarMensaje('No se pudo eliminar el producto'); }
+
+        if (url == '/Lote/GuardarRegistro' && $("#hddIDLote").val() == '0') { MostrarMensaje('No se pudo crear el Lote'); }
+        if (url == '/Lote/GuardarRegistro' && $("#hddIDLote").val() != '0') { MostrarMensaje('No se pudo editar el lote'); }
+        if (url == '/Lote/Eliminar') { MostrarMensaje('No se pudo eliminar el lote'); }
+
+        if (url == '/Inventario/GuardarRegistro' && $("#hddIDInventario").val() == '0') { MostrarMensaje('No se pudo crear el inventario'); }
+        if (url == '/Inventario/GuardarRegistro' && $("#hddIDInventario").val() != '0') { MostrarMensaje('No se pudo editar el inventario'); }
+        if (url == '/Inventario/Eliminar') { MostrarMensaje('No se pudo eliminar el inventario'); }
+
+
     }
 }
 function ValidarFormulario() {
@@ -47,7 +75,6 @@ function ObtenerDatos() {
 
 function Guardar() {
     var Mensajes = ValidarFormulario();
-
     if (Mensajes == '') {
         LlamadoPost('/Productos/GuardarRegistro', ObtenerDatos());
     }
@@ -61,5 +88,9 @@ $(function () {
 );
 
 function EliminarProducto(idProducto) {
-    LlamadoPost('/Productos/EliminarRegistro', "hddID=" + idProducto);
+    if (!ValidarAccion('/Productos/ExisteProductoEnInventario', "hddID=" + idProducto)) {
+       LlamadoPost('/Productos/EliminarRegistro', "hddID=" + idProducto);
+    } else {
+        MostrarMensaje('No se puede eliminar el producto porque ya se encuentra registrado en los inventarios');
+    }
 }

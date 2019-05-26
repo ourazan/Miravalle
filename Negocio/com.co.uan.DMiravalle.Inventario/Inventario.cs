@@ -111,12 +111,9 @@ namespace com.co.uan.DMiravalle.Inventario
             return MapearDatos(Coleccion);
         }
 
-        public object CrearInventario(int IdLote, int IdSede, int Cantidad, DateTime FechaRegistro)
+        public bool CrearInventario(int IdLote, int IdSede, int Cantidad, DateTime FechaRegistro)
         {
-            
-            if (!ExisteInventario(IdLote, IdSede, 0))
-            {
-                   List<Parametros> Parametros = new List<Parametros>() {
+                 List<Parametros> Parametros = new List<Parametros>() {
                 new Parametros("@FechaRegistro",FechaRegistro,SqlDbType.DateTime,ParameterDirection.Input)
                 ,new Parametros("@Cantidad",Cantidad,SqlDbType.Int,ParameterDirection.Input)
                 ,new Parametros("@IdLote",IdLote,SqlDbType.Int,ParameterDirection.Input)
@@ -124,16 +121,8 @@ namespace com.co.uan.DMiravalle.Inventario
                 ,new Parametros("@UsuarioAutenticado",this.usuarioautenticado,SqlDbType.Int,ParameterDirection.Input)
                  ,new Parametros("@RETURN_VALUE",null,SqlDbType.Int,ParameterDirection.ReturnValue) };
                     Resultado =  Convert.ToInt32(new Transaccion("CrearInventario", Parametros).EjecutarDevuelveReturnValue()) > 0;
-                    Mensaje = "No se pudo crear el inventario ";
-                if (Resultado)
-                    Mensaje = "Se ha creado el inventario exitosamente";
-            }
-            else {
-                 Resultado = false;
-                Mensaje = "El inventario ya se encuentra registrado para la sede seleccionada";
-
-            }
-            return new { success = true, data = Resultado, mensaje = Mensaje };
+               
+            return Resultado;
         }
 
         public bool EliminarInventario(int IdInventario)
@@ -146,7 +135,7 @@ namespace com.co.uan.DMiravalle.Inventario
             return Convert.ToInt32(new Transaccion("ELiminarInventario", Parametros).EjecutarDevuelveReturnValue()) > 0;
         }
 
-        public object  ModificarInventario(int IdLote, int IdSede, int Cantidad, int IdInventario, DateTime FechaRegistro)
+        public bool  ModificarInventario(int IdLote, int IdSede, int Cantidad, int IdInventario, DateTime FechaRegistro)
         {
             List<Parametros> Parametros = new List<Parametros>() {
                 new Parametros("@FechaRegistro",FechaRegistro,SqlDbType.DateTime,ParameterDirection.Input)
@@ -158,12 +147,7 @@ namespace com.co.uan.DMiravalle.Inventario
                  ,new Parametros("@RETURN_VALUE",null,SqlDbType.Int,ParameterDirection.ReturnValue)
             };
             Resultado = Convert.ToInt32(new Transaccion("EditarInventario", Parametros).EjecutarDevuelveReturnValue()) > 0;
-
-            Mensaje = "No se pudo editar el inventario ";
-            if (Resultado)
-                Mensaje = "Se ha editado el inventario exitosamente";
-
-            return   new { success = true, data = Resultado, mensaje = Mensaje };
+            return   Resultado;
         }
 
         public List<InventarioDTO> ConsultarProductosVencidos(string Filtro)

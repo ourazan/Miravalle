@@ -71,5 +71,9 @@ function CargarFormularioEdicionLote(Detalles) {
     }
 
     function EliminarLote(IdLote) {
-        LlamadoPost('/Lote/Eliminar','IdLote='+IdLote);
+        if (!ValidarAccion('/Lote/Eliminar', 'IdLote=' + IdLote))
+        { LlamadoPost('/Lote/Eliminar', 'IdLote=' + IdLote); }
+        else {
+            MostrarMensaje('No se puede eliminar el lote porque ya se encuentra registrado en los inventarios');
+        }
     }
