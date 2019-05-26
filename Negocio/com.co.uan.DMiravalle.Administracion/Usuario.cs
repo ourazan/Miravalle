@@ -100,7 +100,19 @@ namespace com.co.uan.DMiravalle.Administracion
             return Convert.ToInt32(new Transaccion("EliminarUsuario", Parametros).EjecutarDevuelveReturnValue()) > 0;
         }
 
-       
+        public UsuarioDTO Validar(string Correo, string Clave)
+        {
+
+            Parametros Parametros = new List<Parametros>()
+            {
+                ,new Parametros("@Correo",string.IsNullOrEmpty(Correo) ? DBNull.Value : (object)Correo,SqlDbType.VarChar,ParameterDirection.Input)
+                ,new Parametros("@Clave",string.IsNullOrEmpty(Correo) ? DBNull.Value : (object)Correo,SqlDbType.VarChar,ParameterDirection.Input)
+            };
+
+
+            throw new System.NotImplementedException();
+
+        }
         #endregion
     }
 }

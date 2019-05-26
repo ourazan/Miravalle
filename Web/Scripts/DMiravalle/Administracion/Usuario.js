@@ -47,12 +47,22 @@ function EditarUsuario(Usuario) {
     $("#Titulo").append('Edición usuario');
 }
 
-function CargarResultados(Resultado) {
-    MostrarMensaje(Resultado.mensaje);
+function CargarResultados(Resultado, url) {
+  
     if (Resultado.data) {
+
+        if (url == '/Usuario/GuardarRegistro' && $("#hddID").val() == '0') { MostrarMensaje('Se ha creado el usuario exitosamente'); }
+        if (url == '/Usuario/GuardarRegistro' && $("#hddID").val() != '0') { MostrarMensaje('Se ha editado el usuario exitosamente'); }
+        if (url == '/Usuario/Eliminar') { MostrarMensaje('Se ha eliminado el usuario exitosamente'); }
+
         LimpiarCampos();
         OcultarModal("divModalUsuario");
         window.location.href = '/Usuario/Index';
+    } else {
+        if (url == '/Usuario/GuardarRegistro' && $("#hddID").val() == '0') { MostrarMensaje('No se pudo crear el usuario'); }
+        if (url == '/Usuario/GuardarRegistro' && $("#hddID").val() != '0') { MostrarMensaje('No se pudo editar el usuario '); }
+        if (url == '/Usuario/Eliminar') { MostrarMensaje('No se pudo eliminar el usuario'); }
+
     }
 }
 

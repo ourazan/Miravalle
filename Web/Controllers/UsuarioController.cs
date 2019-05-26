@@ -38,8 +38,7 @@ namespace Web.Controllers
         [HttpPost]
         public ActionResult GuardarRegistro()
         {
-            string Mensaje = "";
-            Boolean Resultado = false;
+            
             try
             {
                 if (Request["hddID"] == "0")
@@ -52,9 +51,7 @@ namespace Web.Controllers
                         , Request["Usuario"]
                         , Request["Clave"]
                         ,Convert.ToInt32(Request["Perfil"]));
-                        Mensaje = "No se pudo crear el usuario ";
-                    if (Resultado)
-                        Mensaje = "Se ha creado el usuario exitosamente";
+                 
                 }
                 else
                 {
@@ -66,17 +63,15 @@ namespace Web.Controllers
                         , Request["Correo"]
                         , ""
                         , Convert.ToInt32(Request["Perfil"]));
-                    Mensaje = "No se pudo editar el usuario ";
-                    if (Resultado)
-                        Mensaje = "Se ha editado el usuario exitosamente";
+                  
                 }
             }
             catch (Exception ex)
             {
                 RegistarError(ex);
-                Mensaje = "Se presento inconveniente al realizar la accion";
+                Resultado = false;
             }
-            return Json(new { success = true, data = Resultado, mensaje = Mensaje });
+            return Json(new { success = true, data = Resultado });
         }
 
         [HttpPost]
@@ -85,21 +80,35 @@ namespace Web.Controllers
             try
             {
                 Resultado = ObtenerNegocio().ObtenerFachadaAdministrativa().RemoverUsuario(Convert.ToInt32(Request["hddID"]));
-                Mensaje = "No se pudo eliminar el usuario ";
-                if (Resultado)
-                {
+              
                     Mensaje = "Se ha eliminado el usuario exitosamente";
                     if (Convert.ToInt32(Request["hddID"])== ObtenerUsuarioAutenticado())
                         CerrarSesion();
-                }
+                
             }
             catch (Exception ex)
             {
                 RegistarError(ex);
                 Resultado = false;
-                Mensaje = "Se presento inconveniente al realizar la accion";
             }
-            return Json(new { success = true, data = Resultado, mensaje = Mensaje });
+            return Json(new { success = true, data = Resultado});
+        }
+
+        [HttpPost]
+        public ActionResult ExisteUsuario()
+        {
+            try
+            {
+                Resultado = ObtenerNegocio().ObtenerFachadaAdministrativa().RemoverUsuario(Convert.ToInt32(Request["hddID"]));
+                if (Convert.ToInt32(Request["hddID"]) == ObtenerUsuarioAutenticado())
+                    CerrarSesion();
+            }
+            catch (Exception ex)
+            {
+                RegistarError(ex);
+                Resultado = false;
+            }
+            return Json(new { success = true, data = Resultado });
         }
     }
 }

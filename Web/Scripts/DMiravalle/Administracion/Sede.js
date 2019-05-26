@@ -29,12 +29,34 @@ function EditarSede(Sede) {
     $("#Titulo").append('Edición sede');
 }
 
-function CargarResultados(Resultado) {
-    MostrarMensaje(Resultado.mensaje);
+function CargarResultados(Resultados,url) {
     if (Resultado.data) {
+
+        if (url == '/Sede/GuardarRegistro' && $("#hddID").val() == '0') {
+            MostrarMensaje('Se ha creado la sede exitosamente');
+        }
+        if (url == '/Sede/GuardarRegistro' && $("#hddID").val() != '0') {
+            MostrarMensaje('Se ha editado la sede exitosamente');
+        }
+        if (url == '/Sede/EliminarRegistro') {
+            MostrarMensaje('Se ha eliminado la sede exitosamente');
+        }
+
+
         LimpiarCampos();
         OcultarModal("divModalSede");
         window.location.href = '/Sede/Index';
+    } else {
+
+        if (url == '/Sede/GuardarRegistro' && $("#hddID").val() == '0') {
+            MostrarMensaje('No se pudo crear la sede');
+        }
+        if (url == '/Sede/GuardarRegistro' && $("#hddID").val() != '0') {
+            MostrarMensaje('No se pudo editar la sede');
+        }
+        if (url == '/Sede/EliminarRegistro') {
+            MostrarMensaje('No se pudo eliminar la sede');
+        }
     }
 }
 function ObtenerDatos() {
@@ -63,7 +85,12 @@ function Guardar() {
     else { MostrarMensaje(Mensajes); }
 }
 function EliminarSede(Tipo) {
-    LlamadoPost('/Sede/EliminarRegistro', "hddID=" + Tipo);
+    if (!ValidarAccion('/Sede/ExisteSedeXInventario', "hddID=" + Tipo)) {
+        LlamadoPost('/Sede/EliminarRegistro', "hddID=" + Tipo);
+    }
+    else {
+        MostrarMensaje('No se puede eliminar la sede porque se encuentra relacionado con el inventario');
+    }
 }
 
 

@@ -13,6 +13,8 @@ namespace com.co.uan.DMiravalle.Administracion
         bool Editar(int IdUsuario, string Nombre, string Apellido, int IdSede, string Correo, string Clave, int Perfil);
 
         bool Eliminar(int IdUsuario);
-    
+
+        UsuarioDTO Validar(string Correo, string Clave);
+
     }
 }

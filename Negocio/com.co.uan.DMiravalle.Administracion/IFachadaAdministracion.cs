@@ -21,5 +21,7 @@ namespace com.co.uan.DMiravalle.Administracion
 
         bool RemoverUsuario(int IdUsuario);
         void AsignarEjecutor(int Autenticado);
+
+        UsuarioDTO validarUsuario(string Correo, string Clave);
     }
 }
