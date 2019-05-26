@@ -21,7 +21,8 @@ namespace Web.Controllers
                          {
                              Text = sede.NombreSede,
                              Value = sede.IdSede.ToString()
-                         });
+                         }).ToList();
+            Items= AdicionarValorDefecto(Items);
             Sedes = new SelectList(Items, "Value", "Text");
             ViewData["Sede"] = Sedes;
             return PartialView();

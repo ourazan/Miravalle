@@ -13,7 +13,6 @@ namespace Web.Controllers
             ViewData["TiposProducto"] = ObtenerNegocio().ObtenerFachadaInventario().ConsultarTipoProducto(string.Empty,string.Empty,0);
             ViewData["Autenticado"] = ObtenerAutenticado();
             return View();
-
             }
             catch (Exception ex)
             {

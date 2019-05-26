@@ -73,6 +73,41 @@
 
 </script>
 <h2 class="center">Gestión de productos</h2>
+
+<div class="widget-box">
+    <div class="widget-header ui-autocomplete">
+        <h4 class="widget-title">Consulta</h4>
+        <div class="widget-toolbar">
+            <a href="#" data-action="collapse">
+                <i class="ace-icon fa fa-chevron-up"></i>
+            </a>
+        </div>
+    </div>
+    <div class="widget-body">
+        <div class="widget-main">
+            @using (Html.BeginForm(null, null, FormMethod.Post))
+            {
+                <div class="form-group row col-lg-offset-2">
+                    <div class="col-lg-5  control-label no-padding-right">
+                        <label for="TipoProducto">Tipo Producto:</label>
+                        @Html.DropDownList("TipoProducto", (SelectList)ViewData["TiposProducto"], new { id = "TipoProducto", @class = "form-control " })
+                    </div>
+                    <div class="col-lg-5  control-label no-padding-right ">
+                        <label for="Nombre">Nombre:</label>
+                        @Html.TextBox("Nombre", "", new { id = "Nombre", @class = "form-control " })
+                    </div>
+                </div>
+                   <div class="row center">
+                        <button id="btnConsultar" class="btn btn-info">Consultar</button>
+                    </div>
+            }
+        </div>
+    </div>
+</div>
+
+
+
+
 @grdProducto.GetHtml(
     tableStyle: "table table-responsive backcolor",
     headerStyle: "wedgrid-header ",
@@ -114,7 +149,6 @@
     </div>
 </div>
 
-
 <div class="modal fade bd-example-modal-lg" tabindex="-1" role="document" aria-hidden="true" id="divModalLote">
     <div class="modal-dialog modal-lg" style="max-width: 550px">
         <div class="modal-content">
@@ -143,9 +177,6 @@
         </div>
     </div>
 </div>
-
-
-
 
 <div class="modal fade bd-example-modal-lg" tabindex="-1" role="document" aria-hidden="true" id="divModalInventario">
     <div class="modal-dialog modal-lg" style="max-width: 550px">

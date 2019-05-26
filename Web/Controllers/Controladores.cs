@@ -1,6 +1,7 @@
 ﻿using com.co.uan.DMiravalle;
 using com.co.uan.DMiravalle.Administracion;
 using System;
+using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
 using System.Text;
@@ -45,6 +46,12 @@ namespace Web.Controllers
         protected void CerrarSesion() {
             Session.Clear();
             RedirectToAction("Index", "Login");
+        }
+
+        protected List<SelectListItem> AdicionarValorDefecto(List<SelectListItem> Items) {
+            Items.Insert(0, new SelectListItem() { Text ="SELECCIONE",Value="" });
+            return Items;
+
         }
     }
 }

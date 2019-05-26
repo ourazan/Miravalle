@@ -99,7 +99,7 @@ as begin
 	   ,CodigoReferencia
 	   ,Descripcion
 	   from v_producto where Activo=1  
-	   and (NombreProducto=@NombreProducto or (@NombreProducto is null))
+	   and ((@NombreProducto is not null and NombreProducto like @NombreProducto +'%') or (@NombreProducto is null))
 	   and (IdTipoProducto=@IdTipoProducto or (@IdTipoProducto is null))
 	   and (IdProducto=@IdProducto or(@IdProducto is null))
 end
