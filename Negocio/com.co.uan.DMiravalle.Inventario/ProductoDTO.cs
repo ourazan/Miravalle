@@ -10,6 +10,8 @@ namespace com.co.uan.DMiravalle.Inventario
 
         public TipoProductoDTO tipo;
 
+        public ProductoDTO() { }
+
         public ProductoDTO(string nombreproducto, int idproducto, TipoProductoDTO tipo)
         {
             this.nombreproducto = nombreproducto;

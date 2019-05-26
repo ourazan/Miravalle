@@ -29,7 +29,7 @@ namespace Web.Controllers
         protected UsuarioDTO ObtenerAutenticado() {
             return new UsuarioDTO("prueba1", "Prueba apellido1",string.Empty,null,0,0,string .Empty,string.Empty,0);
         }
-        protected int ObtenerUsuarioAutenticado() {
+        private int ObtenerUsuarioAutenticado() {
             return 1;
         }
         protected void RegistarError(Exception ex) {
@@ -42,7 +42,7 @@ namespace Web.Controllers
             Guardar.WriteLine(Detalle.ToString());
             Guardar.Close();
         }
-
+       
         protected void CerrarSesion() {
             Session.Clear();
             RedirectToAction("Index", "Login");

@@ -34,14 +34,14 @@ namespace Web.Controllers
                 {
                     Resultado = ObtenerNegocio().ObtenerFachadaAdministrativa().CrearSede(Request["NombreSede"]
                         , Request["Ciudad"],  Request["Direccion"]
-                        , (Request["Administrador"]==null?0:Convert.ToInt32(Request["Administrador"])));
+                        , ( string.IsNullOrEmpty( Request["Administrador"])?0:Convert.ToInt32(Request["Administrador"])));
                 }
                 else
                 {
                     Resultado = ObtenerNegocio().ObtenerFachadaAdministrativa().EditarSede(Request["NombreSede"]
                         , Request["Ciudad"]
                         , Request["Direccion"]
-                        , (Request["Administrador"] == null || Request["Administrador"] ==""? 0 : Convert.ToInt32(Request["Administrador"]))
+                        , (string.IsNullOrEmpty(Request["Administrador"])? 0 : Convert.ToInt32(Request["Administrador"]))
                         ,Convert.ToInt32(Request["hddID"]) );
                 }
             }

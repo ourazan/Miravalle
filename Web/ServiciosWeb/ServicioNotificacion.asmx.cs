@@ -1,4 +1,6 @@
 ﻿using com.co.uan.DMiravalle;
+using com.co.uan.DMiravalle.Inventario;
+using System.Collections.Generic;
 using System.Web.Services;
 
 namespace Web.ServiciosWeb
@@ -20,6 +22,12 @@ namespace Web.ServiciosWeb
             Servicio Negocio = new Servicio();
             Negocio.ObtenerServicioNotificaciones().NotificarElementosVencidos();
             Negocio.ObtenerServicioNotificaciones().NotificarProductosEscasos();
+        }
+
+        [WebMethod]
+       public  List<ProductoDTO> ConsultarProducto(string Nombre, int IdTipoProducto, int IdProducto) {
+            Servicio Negocio = new Servicio();
+           return  Negocio.ObtenerFachadaInventario().ConsultarProducto(Nombre,  IdTipoProducto,  IdProducto);
         }
     }
 }

@@ -49,7 +49,7 @@ namespace Web.Controllers
                     Resultado = ObtenerNegocio().ObtenerFachadaAdministrativa().CrearUsuario
                         (Request["Nombre"]
                         , Request["Apellido"]
-                        , Request["Sede"]==null?0:  Convert.ToInt32(Request["Sede"])
+                        ,string .IsNullOrEmpty( Request["Sede"])?0:  Convert.ToInt32(Request["Sede"])
                         , Request["Correo"]
                         , Request["Usuario"]
                         , Request["Clave"]
@@ -62,7 +62,7 @@ namespace Web.Controllers
                         Convert.ToInt32(Request["hddID"])
                         , Request["Nombre"]
                         , Request["Apellido"]
-                        , Request["Sede"] == null ? 0 : Convert.ToInt32(Request["Sede"])
+                        , string.IsNullOrEmpty(Request["Sede"])? 0 : Convert.ToInt32(Request["Sede"])
                         , Request["Correo"]
                         , ""
                         , Convert.ToInt32(Request["Perfil"]));
@@ -83,7 +83,7 @@ namespace Web.Controllers
             try
             {
                 Resultado = ObtenerNegocio().ObtenerFachadaAdministrativa().RemoverUsuario(Convert.ToInt32(Request["hddID"]));
-                    if (Convert.ToInt32(Request["hddID"])== ObtenerUsuarioAutenticado())
+                    if (Convert.ToInt32(Request["hddID"])== ObtenerAutenticado().IdUsuario)
                         CerrarSesion();
             }
             catch (Exception ex)
@@ -100,8 +100,6 @@ namespace Web.Controllers
             try
             {
                 Resultado = ObtenerNegocio().ObtenerFachadaAdministrativa().RemoverUsuario(Convert.ToInt32(Request["hddID"]));
-                if (Convert.ToInt32(Request["hddID"]) == ObtenerUsuarioAutenticado())
-                    CerrarSesion();
             }
             catch (Exception ex)
             {

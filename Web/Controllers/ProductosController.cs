@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+
 
 namespace Web.Controllers
 {
@@ -12,13 +12,15 @@ namespace Web.Controllers
         {
             try
             {
+              
                 ViewData["Autenticado"] = ObtenerAutenticado();
                 SelectList Tipos;
-                ViewData["Producto"] = ObtenerNegocio().ObtenerFachadaInventario().ConsultarProducto( 
-                    string.IsNullOrEmpty( Request["Nombre"])?string.Empty  :Request["Nombre"]
-                    ,string.IsNullOrEmpty(Request["TipoProducto"]) ?0:Convert.ToInt32(Request["TipoProducto"])
+
+                ViewData["Producto"] = ObtenerNegocio().ObtenerFachadaInventario().ConsultarProducto(
+                    string.IsNullOrEmpty(Request["Nombre"]) ? string.Empty : Request["Nombre"]
+                    , string.IsNullOrEmpty(Request["TipoProducto"]) ? 0 : Convert.ToInt32(Request["TipoProducto"])
                     , 0);
-              var  Items = (from Tipo in ObtenerNegocio().ObtenerFachadaInventario().ConsultarTipoProducto(string.Empty, string.Empty, 0)
+                var  Items = (from Tipo in ObtenerNegocio().ObtenerFachadaInventario().ConsultarTipoProducto(string.Empty, string.Empty, 0)
                              select new SelectListItem()
                              {
                                  Text = Tipo.Descripcion,

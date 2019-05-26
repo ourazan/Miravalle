@@ -18,7 +18,7 @@ namespace com.co.uan.DMiravalle.Inventario
 
         #endregion
         #region Constructores    
-
+        public TipoProductoDTO() { }
         public TipoProductoDTO(int idTipoProducto, string codigoReferencia, string descripcion)
         {
             this.idtipoproducto = idTipoProducto;

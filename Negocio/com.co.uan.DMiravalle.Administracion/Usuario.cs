@@ -81,7 +81,7 @@ namespace com.co.uan.DMiravalle.Administracion
                  new Parametros("@Nombre",Nombre,SqlDbType.VarChar,ParameterDirection.Input)
                 ,new Parametros("@Apellido",Apellido,SqlDbType.VarChar,ParameterDirection.Input)
                 ,new Parametros("@Correo",Correo,SqlDbType.VarChar,ParameterDirection.Input)
-                ,new Parametros("@Clave",Clave==""?DBNull.Value:(object)Clave,SqlDbType.VarChar,ParameterDirection.Input)
+                ,new Parametros("@Clave",string.IsNullOrEmpty ( Clave)?DBNull.Value:(object)Clave,SqlDbType.VarChar,ParameterDirection.Input)
                 ,new Parametros("@IdSede",(IdSede==0?DBNull.Value:(object)IdSede),SqlDbType.Int,ParameterDirection.Input)
                 ,new Parametros("@IdUsuario",IdUsuario,SqlDbType.Int,ParameterDirection.Input)
                 ,new Parametros("@Perfil",Perfil,SqlDbType.Int,ParameterDirection.Input)
