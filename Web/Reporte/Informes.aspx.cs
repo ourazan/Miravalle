@@ -25,7 +25,7 @@ namespace Web.Reporte
         }
 
         private void GenerarInforme() {
-            LocalReport Reporte = ObtenerFachadaInformes().GenerarInformeVencidos(" 1=1 ");
+            LocalReport Reporte = ObtenerFachadaInformes().GenerarInformeVencidos();
             ReporteInformes.ProcessingMode = ProcessingMode.Local;
             ReporteInformes.LocalReport.ReportPath  = Reporte.ReportPath;
             ReporteInformes.LocalReport.DataSources.Add(Reporte.DataSources[0]);

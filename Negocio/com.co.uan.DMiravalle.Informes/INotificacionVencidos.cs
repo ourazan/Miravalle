@@ -8,8 +8,8 @@ namespace com.co.uan.DMiravalle.Informes
   public  interface INotificacionVencidos
     {
 
-        List<InventarioDTO> ConsultarProductosVencidos(string Filtro);
-        DataTable ConsultarProductosVencidosTabla(string Filtro);
-
+        List<InventarioDTO> ConsultarProductosVencidos();
+        List<InventarioDTO> ConsultarProductosEscasos();
+        DataTable ConsultarProductosVencidosTabla();
     }
 }

@@ -72,6 +72,8 @@
     <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -175,6 +177,11 @@
     <Compile Include="Reporte\Informes.aspx.designer.cs">
       <DependentUpon>Informes.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Service References\SWMiravalle\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="ServiciosWeb\ServicioNotificacion.asmx.cs">
       <DependentUpon>ServicioNotificacion.asmx</DependentUpon>
       <SubType>Component</SubType>
@@ -214,6 +221,7 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="PlantillaCorreo\ProductoEscaso.htm" />
     <Content Include="PlantillaCorreo\ProductoVencido.htm" />
     <Content Include="Reporte\Informes.aspx" />
     <Content Include="Scripts\ace-elements.min.js" />
@@ -281,6 +289,13 @@
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
+    <None Include="Service References\SWMiravalle\ServicioNotificacion.disco" />
+    <None Include="Service References\SWMiravalle\configuration91.svcinfo" />
+    <None Include="Service References\SWMiravalle\configuration.svcinfo" />
+    <None Include="Service References\SWMiravalle\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <Content Include="ServiciosWeb\ServicioNotificacion.asmx" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -304,9 +319,11 @@
     <Content Include="Views\Lote\Edicion.cshtml" />
     <Content Include="Views\Inventario\Edicion.cshtml" />
     <Content Include="Views\Reportes\Index.cshtml" />
+    <None Include="Service References\SWMiravalle\ServicioNotificacion.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Logs\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
@@ -504,6 +521,12 @@
       <Project>{89e55c50-f54f-43a5-809b-0f6009981cee}</Project>
       <Name>Negocio</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\SWMiravalle\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

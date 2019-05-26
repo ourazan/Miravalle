@@ -6,7 +6,7 @@ namespace com.co.uan.DMiravalle.Informes
   public   interface IReporte
     {
 
-        LocalReport GenerarInformeVencidos(string Filtro);
+        LocalReport GenerarInformeVencidos();
 
     }
 }

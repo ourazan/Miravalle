@@ -80,11 +80,8 @@ namespace Web.Controllers
             try
             {
                 Resultado = ObtenerNegocio().ObtenerFachadaAdministrativa().RemoverUsuario(Convert.ToInt32(Request["hddID"]));
-              
-                    Mensaje = "Se ha eliminado el usuario exitosamente";
                     if (Convert.ToInt32(Request["hddID"])== ObtenerUsuarioAutenticado())
                         CerrarSesion();
-                
             }
             catch (Exception ex)
             {

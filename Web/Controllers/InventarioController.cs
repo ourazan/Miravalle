@@ -29,26 +29,24 @@ namespace Web.Controllers
         [HttpPost]
         public ActionResult GuardarRegistro()
         {
-            bool Resultado = false;
-
             try
             {
                 if (Request["hddIDInventario"] == "0")
                 {
-                   return Json (ObtenerNegocio().ObtenerFachadaInventario().CrearInventario(
+                    Resultado = ObtenerNegocio().ObtenerFachadaInventario().CrearInventario(
                         Convert.ToInt32(Request["hddIDLote"])
                         ,Convert.ToInt32(Request["SedeInventario"])
                         ,Convert.ToInt32 (Request["Cantidad"])
-                        ,Convert.ToDateTime( Request["FechaRegistroInventario"])));
+                        ,Convert.ToDateTime( Request["FechaRegistroInventario"]));
                 }
                 else
                 {
-                    return Json(ObtenerNegocio().ObtenerFachadaInventario().ModificarInventario(
+                    Resultado = ObtenerNegocio().ObtenerFachadaInventario().ModificarInventario(
                         Convert.ToInt32(Request["hddIDLote"])
                         ,Convert.ToInt32(Request["SedeInventario"])
                         ,Convert.ToInt32(Request["Cantidad"])
                         ,Convert.ToInt32(Request["hddIDInventario"])
-                        ,Convert.ToDateTime(Request["FechaRegistroInventario"])));
+                        ,Convert.ToDateTime(Request["FechaRegistroInventario"]));
                 }
             }
             catch (Exception ex)

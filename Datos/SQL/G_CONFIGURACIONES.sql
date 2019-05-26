@@ -8,6 +8,45 @@ Create Table Configuraciones
 ,UsuarioModifico int null
 ,Activo bit  null
 )
+
+go
+
+INSERT INTO [dbo].[Configuraciones]
+           ([Configuracion]
+           ,[Valor]
+           ,[FechaCreacion]
+           ,[UsuarioCreo]
+           ,[FechaModificacion]
+           ,[UsuarioModifico]
+           ,[Activo])
+     VALUES
+           ('Productoavencer'
+           ,'30'
+           ,getdate()
+           ,0
+           ,getdate()
+           ,0
+           ,1)
+
+
+INSERT INTO [dbo].[Configuraciones]
+           ([Configuracion]
+           ,[Valor]
+           ,[FechaCreacion]
+           ,[UsuarioCreo]
+           ,[FechaModificacion]
+           ,[UsuarioModifico]
+           ,[Activo])
+     VALUES
+           ('ProductoMinimo'
+           ,'10'
+           ,getdate()
+           ,0
+           ,getdate()
+           ,0
+           ,1)
+
+
 go 
 
 create procedure CrearConfiguracion
@@ -58,14 +97,12 @@ end
 go
 
 create procedure ConsultarConfiguraciones
-@filtro varchar(1000)='1=1'
 as begin
-exec('
 select 
  IdConfiguracion
 ,Configuracion 
 ,Valor
- from Configuraciones where Activo=1  and ' + @filtro)
+ from Configuraciones where Activo=1  
 end
 
 
@@ -90,13 +127,13 @@ INSERT INTO [dbo].[Configuraciones]
 
 go
  create  procedure [dbo].[ObtenerProductosaVencer] 
-@Filtro varchar(5000)= '1=1'
+
 as
 begin
 
-exec('
+
 declare @diasaVencer int 
-select @diasaVencer= isnull(300000,300000) from Configuraciones where Configuracion=''Productoavencer''
+select @diasaVencer= isnull(300000,300000) from Configuraciones where Configuracion='ProductoMinimo'
 select v_Inventario.IdInventario 
 ,v_Inventario.FechaRegistro 
 ,v_Inventario.Cantidad 
@@ -123,11 +160,48 @@ select v_Inventario.IdInventario
 ,v_Inventario.Perfil
 from v_Inventario where
 DATEDIFF (dd,getdate(), Convert(Date,FechaVencimiento)) <=  @diasaVencer
-and ' +@Filtro)
+
 
 end
 
 
+go
 
 
+ create  procedure [dbo].[ObtenerProductosEscasos] 
 
+as
+begin
+
+
+declare @minimo int 
+select @minimo=300000  from Configuraciones where Configuracion='ProductoMinimo'--isnull(cast(Valor as int ),300000)
+select v_Inventario.IdInventario 
+,v_Inventario.FechaRegistro 
+,v_Inventario.Cantidad 
+,v_Inventario.IdLote 
+,v_Inventario.IdSede 
+,v_Inventario.Activo
+,v_Inventario.CodigoLote 
+,v_Inventario.Lote_FechaRegistro 
+,v_Inventario.FechaVencimiento 
+,v_Inventario.IdProducto 
+,v_Inventario.NombreProducto
+,v_Inventario.IdTipoProducto
+,v_Inventario.CodigoReferencia 
+,v_Inventario.Descripcion
+,v_Inventario.NombreSede
+,v_Inventario.Ciudad 
+,v_Inventario.Direccion 
+,v_Inventario.IdAdministrador
+,v_Inventario.Nombre 
+,v_Inventario.Apellido 
+,v_Inventario.Correo   
+,v_Inventario.Clave    
+,v_Inventario.NombreUsuario
+,v_Inventario.Perfil
+from v_Inventario where
+ Cantidad <=  @minimo
+
+
+end

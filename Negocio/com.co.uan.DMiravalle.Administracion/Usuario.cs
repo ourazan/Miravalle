@@ -103,9 +103,9 @@ namespace com.co.uan.DMiravalle.Administracion
         public UsuarioDTO Validar(string Correo, string Clave)
         {
 
-            Parametros Parametros = new List<Parametros>()
+            List<Parametros> Parametros = new List<Parametros>()
             {
-                ,new Parametros("@Correo",string.IsNullOrEmpty(Correo) ? DBNull.Value : (object)Correo,SqlDbType.VarChar,ParameterDirection.Input)
+                new Parametros("@Correo",string.IsNullOrEmpty(Correo) ? DBNull.Value : (object)Correo,SqlDbType.VarChar,ParameterDirection.Input)
                 ,new Parametros("@Clave",string.IsNullOrEmpty(Correo) ? DBNull.Value : (object)Correo,SqlDbType.VarChar,ParameterDirection.Input)
             };
 

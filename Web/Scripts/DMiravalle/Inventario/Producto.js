@@ -22,7 +22,6 @@ function LimpiarCampos() {
     $("#TipoProducto").val('');
 }
 function CargarResultados(Resultado,url) {
-    MostrarMensaje('');
     if (Resultado.data) {
         if (url == '/Productos/GuardarRegistro' && $("#hddID").val() == '0') { MostrarMensaje('Se ha creado el producto exitosamente'); }
         if (url == '/Productos/GuardarRegistro' && $("#hddID").val() != '0') { MostrarMensaje('Se ha editado el producto exitosamente'); }

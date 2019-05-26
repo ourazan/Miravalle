@@ -1,13 +1,15 @@
 ﻿using com.co.uan.DMiravalle;
 using com.co.uan.DMiravalle.Administracion;
 using System;
+using System.Configuration;
+using System.IO;
+using System.Text;
 using System.Web.Mvc;
 
 namespace Web.Controllers
 {
     public class Controladores:Controller
     {
-        protected string  Mensaje="";
         protected bool Resultado = false;
         Servicio Negocio=null ;
         protected Servicio ObtenerNegocio() {
@@ -30,7 +32,14 @@ namespace Web.Controllers
             return 1;
         }
         protected void RegistarError(Exception ex) {
-
+            String RutaLog = Server.MapPath(ConfigurationManager.AppSettings["RutaLog"] + DateTime.Now.Year.ToString() + string.Format(DateTime.Now.Month.ToString(), "00") + string.Format(DateTime.Now.Day.ToString(), "00") + ".txt");
+            StreamWriter Guardar = new StreamWriter(RutaLog, true);
+            StringBuilder Detalle = new StringBuilder();
+            Detalle.AppendLine("Error:"+ex.Message);
+            Detalle.AppendLine("Detalle:"+ex.StackTrace);
+            Detalle.AppendLine("Usuario:" + ObtenerUsuarioAutenticado().ToString());
+            Guardar.WriteLine(Detalle.ToString());
+            Guardar.Close();
         }
 
         protected void CerrarSesion() {

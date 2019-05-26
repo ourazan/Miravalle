@@ -19,6 +19,7 @@ namespace Web.ServiciosWeb
         {
             Servicio Negocio = new Servicio();
             Negocio.ObtenerServicioNotificaciones().NotificarElementosVencidos();
+            Negocio.ObtenerServicioNotificaciones().NotificarProductosEscasos();
         }
     }
 }

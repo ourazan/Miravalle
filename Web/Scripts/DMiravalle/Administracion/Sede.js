@@ -29,7 +29,7 @@ function EditarSede(Sede) {
     $("#Titulo").append('Edición sede');
 }
 
-function CargarResultados(Resultados,url) {
+function CargarResultados(Resultado,url) {
     if (Resultado.data) {
 
         if (url == '/Sede/GuardarRegistro' && $("#hddID").val() == '0') {

@@ -93,6 +93,9 @@ D:\UAN\DMiravalle\Web\bin\es\System.Web.WebPages.Razor.resources.dll
 D:\UAN\DMiravalle\Web\obj\Debug\Web.csprojResolveAssemblyReference.cache
 D:\UAN\DMiravalle\Web\obj\Debug\Web.dll
 D:\UAN\DMiravalle\Web\obj\Debug\Web.pdb
+D:\OMAR\UAN\Miravalle\Web\obj\Debug\Web.csprojResolveAssemblyReference.cache
+D:\OMAR\UAN\Miravalle\Web\obj\Debug\RdlCompile.cache
+D:\OMAR\UAN\Miravalle\Web\obj\Debug\RdlCompile.compiled
 D:\OMAR\UAN\Miravalle\Web\bin\Web.dll.config
 D:\OMAR\UAN\Miravalle\Web\bin\Web.dll
 D:\OMAR\UAN\Miravalle\Web\bin\Web.pdb
@@ -189,8 +192,5 @@ D:\OMAR\UAN\Miravalle\Web\bin\es\System.Web.Razor.resources.dll
 D:\OMAR\UAN\Miravalle\Web\bin\es\System.Web.WebPages.resources.dll
 D:\OMAR\UAN\Miravalle\Web\bin\es\System.Web.WebPages.Deployment.resources.dll
 D:\OMAR\UAN\Miravalle\Web\bin\es\System.Web.WebPages.Razor.resources.dll
-D:\OMAR\UAN\Miravalle\Web\obj\Debug\Web.csprojResolveAssemblyReference.cache
-D:\OMAR\UAN\Miravalle\Web\obj\Debug\RdlCompile.cache
-D:\OMAR\UAN\Miravalle\Web\obj\Debug\RdlCompile.compiled
 D:\OMAR\UAN\Miravalle\Web\obj\Debug\Web.dll
 D:\OMAR\UAN\Miravalle\Web\obj\Debug\Web.pdb

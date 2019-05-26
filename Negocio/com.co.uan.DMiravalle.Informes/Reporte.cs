@@ -1,6 +1,8 @@
 ﻿using Microsoft.Reporting.WebForms;
 using System.Configuration;
 using System.Web;
+using System;
+
 namespace com.co.uan.DMiravalle.Informes
 {
    public  class Reporte: IReporte
@@ -11,18 +13,18 @@ namespace com.co.uan.DMiravalle.Informes
             Inventario = new Inventario.Inventario();
         }
 
-        public LocalReport GenerarInformeVencidos(string Filtro)
+        public LocalReport GenerarInformeVencidos()
         {
             LocalReport Vencidos = new LocalReport();
             Vencidos.ReportPath = HttpContext.Current.Server.MapPath(ConfigurationManager.AppSettings["RutaRDL"] + "Vencidos.rdlc");
-            ObtenerInformacion(ref Vencidos, Filtro);
+            ObtenerInformacion(ref Vencidos);
             return Vencidos;
         }
 
-        private void ObtenerInformacion(ref LocalReport Reporte, string Filtro)
+        private void ObtenerInformacion(ref LocalReport Reporte)
         {
             ReportDataSource Coleccion;
-            Coleccion = new ReportDataSource("origen1", Inventario.ConsultarProductosVencidosTabla(Filtro));
+            Coleccion = new ReportDataSource("origen1", Inventario.ConsultarProductosVencidosTabla());
             Reporte.DataSources.Add(Coleccion);
 
         }

@@ -64,7 +64,7 @@ namespace Web.Controllers
                 RegistarError(ex);
                 Resultado = false;
             }
-            return Json(new { success = true, data = Resultado, mensaje = Mensaje });
+            return Json(new { success = true, data = Resultado});
         }
 
         [HttpPost]
