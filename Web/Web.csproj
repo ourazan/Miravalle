@@ -182,14 +182,9 @@
     <Compile Include="Reporte\Informes.aspx.designer.cs">
       <DependentUpon>Informes.aspx</DependentUpon>
     </Compile>
-    <Compile Include="ServiciosWeb\ServicioNotificacion.asmx.cs">
-      <DependentUpon>ServicioNotificacion.asmx</DependentUpon>
+    <Compile Include="ServiciosWeb\ServiciosMiravalle.asmx.cs">
+      <DependentUpon>ServiciosMiravalle.asmx</DependentUpon>
       <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Web References\SWMiravalle\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.map</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -298,15 +293,7 @@
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
-    <Content Include="ServiciosWeb\ServicioNotificacion.asmx" />
-    <Content Include="Web References\SWMiravalle\ProductoDTO.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </Content>
-    <Content Include="Web References\SWMiravalle\Reference.map">
-      <Generator>MSDiscoCodeGenerator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </Content>
-    <None Include="Web References\SWMiravalle\ServicioNotificacion.disco" />
+    <Content Include="ServiciosWeb\ServiciosMiravalle.asmx" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -327,7 +314,6 @@
     <Content Include="Views\Lote\Edicion.cshtml" />
     <Content Include="Views\Inventario\Edicion.cshtml" />
     <Content Include="Views\Reportes\Index.cshtml" />
-    <None Include="Web References\SWMiravalle\ServicioNotificacion.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -535,19 +521,6 @@
   </ItemGroup>
   <ItemGroup>
     <WebReferences Include="Web References\" />
-  </ItemGroup>
-  <ItemGroup>
-    <WebReferenceUrl Include="http://localhost:55789/ServiciosWeb/ServicioNotificacion.asmx%3fop=ConsultarProducto">
-      <UrlBehavior>Dynamic</UrlBehavior>
-      <RelPath>Web References\SWMiravalle\</RelPath>
-      <UpdateFromURL>http://localhost:55789/ServiciosWeb/ServicioNotificacion.asmx%3fop=ConsultarProducto</UpdateFromURL>
-      <ServiceLocationURL>
-      </ServiceLocationURL>
-      <CachedDynamicPropName>
-      </CachedDynamicPropName>
-      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
-      <CachedSettingsPropName>Web_SWMiravalle_ServicioNotificacion</CachedSettingsPropName>
-    </WebReferenceUrl>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
