@@ -78,13 +78,9 @@ namespace Web.Controllers
         {
             try
             {
-                Resultado = ObtenerNegocio().ObtenerFachadaInventario().ConsultarInventario(
+                Resultado = ObtenerNegocio().ObtenerFachadaInventario().ExisteLoteXSede(
                       Convert.ToInt32(Request["hddIDLote"])
-                    , Convert.ToInt32(Request["SedeInventario"])
-                    , -1
-                    ,0
-                    ,null
-                    ,0).Count>0;
+                    , Convert.ToInt32(Request["SedeInventario"])) ;
             }
             catch (Exception ex)
             {

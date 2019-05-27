@@ -13,7 +13,6 @@ namespace com.co.uan.DMiravalle.Inventario
     {
         #region Propiedades
         private bool Resultado;
-        private string Mensaje;
         private Lote LoteProducto;
         private Producto Producto;
         private TipoProducto Tipo;
@@ -44,16 +43,7 @@ namespace com.co.uan.DMiravalle.Inventario
 
         #region Metodos
 
-        private bool ExisteInventario(int IdLote ,int IdSede ,int IdInventario) {
-                List<Parametros> Parametros = new List<Parametros>() {
-                 new Parametros("@IdLote",IdLote,SqlDbType.Int,ParameterDirection.Input)
-                ,new Parametros("@IdSede",IdSede,SqlDbType.Int,ParameterDirection.Input)
-                ,new Parametros("@IdInventario",IdInventario,SqlDbType.Int,ParameterDirection.Input)
-            };
-            DataTable Coleccion = new Transaccion("ExisteInventario", Parametros).EjecutarDevuelveTabla();
-            return Coleccion.Rows.Count > 0;
-        }
-
+     
 
         private List<InventarioDTO> MapearDatos(DataTable Coleccion) {
             List<InventarioDTO> Resultado = (from fila in Coleccion.AsEnumerable()
@@ -229,6 +219,16 @@ namespace com.co.uan.DMiravalle.Inventario
         public bool EliminarTipoProducto(int IdTipoProducto)
         {
             return Tipo.Eliminar(IdTipoProducto);
+        }
+
+        public bool ExisteLoteXSede(int IdLote,int IdSede) {
+         return   ConsultarInventario(
+                     IdLote
+                    , IdSede
+                    , -1
+                    , 0
+                    , null
+                    , 0).Count > 0;
         }
         #endregion
     }

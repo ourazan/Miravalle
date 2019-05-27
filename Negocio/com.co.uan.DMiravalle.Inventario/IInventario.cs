@@ -41,5 +41,6 @@ namespace com.co.uan.DMiravalle.Inventario
 
         bool EliminarTipoProducto(int IdTipoProducto);
 
+        bool ExisteLoteXSede(int IdLote, int IdSede);
     }
 }
