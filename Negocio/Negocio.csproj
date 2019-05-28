@@ -55,6 +55,7 @@
     <Compile Include="com.co.uan.DMiravalle.Administracion\SedeDTO.cs" />
     <Compile Include="com.co.uan.DMiravalle.Administracion\Usuario.cs" />
     <Compile Include="com.co.uan.DMiravalle.Administracion\UsuarioDTO.cs" />
+    <Compile Include="com.co.uan.DMiravalle.Funcionales\Encripcion.cs" />
     <Compile Include="com.co.uan.DMiravalle.Informes\Email.cs" />
     <Compile Include="com.co.uan.DMiravalle.Informes\IAlerta.cs" />
     <Compile Include="com.co.uan.DMiravalle.Informes\INotificacionVencidos.cs" />
@@ -67,6 +68,7 @@
     <Compile Include="com.co.uan.DMiravalle.Inventario\ILote.cs" />
     <Compile Include="com.co.uan.DMiravalle.Inventario\Inventario.cs" />
     <Compile Include="com.co.uan.DMiravalle.Inventario\InventarioDTO.cs" />
+    <Compile Include="com.co.uan.DMiravalle.Inventario\InventarioRowMaper.cs" />
     <Compile Include="com.co.uan.DMiravalle.Inventario\IProducto.cs" />
     <Compile Include="com.co.uan.DMiravalle.Inventario\ITipoProducto.cs" />
     <Compile Include="com.co.uan.DMiravalle.Inventario\Lote.cs" />

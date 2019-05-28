@@ -1,0 +1,67 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+
+    <meta name="viewport" content="width=device-width" />
+    <link href="~/Content/Login.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+
+    <script src="~/scripts/jquery-1.10.2.js"></script>
+    <script src="~/scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/DMiravalle/Maestro.js"></script>
+    <script src="~/Scripts/DMiravalle/Maestro.js"></script>
+    <script src="~/Scripts/DMiravalle/Login.js"></script>
+    <title>Login</title>
+</head>
+<body>
+    <div class="limiter">
+        <div class="container-login100">
+            <div id="divFormulario" class="">
+
+                <div class="panel-body col-xs-12 col-sm-12 col-md-12" style=" width: auto;    height: auto;    max-width: 500px;">
+
+                        <img src="~/Img/Logo.png" class="col-xs-12 col-sm-12 col-md-12"/>
+                </div>
+
+                <div class="panel-body col-xs-12 col-sm-12 col-md-12" style="margin: 10% auto;    width: auto;    height: auto;    max-width: 300px;">
+                    <div class="row">
+
+                        <div class="wrap-input100 validate-input col-xs-12 col-sm-12 col-md-12" data-validate="Usuario incorrecto">
+                            <input class="input100" type="text" id="correo" name="correo" placeholder="Correo">
+                            <span class="focus-input100"></span>
+                            <span class="symbol-input100">
+                                <i class="fa fa-envelope" aria-hidden="true"></i>
+                            </span>
+                        </div>
+                        <div class="wrap-input100 validate-input col-xs-12 col-sm-12 col-md-12" data-validate="Contraseña incorrecta">
+                            <input class="input100" type="password" id="clave" name="clave" placeholder="Contraseña">
+                            <span class="focus-input100"></span>
+                            <span class="symbol-input100">
+                                <i class="fa fa-lock" aria-hidden="true"></i>
+                            </span>
+                        </div>
+                        <div class="container-login100-form-btn">
+                            <input type="hidden" id="hddID" />
+                            <button id="BtnLogin" class="login100-form-btn validate-button">
+                                Login
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+
+                @*<div class="login100-pic js-tilt" data-tilt>
+
+                    </div>
+
+                    <span class="login100-form-title">
+                    </span>*@
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>

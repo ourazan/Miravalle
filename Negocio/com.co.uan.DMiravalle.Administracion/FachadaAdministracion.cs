@@ -60,9 +60,9 @@ namespace com.co.uan.DMiravalle.Administracion
                  ((Sede)Sede).UsuarioAutenticado = Autenticado;
 
         }
-        public UsuarioDTO validarUsuario(string Correo, string Clave)
+        public UsuarioDTO validarUsuario(string Usuario, string Clave)
         {
-            return Gerente.Validar(Correo, Clave);
+            return Gerente.Validar(Usuario, Clave);
         }
         #endregion
     }

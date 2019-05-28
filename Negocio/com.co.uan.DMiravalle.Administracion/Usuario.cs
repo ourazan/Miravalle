@@ -1,4 +1,5 @@
 ﻿
+using com.co.uan.DMiravalle.Funcionales;
 using Datos;
 using System;
 using System.Collections.Generic;
@@ -100,19 +101,45 @@ namespace com.co.uan.DMiravalle.Administracion
             return Convert.ToInt32(new Transaccion("EliminarUsuario", Parametros).EjecutarDevuelveReturnValue()) > 0;
         }
 
-        public UsuarioDTO Validar(string Correo, string Clave)
+        public UsuarioDTO Validar(string Usuario, string Clave)
         {
-
             List<Parametros> Parametros = new List<Parametros>()
             {
-                new Parametros("@Correo",string.IsNullOrEmpty(Correo) ? DBNull.Value : (object)Correo,SqlDbType.VarChar,ParameterDirection.Input)
-                ,new Parametros("@Clave",string.IsNullOrEmpty(Correo) ? DBNull.Value : (object)Correo,SqlDbType.VarChar,ParameterDirection.Input)
+                new Parametros("@NombreUsuario",string.IsNullOrEmpty(Usuario) ? DBNull.Value : (object)Usuario,SqlDbType.VarChar,ParameterDirection.Input)
+                ,new Parametros("@Clave",Encripcion.CodificarSHA256(Clave),SqlDbType.VarChar,ParameterDirection.Input)
             };
+            DataTable Coleccion = new Transaccion("ValidarUsuario", Parametros).EjecutarDevuelveTabla();
+            List<UsuarioDTO> Resultado = ((from fila in Coleccion.AsEnumerable()
+                                           select new UsuarioDTO(
+                                                fila["Nombre"].ToString()
+                                                , fila["Apellido"].ToString()
+                                                , fila["Correo"].ToString()
+                                                , new SedeDTO(fila["NombreSede"].ToString()
+                                                           , fila["Direccion"].ToString()
+                                                           , fila["Ciudad"].ToString()
+                                                           , Int32.Parse(fila["IdSede"].ToString())
+                                                           , new UsuarioDTO(fila["Administrador_Nombre"].ToString()
+                                                                        , fila["Administrador_Apellido"].ToString()
+                                                                        , fila["Administrador_Correo"].ToString()
+                                                                        , new SedeDTO()
+                                                                        , 0, 0, fila["Administrador_Usuario"].ToString()
+                                                                        , fila["Administrador_Clave"].ToString()
+                                                                        , Convert.ToInt32(fila["Administrador_Perfil"])
+                                                                        )
+                                                          )
+                                                , Int32.Parse(fila["IdUsuario"].ToString())
+                                                , Int32.Parse(fila["IdSede"].ToString())
+                                                , fila["NombreUsuario"].ToString()
+                                                , fila["Clave"].ToString()
+                                                , Convert.ToInt32(fila["Perfil"])
+                                                )
+                                        ).ToList());
 
 
-            throw new System.NotImplementedException();
+            return Resultado.FirstOrDefault();
 
         }
+
         #endregion
     }
 }

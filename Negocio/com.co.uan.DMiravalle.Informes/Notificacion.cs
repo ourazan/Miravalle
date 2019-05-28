@@ -1,4 +1,6 @@
 ﻿
+using com.co.uan.DMiravalle.Inventario;
+
 namespace com.co.uan.DMiravalle.Informes
 { 
  public   class Notificacion
@@ -13,6 +15,11 @@ namespace com.co.uan.DMiravalle.Informes
         public void EjecutarNotificacion()
         {
             this.Alerta.EnviarNotificacion();
+        }
+
+        public void GenerarCuerpoHTMLCorreo(InventarioDTO ElementoVencido, string NombrePlantillaCorreo)
+        {
+            this.Alerta.GenerarCuerpoHTMLCorreo( ElementoVencido,  NombrePlantillaCorreo);
         }
 
     }

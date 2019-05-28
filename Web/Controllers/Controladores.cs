@@ -26,11 +26,28 @@ namespace Web.Controllers
             Negocio.AsignarEjecutor(ObtenerUsuarioAutenticado());
             return  Negocio;
         }
-        protected UsuarioDTO ObtenerAutenticado() {
-            return new UsuarioDTO("prueba1", "Prueba apellido1",string.Empty,null,0,0,string .Empty,string.Empty,0);
+        protected UsuarioDTO ObtenerAutenticado()
+        {
+            if (Session["Autenticado"] != null)
+            {
+                return (UsuarioDTO)Session["Autenticado"];
+            }
+            else
+            {
+                CerrarSesion();
+                return null;
+            }
         }
-        private int ObtenerUsuarioAutenticado() {
-            return 1;
+        protected int ObtenerUsuarioAutenticado()
+        {
+            if (ObtenerAutenticado() != null)
+            {
+                return ObtenerAutenticado().IdUsuario;
+            }
+            else
+            {
+                return 0;
+            }
         }
         protected void RegistarError(Exception ex) {
             String RutaLog = Server.MapPath(ConfigurationManager.AppSettings["RutaLog"] + DateTime.Now.Year.ToString() + string.Format(DateTime.Now.Month.ToString(), "00") + string.Format(DateTime.Now.Day.ToString(), "00") + ".txt");
@@ -42,10 +59,11 @@ namespace Web.Controllers
             Guardar.WriteLine(Detalle.ToString());
             Guardar.Close();
         }
-       
-        protected void CerrarSesion() {
+
+        [HttpGet]
+        public ActionResult CerrarSesion()  {
             Session.Clear();
-            RedirectToAction("Index", "Login");
+            return RedirectToAction("Index", "Login");
         }
 
         protected List<SelectListItem> AdicionarValorDefecto(List<SelectListItem> Items) {

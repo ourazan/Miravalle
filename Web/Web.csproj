@@ -160,6 +160,7 @@
     <Compile Include="Controllers\Controladores.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InventarioController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\LoteController.cs" />
     <Compile Include="Controllers\ProductosController.cs" />
     <Compile Include="Controllers\ReportesController.cs" />
@@ -267,6 +268,7 @@
     <Content Include="Scripts\DMiravalle\Inventario\TipoProducto.js" />
     <Content Include="Scripts\DMiravalle\Administracion\Sede.js" />
     <Content Include="Scripts\DMiravalle\Administracion\Usuario.js" />
+    <Content Include="Scripts\DMiravalle\Login.js" />
     <Content Include="Scripts\DMiravalle\Maestro.js" />
     <Content Include="Scripts\esm\popper-utils.js" />
     <Content Include="Scripts\esm\popper-utils.min.js" />
@@ -314,6 +316,7 @@
     <Content Include="Views\Lote\Edicion.cshtml" />
     <Content Include="Views\Inventario\Edicion.cshtml" />
     <Content Include="Views\Reportes\Index.cshtml" />
+    <Content Include="Views\Login\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

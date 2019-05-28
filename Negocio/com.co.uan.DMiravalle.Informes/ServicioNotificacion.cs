@@ -8,11 +8,11 @@ namespace com.co.uan.DMiravalle.Informes
  public  class ServicioNotificacion:IServicioNotificaciones
     {
         INotificacionVencidos Consulta;
-        Notificacion Envio;
+        Notificacion Notificaciones;
         public ServicioNotificacion( )
         {
            Consulta = new Inventario.Inventario();
-           Envio = new Notificacion();
+           Notificaciones = new Notificacion();
         }
         public void NotificarElementosVencidos()
         {
@@ -20,9 +20,9 @@ namespace com.co.uan.DMiravalle.Informes
             Email TipoNotificacion= new Email();
             foreach (InventarioDTO Vencido in Vencidos)
             {
-                TipoNotificacion.GenerarCuerpoHTMLCorreo(Vencido,ConfigurationManager.AppSettings["PlantillaVencidos"]);
-                Envio.AsignarEstrategia(TipoNotificacion);
-                Envio.EjecutarNotificacion();
+                Notificaciones.GenerarCuerpoHTMLCorreo(Vencido,ConfigurationManager.AppSettings["PlantillaVencidos"]);
+                Notificaciones.AsignarEstrategia(TipoNotificacion);
+                Notificaciones.EjecutarNotificacion();
             }
         }
 
@@ -32,9 +32,9 @@ namespace com.co.uan.DMiravalle.Informes
             Email TipoNotificacion = new Email();
             foreach (InventarioDTO Vencido in Vencidos)
             {
-                TipoNotificacion.GenerarCuerpoHTMLCorreo(Vencido, ConfigurationManager.AppSettings["PlantillaProductoEscaso"]);
-                Envio.AsignarEstrategia(TipoNotificacion);
-                Envio.EjecutarNotificacion();
+                Notificaciones.GenerarCuerpoHTMLCorreo(Vencido, ConfigurationManager.AppSettings["PlantillaProductoEscaso"]);
+                Notificaciones.AsignarEstrategia(TipoNotificacion);
+                Notificaciones.EjecutarNotificacion();
             }
         }
     }
