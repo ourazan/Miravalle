@@ -55,6 +55,7 @@
     <Compile Include="com.co.uan.DMiravalle.Administracion\SedeDTO.cs" />
     <Compile Include="com.co.uan.DMiravalle.Administracion\Usuario.cs" />
     <Compile Include="com.co.uan.DMiravalle.Administracion\UsuarioDTO.cs" />
+    <Compile Include="com.co.uan.DMiravalle.Administracion\UsuarioRowMaper.cs" />
     <Compile Include="com.co.uan.DMiravalle.Funcionales\Encripcion.cs" />
     <Compile Include="com.co.uan.DMiravalle.Informes\Email.cs" />
     <Compile Include="com.co.uan.DMiravalle.Informes\IAlerta.cs" />

@@ -11,12 +11,16 @@ namespace com.co.uan.DMiravalle.Administracion
    public  class Usuario :  IGerente
     {
         #region Propiedades
+        UsuarioRowMaper Maper;
         private int usuarioautenticado;
         public int UsuarioAutenticado
         {
             set { usuarioautenticado = value; }
         }
         #endregion
+        public Usuario(){
+            Maper= new UsuarioRowMaper();
+       }
 
         #region Metodos
         public List<UsuarioDTO> Consultar(int IdUsuario, string Nombre, string Apellido, int IdSede, string Correo, int Perfil)
@@ -30,36 +34,7 @@ namespace com.co.uan.DMiravalle.Administracion
                 ,new Parametros("@Perfil",(Perfil == 0 ? DBNull.Value : (object)Perfil),SqlDbType.Int,ParameterDirection.Input)
             };
             DataTable Coleccion = new Transaccion("ConsultarUsuario",Parametros).EjecutarDevuelveTabla();
-
-            List<UsuarioDTO> Resultado = ((from fila in Coleccion.AsEnumerable()
-                                        select new UsuarioDTO(
-                                             fila["Nombre"].ToString()
-                                             ,fila["Apellido"].ToString()
-                                             , fila["Correo"].ToString()
-                                             , new SedeDTO(fila["NombreSede"].ToString()
-                                                        ,fila["Direccion"].ToString()
-                                                        ,fila["Ciudad"].ToString()
-                                                        ,Int32.Parse(fila["IdSede"].ToString())
-                                                        ,new UsuarioDTO(fila["Administrador_Nombre"].ToString()
-                                                                     ,fila["Administrador_Apellido"].ToString()
-                                                                     ,fila["Administrador_Correo"].ToString()
-                                                                     ,new SedeDTO()
-                                                                     ,0,0, fila["Administrador_Usuario"].ToString()
-                                                                     , fila["Administrador_Clave"].ToString()
-                                                                     ,Convert.ToInt32(fila["Administrador_Perfil"]) 
-                                                                     )
-                                                       )
-                                             ,Int32.Parse(fila["IdUsuario"].ToString())
-                                             ,Int32.Parse( fila["IdSede"].ToString())
-                                             ,fila["NombreUsuario"].ToString()
-                                             ,fila["Clave"].ToString()
-                                             , Convert.ToInt32(fila["Perfil"])
-                                             )
-                                             ).ToList() );
-
-
-            return Resultado;
-
+          return   Maper.MapearDatos(Coleccion);
         }
         public bool Agregar(string Nombre, string Apellido, int IdSede, string Correo, string usuario, string Clave,int Perfil)
         {
@@ -109,35 +84,7 @@ namespace com.co.uan.DMiravalle.Administracion
                 ,new Parametros("@Clave",Encripcion.CodificarSHA256(Clave),SqlDbType.VarChar,ParameterDirection.Input)
             };
             DataTable Coleccion = new Transaccion("ValidarUsuario", Parametros).EjecutarDevuelveTabla();
-            List<UsuarioDTO> Resultado = ((from fila in Coleccion.AsEnumerable()
-                                           select new UsuarioDTO(
-                                                fila["Nombre"].ToString()
-                                                , fila["Apellido"].ToString()
-                                                , fila["Correo"].ToString()
-                                                , new SedeDTO(fila["NombreSede"].ToString()
-                                                           , fila["Direccion"].ToString()
-                                                           , fila["Ciudad"].ToString()
-                                                           , Int32.Parse(fila["IdSede"].ToString())
-                                                           , new UsuarioDTO(fila["Administrador_Nombre"].ToString()
-                                                                        , fila["Administrador_Apellido"].ToString()
-                                                                        , fila["Administrador_Correo"].ToString()
-                                                                        , new SedeDTO()
-                                                                        , 0, 0, fila["Administrador_Usuario"].ToString()
-                                                                        , fila["Administrador_Clave"].ToString()
-                                                                        , Convert.ToInt32(fila["Administrador_Perfil"])
-                                                                        )
-                                                          )
-                                                , Int32.Parse(fila["IdUsuario"].ToString())
-                                                , Int32.Parse(fila["IdSede"].ToString())
-                                                , fila["NombreUsuario"].ToString()
-                                                , fila["Clave"].ToString()
-                                                , Convert.ToInt32(fila["Perfil"])
-                                                )
-                                        ).ToList());
-
-
-            return Resultado.FirstOrDefault();
-
+            return Maper.MapearDatos(Coleccion).FirstOrDefault();
         }
 
         #endregion
