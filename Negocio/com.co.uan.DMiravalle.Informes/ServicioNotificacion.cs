@@ -1,7 +1,7 @@
 ﻿using com.co.uan.DMiravalle.Inventario;
 using System.Collections.Generic;
 using System.Configuration;
-using System;
+using System.Linq;
 
 namespace com.co.uan.DMiravalle.Informes
 {
@@ -17,25 +17,35 @@ namespace com.co.uan.DMiravalle.Informes
         public void NotificarElementosVencidos()
         {
             List<InventarioDTO> Vencidos = Consulta.ConsultarProductosVencidos();
-            Email TipoNotificacion= new Email();
-            foreach (InventarioDTO Vencido in Vencidos)
-            {
-                Notificaciones.GenerarCuerpoHTMLCorreo(Vencido,ConfigurationManager.AppSettings["PlantillaVencidos"]);
-                Notificaciones.AsignarEstrategia(TipoNotificacion);
-                Notificaciones.EjecutarNotificacion();
-            }
+            NotificarDetalle(Vencidos,ConfigurationManager.AppSettings["PlantillaVencidos"]);
+            
+          
         }
 
         public void NotificarProductosEscasos()
         {
             List<InventarioDTO> Vencidos = Consulta.ConsultarProductosEscasos();
+            NotificarDetalle(Vencidos,ConfigurationManager.AppSettings["PlantillaProductoEscaso"]);   
+        }
+
+        private void NotificarDetalle(List<InventarioDTO> Vencidos,string Plantilla) {
+            List<string> Sedes = (from sede in Vencidos
+                                  group sede.SedeInventario.IdSede by sede.SedeInventario.IdSede into sed
+                                  select sed.Key.ToString()).ToList();
             Email TipoNotificacion = new Email();
-            foreach (InventarioDTO Vencido in Vencidos)
+            foreach (string sede in Sedes)
             {
-                Notificaciones.GenerarCuerpoHTMLCorreo(Vencido, ConfigurationManager.AppSettings["PlantillaProductoEscaso"]);
-                Notificaciones.AsignarEstrategia(TipoNotificacion);
-                Notificaciones.EjecutarNotificacion();
+                List<InventarioDTO> VencidosSede = (from producto in Vencidos.AsEnumerable()
+                                                    where producto.SedeInventario.IdSede.ToString().Equals(sede)
+                                                    select producto).ToList();
+                if (VencidosSede.Count > 0)
+                {
+                    Notificaciones.AsignarEstrategia(TipoNotificacion);
+                    Notificaciones.GenerarCuerpoHTMLCorreo(VencidosSede, Plantilla);
+                    Notificaciones.EjecutarNotificacion();
+                }
             }
+
         }
     }
 }

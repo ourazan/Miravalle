@@ -207,7 +207,9 @@
     <Content Include="Content\Estilos.css" />
     <Content Include="Content\font\fontawesome-webfont.svg" />
     <Content Include="Content\font\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\hamburgers.min.css" />
     <Content Include="Content\Images\Carga.gif" />
+    <Content Include="Content\Login.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\uncompressed\ace-ie.css" />
     <Content Include="Content\uncompressed\ace-part2.css" />
@@ -222,6 +224,9 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="Img\GroupM_Standard_ColorburstBlue_RGB.jpg" />
+    <Content Include="Img\Logo.png" />
+    <Content Include="Img\PicsArt_05-26-10.12.46.jpg" />
     <Content Include="PlantillaCorreo\ProductoEscaso.htm" />
     <Content Include="PlantillaCorreo\ProductoVencido.htm" />
     <Content Include="Reporte\Informes.aspx" />

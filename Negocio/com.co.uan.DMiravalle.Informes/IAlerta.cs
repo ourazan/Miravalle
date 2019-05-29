@@ -1,5 +1,6 @@
 ﻿
 using com.co.uan.DMiravalle.Inventario;
+using System.Collections.Generic;
 
 namespace com.co.uan.DMiravalle.Informes
 {
@@ -7,6 +8,6 @@ namespace com.co.uan.DMiravalle.Informes
     {
 
         void EnviarNotificacion();
-        void GenerarCuerpoHTMLCorreo(InventarioDTO ElementoVencido, string NombrePlantillaCorreo);
+        void GenerarCuerpoHTMLCorreo(List<InventarioDTO>  ElementoVencido, string NombrePlantillaCorreo);
     }
 }
