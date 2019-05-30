@@ -18,7 +18,7 @@ namespace Web.Controllers
 
                 ViewData["Producto"] = ObtenerNegocio().ObtenerFachadaInventario().ConsultarProducto(
                     string.IsNullOrEmpty(Request["Nombre"]) ? string.Empty : Request["Nombre"]
-                    , string.IsNullOrEmpty(Request["TipoProducto"]) ? 0 : Convert.ToInt32(Request["TipoProducto"])
+                    , string.IsNullOrEmpty(Request["TipoProductoBus"]) ? 0 : Convert.ToInt32(Request["TipoProductoBus"])
                     , 0);
                 var  Items = (from Tipo in ObtenerNegocio().ObtenerFachadaInventario().ConsultarTipoProducto(string.Empty, string.Empty, 0)
                              select new SelectListItem()

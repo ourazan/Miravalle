@@ -133,7 +133,7 @@ begin
 
 
 declare @diasaVencer int 
-select @diasaVencer= isnull(300000,300000) from Configuraciones where Configuracion='ProductoMinimo'
+select @diasaVencer= cast(isnull(Valor,30) as int) from Configuraciones where Configuracion='ProductoMinimo'
 select v_Inventario.IdInventario 
 ,v_Inventario.FechaRegistro 
 ,v_Inventario.Cantidad 

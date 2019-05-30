@@ -15,3 +15,13 @@ D:\OMAR\UAN\Miravalle\Negocio\bin\Debug\Microsoft.ReportViewer.WebForms.xml
 D:\OMAR\UAN\Miravalle\Negocio\obj\Debug\Negocio.csprojResolveAssemblyReference.cache
 D:\OMAR\UAN\Miravalle\Negocio\obj\Debug\Negocio.dll
 D:\OMAR\UAN\Miravalle\Negocio\obj\Debug\Negocio.pdb
+D:\UAN\Miravalle\Negocio\bin\Debug\Negocio.dll
+D:\UAN\Miravalle\Negocio\bin\Debug\Negocio.pdb
+D:\UAN\Miravalle\Negocio\bin\Debug\Datos.dll
+D:\UAN\Miravalle\Negocio\bin\Debug\Microsoft.ReportViewer.WebForms.dll
+D:\UAN\Miravalle\Negocio\bin\Debug\Microsoft.ReportViewer.Common.dll
+D:\UAN\Miravalle\Negocio\bin\Debug\Datos.pdb
+D:\UAN\Miravalle\Negocio\bin\Debug\Microsoft.ReportViewer.WebForms.xml
+D:\UAN\Miravalle\Negocio\obj\Debug\Negocio.csprojResolveAssemblyReference.cache
+D:\UAN\Miravalle\Negocio\obj\Debug\Negocio.dll
+D:\UAN\Miravalle\Negocio\obj\Debug\Negocio.pdb
