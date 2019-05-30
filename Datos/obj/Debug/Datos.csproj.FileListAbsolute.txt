@@ -9,6 +9,5 @@ D:\OMAR\UAN\Miravalle\Datos\obj\Debug\Datos.pdb
 D:\OMAR\UAN\Miravalle\Datos\obj\Debug\Datos.csprojResolveAssemblyReference.cache
 D:\UAN\Miravalle\Datos\bin\Debug\Datos.dll
 D:\UAN\Miravalle\Datos\bin\Debug\Datos.pdb
-D:\UAN\Miravalle\Datos\obj\Debug\Datos.csprojResolveAssemblyReference.cache
 D:\UAN\Miravalle\Datos\obj\Debug\Datos.dll
 D:\UAN\Miravalle\Datos\obj\Debug\Datos.pdb

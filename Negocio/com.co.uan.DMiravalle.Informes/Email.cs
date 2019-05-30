@@ -57,12 +57,12 @@ namespace com.co.uan.DMiravalle.Informes
 
         private string GenerarDetalleProductos(List<InventarioDTO> ElementoVencidos) {
             StringBuilder Detalle = new StringBuilder();
-            Detalle.AppendLine("<table style='width: 400px; padding: 10px; margin:0 auto; border-collapse: collapse;  border-radius: 10px; color: white; text-align: center;' border='1' ><tr><td>Producto</td><td>Código Lote</td><td>Fecha Vencimiento</td><td></td><td>Cantidad</td></tr>");
+            Detalle.AppendLine("<table style='width: 400px; padding: 10px; margin:0 auto; border-collapse: collapse;  border-radius: 10px; color: white; text-align: center;' border='1' ><tr><td>Producto</td><td>Código Lote</td><td>Fecha Vencimiento</td><td>Cantidad</td></tr>");
             foreach (InventarioDTO Elemento in ElementoVencidos)
             {
                 Detalle.AppendLine("<tr><td>"+ Elemento.LoteProducto.Producto.NombreProducto 
                     + "</td><td>"+ Elemento.LoteProducto.CodigoLote 
-                    + "</td><td>"+ Elemento.LoteProducto.FechaVencimiento.ToString("dd/MM/yyyy") + "</td><td>"
+                    + "</td><td>"+ Elemento.LoteProducto.FechaVencimiento.ToString("dd/MM/yyyy") 
                     +"</td><td>"+ Elemento.Cantidad.ToString() + "</td></tr>");
             }
             Detalle.AppendLine("</table>");
