@@ -348,3 +348,9 @@ from v_Usuario
  and	Clave=@Clave
 end
 
+SET IDENTITY_INSERT [dbo].[Usuario] ON 
+
+INSERT [dbo].[Usuario] ([IdUsuario], [Nombre], [Apellido], [Correo], [Clave], [NombreUsuario], [IdSede], [Perfil], [FechaCreacion], [UsuarioCreo], [FechaModificacion], [UsuarioModifico], [Activo]) VALUES (1, N'Nestor', N'Ballesteros', N'nballesteros61@uan.edu.co', N'2a3ab2f5d9d40b1e2af1211c58f8c2a06be2b56592933fc6ae7a31f0f26b12dc', N'amira', NULL, 2, CAST(N'2019-05-25 00:46:00' AS SmallDateTime), 1, CAST(N'2019-05-26 14:49:00' AS SmallDateTime), 1, 1)
+INSERT [dbo].[Usuario] ([IdUsuario], [Nombre], [Apellido], [Correo], [Clave], [NombreUsuario], [IdSede], [Perfil], [FechaCreacion], [UsuarioCreo], [FechaModificacion], [UsuarioModifico], [Activo]) VALUES (2, N'Omar Yesid', N'Urazan Garcia', N'ourazan05@uan.edu.co', N'2a3ab2f5d9d40b1e2af1211c58f8c2a06be2b56592933fc6ae7a31f0f26b12dc', N'oygarcia', NULL, 2, CAST(N'2019-05-26 14:50:00' AS SmallDateTime), 1, CAST(N'2019-05-26 17:49:00' AS SmallDateTime), 1, 1)
+INSERT [dbo].[Usuario] ([IdUsuario], [Nombre], [Apellido], [Correo], [Clave], [NombreUsuario], [IdSede], [Perfil], [FechaCreacion], [UsuarioCreo], [FechaModificacion], [UsuarioModifico], [Activo]) VALUES (3, N'Diana', N'Gutierrez', N'ourazan05@uan.edu.co', N'2a3ab2f5d9d40b1e2af1211c58f8c2a06be2b56592933fc6ae7a31f0f26b12dc', N'dianag', NULL, 1, CAST(N'2019-05-26 17:48:00' AS SmallDateTime), 1, CAST(N'2019-05-26 17:48:00' AS SmallDateTime), 1, 1)
+SET IDENTITY_INSERT [dbo].[Usuario] OFF
