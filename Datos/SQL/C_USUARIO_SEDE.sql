@@ -316,3 +316,35 @@ from v_Sede
 end
 
 go
+
+create procedure [dbo].[ValidarUsuario]
+ @NombreUsuario varchar(1000)=null,
+ @Clave varchar(200)=null
+as 
+begin
+ Select 
+ v_Usuario. IdUsuario  
+,v_Usuario.Nombre
+,v_Usuario.Apellido 
+,v_Usuario.Correo
+,v_Usuario.Clave 
+,v_Usuario.NombreUsuario
+,v_Usuario.IdSede 
+,v_Usuario.Activo 
+,v_Usuario.NombreSede
+,v_Usuario.Ciudad 
+,v_Usuario.Direccion 
+,v_Usuario.Perfil
+,v_Usuario.IdAdministrador
+,v_Usuario.Administrador_Nombre
+,v_Usuario.Administrador_Apellido
+,v_Usuario.Administrador_Correo
+,v_Usuario.Administrador_Clave
+,v_Usuario.Administrador_Usuario
+,v_Usuario.Administrador_Perfil
+from v_Usuario
+ where 
+		NombreUsuario = @NombreUsuario
+ and	Clave=@Clave
+end
+
