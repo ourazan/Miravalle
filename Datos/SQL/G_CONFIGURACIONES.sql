@@ -158,7 +158,7 @@ select v_Inventario.IdInventario
 ,v_Inventario.Clave    
 ,v_Inventario.NombreUsuario
 ,v_Inventario.Perfil
-from v_Inventario where
+from v_Inventario where activo=1 and
 DATEDIFF (dd,getdate(), Convert(Date,FechaVencimiento)) <=  @diasaVencer
 
 
@@ -200,7 +200,7 @@ select v_Inventario.IdInventario
 ,v_Inventario.Clave    
 ,v_Inventario.NombreUsuario
 ,v_Inventario.Perfil
-from v_Inventario where
+from v_Inventario where  activo=1 and
  Cantidad <=  @minimo
 
 
