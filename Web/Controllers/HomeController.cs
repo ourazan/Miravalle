@@ -8,6 +8,10 @@ namespace Web.Controllers
         public ActionResult Index()
         {
             ViewData["Autenticado"] = ObtenerAutenticado();
+            if (ViewData["Autenticado"]==null)
+            {
+                return CerrarSesion();
+            }else
             return View();
         }
 
