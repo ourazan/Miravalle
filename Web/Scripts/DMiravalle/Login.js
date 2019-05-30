@@ -72,5 +72,7 @@ function CargarResultados(Resultado, ur) {
        
         if (Resultado.data) {
                   window.location.href = '/Home/Index';
+        } else {
+            MostrarMensaje(Resultado.mensaje);
         }
     }

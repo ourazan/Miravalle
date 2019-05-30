@@ -15,5 +15,6 @@
     grdInventario.Column(header: null, format:@<text><a href="#" class="ace-icon fa fa-pencil" title="Editar Inventario" onclick="EditarInventario(@Html.Raw( String.Concat(new string[] { "'" +item.IdInventario.ToString() + "-", item.LoteProducto.IdLote.ToString() + '-', item.LoteProducto.CodigoLote + '-', item.LoteProducto.Producto.NombreProducto + '-', item.SedeInventario.IdSede.ToString() + '-', string.Format("{0:dd/MM/yyyy}", item.FechaRegistro) + '-',item.Cantidad +"'"})));"></a></text>),
     grdInventario.Column(header: null, format:@<text><a href="#" class="ace-icon fa fa-trash-o" title="Eliminar Inventario" onclick="EliminarInventario(@Html.Raw( "'" +item.IdInventario.ToString()+"'"));"></a></text>),
     grdInventario.Column("SedeInventario.NombreSede", "Sede", canSort: false),
+    grdInventario.Column("LoteProducto.CodigoLote", "Código Lote", canSort: false),
     grdInventario.Column("Cantidad", "Cantidad", canSort: false),
     grdInventario.Column("FechaRegistro", "Fecha Registro", canSort: false, format: (item) => string.Format("{0:dd/MM/yyyy}", item.FechaRegistro))))

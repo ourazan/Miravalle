@@ -63,7 +63,7 @@ namespace Web.Controllers
         [HttpGet]
         public ActionResult CerrarSesion()  {
             Session.Clear();
-            return RedirectToAction("Index", "Login");
+            return  RedirectToAction("Index", "Login");
         }
 
         protected List<SelectListItem> AdicionarValorDefecto(List<SelectListItem> Items) {
