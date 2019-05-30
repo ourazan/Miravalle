@@ -1,0 +1,14 @@
+Error:La cadena de entrada no tiene el formato correcto.
+Detalle:   en System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   en System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   en System.Convert.ToInt32(String value)
+   en Web.Controllers.InventarioController.ExisteLoteXSede() en D:\UAN\Miravalle\Web\Controllers\InventarioController.cs:línea 81
+Usuario:2
+
+Error:La cadena de entrada no tiene el formato correcto.
+Detalle:   en System.Number.StringToNumber(String str, NumberStyles options, NumberBuffer& number, NumberFormatInfo info, Boolean parseDecimal)
+   en System.Number.ParseInt32(String s, NumberStyles style, NumberFormatInfo info)
+   en System.Convert.ToInt32(String value)
+   en Web.Controllers.InventarioController.ExisteLoteXSede() en D:\UAN\Miravalle\Web\Controllers\InventarioController.cs:línea 81
+Usuario:2
+
