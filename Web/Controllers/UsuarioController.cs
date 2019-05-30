@@ -35,7 +35,7 @@ namespace Web.Controllers
             SelectList Perfiles = new SelectList(PerfilOpciones, "Value", "Text");
             ViewData["Perfiles"] = Perfiles;
             ViewData["Usuario"] = ObtenerNegocio().ObtenerFachadaAdministrativa().ConsultarUsuario(0,string.Empty,string.Empty,0,string.Empty,0);
-            return View();
+            return RetornarVista();
         }
 
         [HttpPost]

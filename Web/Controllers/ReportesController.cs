@@ -9,7 +9,7 @@ namespace Web.Controllers
         public ActionResult Index()
         {
             ViewData["Autenticado"] = ObtenerAutenticado();
-            return View();
+            return RetornarVista();
         }
     }
 }

@@ -22,7 +22,7 @@ namespace Web.Controllers
             Administradores = new SelectList(Items, "Value", "Text");
             ViewData["Administradores"] = Administradores;
             ViewData["Sede"] = ObtenerNegocio().ObtenerFachadaAdministrativa().ConsultarSede(string.Empty, string.Empty, string.Empty, 0,0);
-            return View();
+            return RetornarVista();
         }
 
         [HttpPost]

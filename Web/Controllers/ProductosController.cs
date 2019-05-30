@@ -29,7 +29,7 @@ namespace Web.Controllers
                 Items= AdicionarValorDefecto(Items);
                 Tipos = new SelectList(Items, "Value", "Text");
                 ViewData["TiposProducto"] = Tipos;
-                return View();
+                return RetornarVista();
 
             }
             catch (Exception ex)
